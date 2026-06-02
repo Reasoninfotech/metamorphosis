@@ -1,0 +1,1355 @@
+{% comment %}
+  Section: Clinically Verified Results
+  File: sections/clinically-verified-results.liquid
+
+  FEATURES:
+  - Two tabs (configurable labels)
+  - Each tab: 2 before/after image sliders side by side
+  - Stat percentage + description per slider
+  - CTA button per tab
+  - Desktop: sticky left column + right content panels
+  - Mobile: accordion-style tabs with vertical stacked sliders
+  - Full schema settings for all content, colors, spacing
+{% endcomment %}
+
+{%- liquid
+  assign section_id = section.id
+  assign bg_color = section.settings.bg_color
+  assign text_color = section.settings.text_color
+  assign accent_color = section.settings.accent_color
+  assign section_padding_top = section.settings.padding_top
+  assign section_padding_bottom = section.settings.padding_bottom
+-%}
+
+<section
+  id="cvr-{{ section_id }}"
+  class="cvr-section"
+  style="
+    --cvr-bg:           {{ bg_color }};
+    --cvr-text:         {{ text_color }};
+    --cvr-accent:       {{ accent_color }};
+    --cvr-pt:           {{ section_padding_top }}px;
+    --cvr-pb:           {{ section_padding_bottom }}px;
+  "
+>
+  <!--
+    ════════════════════════════
+         DESKTOP LAYOUT
+    ════════════════════════════
+  -->
+  <div class="cvr-desktop">
+    <div class="main-container">
+      <div class="cvr-container">
+        <!-- LEFT sticky column -->
+        <div class="cvr-left">
+          <div class="cvr-content">
+            {%- if section.settings.badge != blank -%}
+              <span class="cvr-badge">{{ section.settings.badge }}</span>
+            {%- endif -%}
+
+            {%- if section.settings.heading != blank -%}
+              <{{ section.settings.heading_tag }} class="cvr-heading">
+                {{ section.settings.heading }}
+              </{{ section.settings.heading_tag }}>
+            {%- endif -%}
+
+            {%- if section.settings.description != blank -%}
+              <p class="cvr-desc">{{ section.settings.description }}</p>
+            {%- endif -%}
+          </div>
+          <div class="cvr-tab">
+            <!-- Desktop Tabs -->
+            <div class="cvr-tabs" role="tablist">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'tab' -%}
+                  <button
+                    class="cvr-tab-btn {% if forloop.first %}active{% endif %}"
+                    role="tab"
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+                    aria-controls="cvr-panel-{{ section_id }}-{{ forloop.index }}"
+                    data-tab-index="{{ forloop.index }}"
+                    data-section="{{ section_id }}"
+                    {{ block.shopify_attributes }}
+                  >
+                    <span class="cvr-tab-btn__text">{{ block.settings.tab_label }}</span>
+                    <span class="cvr-tab-btn__arrow" aria-hidden="true">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                    </span>
+                  </button>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+
+            {%- if section.settings.footnote != blank -%}
+              <p class="cvr-footnote">{{ section.settings.footnote }}</p>
+            {%- endif -%}
+          </div>
+        </div>
+        <!-- /cvr-left -->
+
+        <!-- RIGHT panels -->
+        <div class="cvr-panels">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tab' -%}
+              <div
+                class="cvr-panel {% if forloop.first %}active{% endif %}"
+                id="cvr-panel-{{ section_id }}-{{ forloop.index }}"
+                role="tabpanel"
+                {{ block.shopify_attributes }}
+              >
+                <div class="cvr-sliders-row">
+                  <!-- Slider 1 -->
+                  <div class="cvr-slider-col">
+                    {% comment %}
+                      {%- if section.settings.after_label != blank -%}
+                        <h5 class="cvr-after-label">{{ section.settings.after_label }}</h5>
+                      {%- endif -%}
+                    {% endcomment %}
+                    {%- if block.settings.after_label_1 != blank -%}
+                      <h5 class="cvr-after-label">{{ block.settings.after_label_1 }}</h5>
+                    {%- endif -%}
+                    <div
+                      class="cvr-compare"
+                      id="slider-{{ section_id }}-{{ forloop.index }}-1"
+                      data-slider
+                    >
+                      <div class="cvr-compare__layer cvr-compare__after">
+                        {%- if block.settings.after_image_1 != blank -%}
+                          <img
+                            src="{{ block.settings.after_image_1 | image_url: width: 800, format: 'webp' }}"
+                            alt="{{ block.settings.after_image_1.alt | escape | default: 'After' }}"
+                            width="{{ block.settings.after_image_1.width }}"
+                            height="{{ block.settings.after_image_1.height }}"
+                            loading="lazy"
+                          >
+                        {%- else -%}
+                          <div
+                            class="cvr-compare__placeholder"
+                            style="background:linear-gradient(160deg,#f0e2d6,#d4b89a);"
+                          ></div>
+                        {%- endif -%}
+                      </div>
+                      <div class="cvr-compare__layer cvr-compare__before" data-before>
+                        {%- if block.settings.before_image_1 != blank -%}
+                          <img
+                            src="{{ block.settings.before_image_1 | image_url: width: 800, format: 'webp' }}"
+                            alt="{{ block.settings.before_image_1.alt | escape | default: 'Before' }}"
+                            width="{{ block.settings.before_image_1.width }}"
+                            height="{{ block.settings.before_image_1.height }}"
+                            loading="lazy"
+                          >
+                        {%- else -%}
+                          <div
+                            class="cvr-compare__placeholder"
+                            style="background:linear-gradient(160deg,#c0907a,#96604a);"
+                          ></div>
+                        {%- endif -%}
+                      </div>
+                      <div class="cvr-compare__line" data-line></div>
+                      <div class="cvr-compare__handle" data-handle>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
+                          <path d="M12.0006 0.75V17.25C12.0006 17.4489 11.9216 17.6397 11.7809 17.7803C11.6403 17.921 11.4495 18 11.2506 18C11.0517 18 10.8609 17.921 10.7203 17.7803C10.5796 17.6397 10.5006 17.4489 10.5006 17.25V0.75C10.5006 0.551088 10.5796 0.360322 10.7203 0.21967C10.8609 0.0790178 11.0517 0 11.2506 0C11.4495 0 11.6403 0.0790178 11.7809 0.21967C11.9216 0.360322 12.0006 0.551088 12.0006 0.75ZM8.25059 8.25H2.5609L4.28121 6.53062C4.42195 6.38989 4.50101 6.19902 4.50101 6C4.50101 5.80098 4.42195 5.6101 4.28121 5.46937C4.14048 5.32864 3.94961 5.24958 3.75059 5.24958C3.55157 5.24958 3.3607 5.32864 3.21996 5.46937L0.219965 8.46937C0.150233 8.53903 0.0949134 8.62175 0.0571702 8.71279C0.019427 8.80384 0 8.90144 0 9C0 9.09856 0.019427 9.19616 0.0571702 9.2872C0.0949134 9.37825 0.150233 9.46097 0.219965 9.53062L3.21996 12.5306C3.3607 12.6714 3.55157 12.7504 3.75059 12.7504C3.94961 12.7504 4.14048 12.6714 4.28121 12.5306C4.42195 12.3899 4.50101 12.199 4.50101 12C4.50101 11.801 4.42195 11.6101 4.28121 11.4694L2.5609 9.75H8.25059C8.4495 9.75 8.64027 9.67098 8.78092 9.53033C8.92157 9.38968 9.00059 9.19891 9.00059 9C9.00059 8.80109 8.92157 8.61032 8.78092 8.46967C8.64027 8.32902 8.4495 8.25 8.25059 8.25ZM22.2812 8.46937L19.2812 5.46937C19.1405 5.32864 18.9496 5.24958 18.7506 5.24958C18.5516 5.24958 18.3607 5.32864 18.22 5.46937C18.0792 5.6101 18.0002 5.80098 18.0002 6C18.0002 6.19902 18.0792 6.38989 18.22 6.53062L19.9403 8.25H14.2506C14.0517 8.25 13.8609 8.32902 13.7203 8.46967C13.5796 8.61032 13.5006 8.80109 13.5006 9C13.5006 9.19891 13.5796 9.38968 13.7203 9.53033C13.8609 9.67098 14.0517 9.75 14.2506 9.75H19.9403L18.22 11.4694C18.0792 11.6101 18.0002 11.801 18.0002 12C18.0002 12.199 18.0792 12.3899 18.22 12.5306C18.3607 12.6714 18.5516 12.7504 18.7506 12.7504C18.9496 12.7504 19.1405 12.6714 19.2812 12.5306L22.2812 9.53062C22.3509 9.46097 22.4063 9.37825 22.444 9.2872C22.4817 9.19616 22.5012 9.09856 22.5012 9C22.5012 8.90144 22.4817 8.80384 22.444 8.71279C22.4063 8.62175 22.3509 8.53903 22.2812 8.46937Z" fill="white"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    {%- if block.settings.stat_1 != blank or block.settings.stat_desc_1 != blank -%}
+                      <div class="cvr-stat">
+                        {%- if block.settings.stat_1 != blank -%}
+                          <div class="cvr-stat__number">{{ block.settings.stat_1 }}%</div>
+                        {%- endif -%}
+                        {%- if block.settings.stat_desc_1 != blank -%}
+                          <p class="cvr-stat__desc">{{ block.settings.stat_desc_1 }}</p>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <!-- /slider-col 1 -->
+
+                  <!-- Slider 2 -->
+                  <div class="cvr-slider-col">
+                    {%- if block.settings.after_label_2 != blank -%}
+                      <h5 class="cvr-after-label">{{ block.settings.after_label_2 }}</h5>
+                    {%- endif -%}
+                    <div
+                      class="cvr-compare"
+                      id="slider-{{ section_id }}-{{ forloop.index }}-2"
+                      data-slider
+                    >
+                      <div class="cvr-compare__layer cvr-compare__after">
+                        {%- if block.settings.after_image_2 != blank -%}
+                          <img
+                            src="{{ block.settings.after_image_2 | image_url: width: 800,format: 'webp' }}"
+                            alt="{{ block.settings.after_image_2.alt | escape | default: 'After' }}"
+                            width="{{ block.settings.after_image_2.width }}"
+                            height="{{ block.settings.after_image_2.height }}"
+                            loading="lazy"
+                          >
+                        {%- else -%}
+                          <div
+                            class="cvr-compare__placeholder"
+                            style="background:linear-gradient(160deg,#ecddd6,#d0b09a);"
+                          ></div>
+                        {%- endif -%}
+                      </div>
+                      <div class="cvr-compare__layer cvr-compare__before" data-before>
+                        {%- if block.settings.before_image_2 != blank -%}
+                          <img
+                            src="{{ block.settings.before_image_2 | image_url: width: 800,format: 'webp' }}"
+                            alt="{{ block.settings.before_image_2.alt | escape | default: 'Before' }}"
+                            width="{{ block.settings.before_image_2.width }}"
+                            height="{{ block.settings.before_image_2.height }}"
+                            loading="lazy"
+                          >
+                        {%- else -%}
+                          <div
+                            class="cvr-compare__placeholder"
+                            style="background:linear-gradient(160deg,#b48878,#8a5848);"
+                          ></div>
+                        {%- endif -%}
+                      </div>
+                      <div class="cvr-compare__line" data-line></div>
+                      <div class="cvr-compare__handle" data-handle>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="18" viewBox="0 0 23 18" fill="none">
+                          <path d="M12.0006 0.75V17.25C12.0006 17.4489 11.9216 17.6397 11.7809 17.7803C11.6403 17.921 11.4495 18 11.2506 18C11.0517 18 10.8609 17.921 10.7203 17.7803C10.5796 17.6397 10.5006 17.4489 10.5006 17.25V0.75C10.5006 0.551088 10.5796 0.360322 10.7203 0.21967C10.8609 0.0790178 11.0517 0 11.2506 0C11.4495 0 11.6403 0.0790178 11.7809 0.21967C11.9216 0.360322 12.0006 0.551088 12.0006 0.75ZM8.25059 8.25H2.5609L4.28121 6.53062C4.42195 6.38989 4.50101 6.19902 4.50101 6C4.50101 5.80098 4.42195 5.6101 4.28121 5.46937C4.14048 5.32864 3.94961 5.24958 3.75059 5.24958C3.55157 5.24958 3.3607 5.32864 3.21996 5.46937L0.219965 8.46937C0.150233 8.53903 0.0949134 8.62175 0.0571702 8.71279C0.019427 8.80384 0 8.90144 0 9C0 9.09856 0.019427 9.19616 0.0571702 9.2872C0.0949134 9.37825 0.150233 9.46097 0.219965 9.53062L3.21996 12.5306C3.3607 12.6714 3.55157 12.7504 3.75059 12.7504C3.94961 12.7504 4.14048 12.6714 4.28121 12.5306C4.42195 12.3899 4.50101 12.199 4.50101 12C4.50101 11.801 4.42195 11.6101 4.28121 11.4694L2.5609 9.75H8.25059C8.4495 9.75 8.64027 9.67098 8.78092 9.53033C8.92157 9.38968 9.00059 9.19891 9.00059 9C9.00059 8.80109 8.92157 8.61032 8.78092 8.46967C8.64027 8.32902 8.4495 8.25 8.25059 8.25ZM22.2812 8.46937L19.2812 5.46937C19.1405 5.32864 18.9496 5.24958 18.7506 5.24958C18.5516 5.24958 18.3607 5.32864 18.22 5.46937C18.0792 5.6101 18.0002 5.80098 18.0002 6C18.0002 6.19902 18.0792 6.38989 18.22 6.53062L19.9403 8.25H14.2506C14.0517 8.25 13.8609 8.32902 13.7203 8.46967C13.5796 8.61032 13.5006 8.80109 13.5006 9C13.5006 9.19891 13.5796 9.38968 13.7203 9.53033C13.8609 9.67098 14.0517 9.75 14.2506 9.75H19.9403L18.22 11.4694C18.0792 11.6101 18.0002 11.801 18.0002 12C18.0002 12.199 18.0792 12.3899 18.22 12.5306C18.3607 12.6714 18.5516 12.7504 18.7506 12.7504C18.9496 12.7504 19.1405 12.6714 19.2812 12.5306L22.2812 9.53062C22.3509 9.46097 22.4063 9.37825 22.444 9.2872C22.4817 9.19616 22.5012 9.09856 22.5012 9C22.5012 8.90144 22.4817 8.80384 22.444 8.71279C22.4063 8.62175 22.3509 8.53903 22.2812 8.46937Z" fill="white"/>
+                        </svg>
+                      </div>
+                    </div>
+
+                    {%- if block.settings.stat_2 != blank or block.settings.stat_desc_2 != blank -%}
+                      <div class="cvr-stat">
+                        {%- if block.settings.stat_2 != blank -%}
+                          <div class="cvr-stat__number">{{ block.settings.stat_2 }}%</div>
+                        {%- endif -%}
+                        {%- if block.settings.stat_desc_2 != blank -%}
+                          <p class="cvr-stat__desc">{{ block.settings.stat_desc_2 }}</p>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                  <!-- /slider-col 2 -->
+                </div>
+                <!-- /sliders-row -->
+              </div>
+              <!-- /cvr-panel -->
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <!-- /cvr-panels -->
+      </div>
+      {%- if section.settings.cta_label != blank -%}
+        <div class="cvr-cta-wrap">
+          <a
+            href="{{ section.settings.cta_url | default: '#' }}"
+            class="cvr-cta-btn common_btn"
+            {% if section.settings.cta_new_tab %}
+              target="_blank" rel="noopener"
+            {% endif %}
+          >
+            <span>{{ section.settings.cta_label }}</span>
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+    <!-- /cvr-container -->
+  </div>
+  <!-- /cvr-desktop -->
+
+  <!--
+    ════════════════════════════
+         MOBILE LAYOUT
+    ════════════════════════════
+  -->
+  <div class="cvr-mobile">
+    <div class="main-container">
+      <div class="cvr-container">
+        <!-- Shared header -->
+        <div class="cvr-mob-header">
+          {%- if section.settings.badge != blank -%}
+            <span class="cvr-badge">{{ section.settings.badge }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <{{ section.settings.heading_tag }} class="cvr-heading">
+              {{- section.settings.heading -}}
+            </{{ section.settings.heading_tag }}>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <p class="cvr-desc">{{ section.settings.description }}</p>
+          {%- endif -%}
+        </div>
+
+        <!-- Accordion tabs -->
+        <div class="cvr-mob-tabs">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'tab' -%}
+              <div class="cvr-mob-tab" {{ block.shopify_attributes }}>
+                <button
+                  class="cvr-mob-tab__trigger {% if forloop.first %}open{% endif %}"
+                  aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                  aria-controls="cvr-mob-body-{{ section_id }}-{{ forloop.index }}"
+                  data-mob-trigger
+                >
+                  <span class="cvr-mob-tab__label">{{ block.settings.tab_label }}</span>
+                  <span class="cvr-mob-tab__icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="15" viewBox="0 0 10 15" fill="none">
+                      <g clip-path="url(#clip0_10904_34267)">
+                      <path d="M5.20488e-07 9.04631L5.52585e-07 8.67916C1.13094 9.09495 2.13843 9.68196 2.96079 10.4043C3.78315 11.1265 4.40307 11.9689 4.78261 12.8798L4.78261 4.97555e-07L5.21739 5.35565e-07L5.21739 12.8798C5.59641 11.9683 6.2161 11.1253 7.03849 10.4024C7.86087 9.67953 8.86863 9.09201 10 8.67585L10 9.04631C8.56068 9.60856 7.35285 10.4617 6.50915 11.512C5.66545 12.5623 5.2185 13.7691 5.21739 15L4.78261 15C4.7815 13.7691 4.33456 12.5623 3.49085 11.512C2.64715 10.4617 1.43932 9.60856 5.20488e-07 9.04631Z" fill="black"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_10904_34267">
+                      <rect width="10" height="15" fill="white" transform="translate(10 15) rotate(-180)"/>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </span>
+                </button>
+
+                <div
+                  class="cvr-mob-tab__body {% if forloop.first %}open{% endif %}"
+                  id="cvr-mob-body-{{ section_id }}-{{ forloop.index }}"
+                >
+                  <div class="cvr-mob-tab__content">
+                    {% comment %}
+                      {%- if section.settings.after_label != blank -%}
+                        <p class="cvr-after-label">{{ section.settings.after_label }}</p>
+                      {%- endif -%}
+                    {% endcomment %}
+
+                    <div class="cvr-mob-sliders">
+                      <!-- Mobile Slider 1 -->
+                      <div class="cvr-slider-col">
+                        {%- if block.settings.after_label_1 != blank -%}
+                          <p class="cvr-after-label">{{ block.settings.after_label_1 }}</p>
+                        {%- endif -%}
+                        <div class="cvr-compare" data-slider>
+                          <div class="cvr-compare__layer cvr-compare__after">
+                            {%- if block.settings.after_image_1 != blank -%}
+                              <img
+                                src="{{ block.settings.after_image_1 | image_url: width: 600 }}"
+                                alt="{{ block.settings.after_image_1.alt | escape | default: 'After' }}"
+                                loading="lazy"
+                              >
+                            {%- else -%}
+                              <div
+                                class="cvr-compare__placeholder"
+                                style="background:linear-gradient(160deg,#f0e2d6,#d4b89a);"
+                              ></div>
+                            {%- endif -%}
+                          </div>
+                          <div class="cvr-compare__layer cvr-compare__before" data-before>
+                            {%- if block.settings.before_image_1 != blank -%}
+                              <img
+                                src="{{ block.settings.before_image_1 | image_url: width: 600 }}"
+                                alt="{{ block.settings.before_image_1.alt | escape | default: 'Before' }}"
+                                loading="lazy"
+                              >
+                            {%- else -%}
+                              <div
+                                class="cvr-compare__placeholder"
+                                style="background:linear-gradient(160deg,#c0907a,#96604a);"
+                              ></div>
+                            {%- endif -%}
+                          </div>
+                          <div class="cvr-compare__line" data-line></div>
+                          <div class="cvr-compare__handle" data-handle>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="23"
+                              height="18"
+                              viewBox="0 0 23 18"
+                              fill="none"
+                            >
+                              <path d="M12.0006 0.75V17.25C12.0006 17.4489 11.9216 17.6397 11.7809 17.7803C11.6403 17.921 11.4495 18 11.2506 18C11.0517 18 10.8609 17.921 10.7203 17.7803C10.5796 17.6397 10.5006 17.4489 10.5006 17.25V0.75C10.5006 0.551088 10.5796 0.360322 10.7203 0.21967C10.8609 0.0790178 11.0517 0 11.2506 0C11.4495 0 11.6403 0.0790178 11.7809 0.21967C11.9216 0.360322 12.0006 0.551088 12.0006 0.75ZM8.25059 8.25H2.5609L4.28121 6.53062C4.42195 6.38989 4.50101 6.19902 4.50101 6C4.50101 5.80098 4.42195 5.6101 4.28121 5.46937C4.14048 5.32864 3.94961 5.24958 3.75059 5.24958C3.55157 5.24958 3.3607 5.32864 3.21996 5.46937L0.219965 8.46937C0.150233 8.53903 0.0949134 8.62175 0.0571702 8.71279C0.019427 8.80384 0 8.90144 0 9C0 9.09856 0.019427 9.19616 0.0571702 9.2872C0.0949134 9.37825 0.150233 9.46097 0.219965 9.53062L3.21996 12.5306C3.3607 12.6714 3.55157 12.7504 3.75059 12.7504C3.94961 12.7504 4.14048 12.6714 4.28121 12.5306C4.42195 12.3899 4.50101 12.199 4.50101 12C4.50101 11.801 4.42195 11.6101 4.28121 11.4694L2.5609 9.75H8.25059C8.4495 9.75 8.64027 9.67098 8.78092 9.53033C8.92157 9.38968 9.00059 9.19891 9.00059 9C9.00059 8.80109 8.92157 8.61032 8.78092 8.46967C8.64027 8.32902 8.4495 8.25 8.25059 8.25ZM22.2812 8.46937L19.2812 5.46937C19.1405 5.32864 18.9496 5.24958 18.7506 5.24958C18.5516 5.24958 18.3607 5.32864 18.22 5.46937C18.0792 5.6101 18.0002 5.80098 18.0002 6C18.0002 6.19902 18.0792 6.38989 18.22 6.53062L19.9403 8.25H14.2506C14.0517 8.25 13.8609 8.32902 13.7203 8.46967C13.5796 8.61032 13.5006 8.80109 13.5006 9C13.5006 9.19891 13.5796 9.38968 13.7203 9.53033C13.8609 9.67098 14.0517 9.75 14.2506 9.75H19.9403L18.22 11.4694C18.0792 11.6101 18.0002 11.801 18.0002 12C18.0002 12.199 18.0792 12.3899 18.22 12.5306C18.3607 12.6714 18.5516 12.7504 18.7506 12.7504C18.9496 12.7504 19.1405 12.6714 19.2812 12.5306L22.2812 9.53062C22.3509 9.46097 22.4063 9.37825 22.444 9.2872C22.4817 9.19616 22.5012 9.09856 22.5012 9C22.5012 8.90144 22.4817 8.80384 22.444 8.71279C22.4063 8.62175 22.3509 8.53903 22.2812 8.46937Z" fill="white"/>
+                            </svg>
+                          </div>
+                        </div>
+                        {%- if block.settings.stat_1 != blank or block.settings.stat_desc_1 != blank -%}
+                          <div class="cvr-stat">
+                            <div class="cvr-stat__number">{{ block.settings.stat_1 }}%</div>
+                            <p class="cvr-stat__desc">{{ block.settings.stat_desc_1 }}</p>
+                          </div>
+                        {%- endif -%}
+                      </div>
+
+                      <!-- Mobile Slider 2 -->
+                      <div class="cvr-slider-col">
+                        {%- if block.settings.after_label_2 != blank -%}
+                          <h5 class="cvr-after-label">{{ block.settings.after_label_2 }}</h5>
+                        {%- endif -%}
+                        <div class="cvr-compare" data-slider>
+                          <div class="cvr-compare__layer cvr-compare__after">
+                            {%- if block.settings.after_image_2 != blank -%}
+                              <img
+                                src="{{ block.settings.after_image_2 | image_url: width: 600 }}"
+                                alt="{{ block.settings.after_image_2.alt | escape | default: 'After' }}"
+                                loading="lazy"
+                              >
+                            {%- else -%}
+                              <div
+                                class="cvr-compare__placeholder"
+                                style="background:linear-gradient(160deg,#ecddd6,#d0b09a);"
+                              ></div>
+                            {%- endif -%}
+                          </div>
+                          <div class="cvr-compare__layer cvr-compare__before" data-before>
+                            {%- if block.settings.before_image_2 != blank -%}
+                              <img
+                                src="{{ block.settings.before_image_2 | image_url: width: 600 }}"
+                                alt="{{ block.settings.before_image_2.alt | escape | default: 'Before' }}"
+                                loading="lazy"
+                              >
+                            {%- else -%}
+                              <div
+                                class="cvr-compare__placeholder"
+                                style="background:linear-gradient(160deg,#b48878,#8a5848);"
+                              ></div>
+                            {%- endif -%}
+                          </div>
+                          <div class="cvr-compare__line" data-line></div>
+                          <div class="cvr-compare__handle" data-handle>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="23"
+                              height="18"
+                              viewBox="0 0 23 18"
+                              fill="none"
+                            >
+                              <path d="M12.0006 0.75V17.25C12.0006 17.4489 11.9216 17.6397 11.7809 17.7803C11.6403 17.921 11.4495 18 11.2506 18C11.0517 18 10.8609 17.921 10.7203 17.7803C10.5796 17.6397 10.5006 17.4489 10.5006 17.25V0.75C10.5006 0.551088 10.5796 0.360322 10.7203 0.21967C10.8609 0.0790178 11.0517 0 11.2506 0C11.4495 0 11.6403 0.0790178 11.7809 0.21967C11.9216 0.360322 12.0006 0.551088 12.0006 0.75ZM8.25059 8.25H2.5609L4.28121 6.53062C4.42195 6.38989 4.50101 6.19902 4.50101 6C4.50101 5.80098 4.42195 5.6101 4.28121 5.46937C4.14048 5.32864 3.94961 5.24958 3.75059 5.24958C3.55157 5.24958 3.3607 5.32864 3.21996 5.46937L0.219965 8.46937C0.150233 8.53903 0.0949134 8.62175 0.0571702 8.71279C0.019427 8.80384 0 8.90144 0 9C0 9.09856 0.019427 9.19616 0.0571702 9.2872C0.0949134 9.37825 0.150233 9.46097 0.219965 9.53062L3.21996 12.5306C3.3607 12.6714 3.55157 12.7504 3.75059 12.7504C3.94961 12.7504 4.14048 12.6714 4.28121 12.5306C4.42195 12.3899 4.50101 12.199 4.50101 12C4.50101 11.801 4.42195 11.6101 4.28121 11.4694L2.5609 9.75H8.25059C8.4495 9.75 8.64027 9.67098 8.78092 9.53033C8.92157 9.38968 9.00059 9.19891 9.00059 9C9.00059 8.80109 8.92157 8.61032 8.78092 8.46967C8.64027 8.32902 8.4495 8.25 8.25059 8.25ZM22.2812 8.46937L19.2812 5.46937C19.1405 5.32864 18.9496 5.24958 18.7506 5.24958C18.5516 5.24958 18.3607 5.32864 18.22 5.46937C18.0792 5.6101 18.0002 5.80098 18.0002 6C18.0002 6.19902 18.0792 6.38989 18.22 6.53062L19.9403 8.25H14.2506C14.0517 8.25 13.8609 8.32902 13.7203 8.46967C13.5796 8.61032 13.5006 8.80109 13.5006 9C13.5006 9.19891 13.5796 9.38968 13.7203 9.53033C13.8609 9.67098 14.0517 9.75 14.2506 9.75H19.9403L18.22 11.4694C18.0792 11.6101 18.0002 11.801 18.0002 12C18.0002 12.199 18.0792 12.3899 18.22 12.5306C18.3607 12.6714 18.5516 12.7504 18.7506 12.7504C18.9496 12.7504 19.1405 12.6714 19.2812 12.5306L22.2812 9.53062C22.3509 9.46097 22.4063 9.37825 22.444 9.2872C22.4817 9.19616 22.5012 9.09856 22.5012 9C22.5012 8.90144 22.4817 8.80384 22.444 8.71279C22.4063 8.62175 22.3509 8.53903 22.2812 8.46937Z" fill="white"/>
+                            </svg>
+                          </div>
+                        </div>
+                        {%- if block.settings.stat_2 != blank or block.settings.stat_desc_2 != blank -%}
+                          <div class="cvr-stat">
+                            <div class="cvr-stat__number">{{ block.settings.stat_2 }}%</div>
+                            <p class="cvr-stat__desc">{{ block.settings.stat_desc_2 }}</p>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                    <!-- /mob-sliders -->
+                  </div>
+                </div>
+                <!-- /mob-tab__body -->
+              </div>
+              <!-- /mob-tab -->
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <!-- /mob-tabs -->
+
+        {%- if section.settings.footnote != blank -%}
+          <p class="cvr-footnote" style="margin-top:32px;">{{ section.settings.footnote }}</p>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.cta_label != blank -%}
+        <div class="cvr-cta-wrap">
+          <a
+            href="{{ section.settings.cta_url | default: '#' }}"
+            class="cvr-cta-btn common_btn"
+            {% if section.settings.cta_new_tab %}
+              target="_blank" rel="noopener"
+            {% endif %}
+          >
+            <span>{{ section.settings.cta_label }}</span>
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  <!-- /cvr-mobile -->
+</section>
+
+<style>
+  /* ────────────────────────────────────────
+     BASE RESET & VARIABLES
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} *,
+  #cvr-{{ section_id }} *::before,
+  #cvr-{{ section_id }} *::after {
+    box-sizing: border-box;
+  }
+
+  #cvr-{{ section_id }} {
+    background-color: var(--cvr-bg, #f8f6f3);
+    color: var(--cvr-text, #2c2420);
+    padding-top: var(--cvr-pt, 80px);
+    padding-bottom: var(--cvr-pb, 80px);
+  }
+
+  /* ────────────────────────────────────────
+     CONTAINER
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .main-container{
+    max-width: {{ section.settings.container_width }}px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: {{ section.settings.container_gutter }}px;
+    padding-right: {{ section.settings.container_gutter }}px;
+  }
+  #cvr-{{ section_id }} .cvr-container {
+  }
+
+  /* ────────────────────────────────────────
+     SHARED TYPOGRAPHY
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cvr-accent, #a07d57);
+    margin-bottom: 18px;
+  }
+
+  #cvr-{{ section_id }} .cvr-heading {
+    color: var(--cvr-text, #2c2420);
+    margin: 0 0 20px;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 48px;
+    text-transform: uppercase;
+  }
+
+  #cvr-{{ section_id }} .cvr-desc {
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: normal;
+    line-height: 22px;
+    color:  var(--cvr-text);
+    margin-bottom: 34px;
+  }
+
+  #cvr-{{ section_id }} .cvr-footnote {
+    color: color-mix(in srgb, var(--cvr-text) 45%, transparent);
+    margin-top: 16px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: normal;
+    font-family: var(--argentum);
+  }
+
+  #cvr-{{ section_id }} .cvr-after-label {
+    font-family:var(--argentum);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    text-transform: uppercase;
+    margin: 0 0 16px;
+    color: color-mix(in srgb, var(--cvr-text) 55%, transparent);
+    letter-spacing: normal;
+  }
+
+  /* ────────────────────────────────────────
+     DESKTOP LAYOUT
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-mobile  { display: none; }
+  #cvr-{{ section_id }} .cvr-desktop { display: block; }
+
+
+  #cvr-{{ section_id }} .cvr-desktop .cvr-container {
+    display: grid;
+    grid-template-columns: {{ section.settings.left_col_width }}px 1fr;
+    gap: {{ section.settings.col_gap }}px;
+    align-items: start;
+  }
+
+  #cvr-{{ section_id }} .cvr-left {
+    position: sticky;
+    top: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Desktop tabs */
+  #cvr-{{ section_id }} .cvr-tabs {
+    {% comment %} border-top: 1px solid color-mix(in srgb, var(--cvr-text) 18%, transparent); {% endcomment %}
+     display: flex;
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  #cvr-{{ section_id }} .cvr-tab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--cvr-text) 18%, transparent);
+    cursor: pointer;
+    text-align: left;
+  }
+  #cvr-{{ section_id }} .cvr-tab-btn.active {
+    border-width: 2px;
+    border-color: #000;
+  }
+  #cvr-{{ section_id }} .cvr-tab-btn__text {
+
+    color: color-mix(in srgb, var(--cvr-text) 50%, transparent);
+    transition: color 0.25s;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--argentum);
+  }
+  #cvr-{{ section_id }} .cvr-cta-btn {
+        text-transform: uppercase;
+  }
+
+  #cvr-{{ section_id }} .cvr-tab-btn__arrow {
+    width: 18px; height: 18px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s;
+    flex-shrink: 0;
+  }
+
+  #cvr-{{ section_id }} .cvr-tab-btn__arrow svg {
+    width: 13px; height: 13px;
+    stroke: #000;
+  }
+
+  #cvr-{{ section_id }} .cvr-tab-btn.active .cvr-tab-btn__text,
+  #cvr-{{ section_id }} .cvr-tab-btn:hover  .cvr-tab-btn__text {
+    color: var(--cvr-text);
+  }
+
+  #cvr-{{ section_id }} .cvr-tab-btn.active .cvr-tab-btn__arrow { opacity: 1; }
+
+  /* Desktop panels */
+  #cvr-{{ section_id }} .cvr-panel { display: none; }
+
+  #cvr-{{ section_id }} .cvr-panel.active {
+    display: block;
+    animation: cvrFadeUp 0.4s ease;
+  }
+
+  @keyframes cvrFadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ────────────────────────────────────────
+     SLIDERS GRID
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-sliders-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: {{ section.settings.slider_gap }}px;
+  }
+
+  /* ────────────────────────────────────────
+     COMPARE WIDGET
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-compare {
+    position: relative;
+    border-radius: {{ section.settings.image_radius }}px;
+    overflow: hidden;
+    user-select: none;
+    cursor: col-resize;
+    aspect-ratio: {{ section.settings.image_aspect }};
+    background: color-mix(in srgb, var(--cvr-text) 10%, transparent);
+    touch-action: pan-y;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__layer img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__placeholder {
+    width: 100%; height: 100%;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__after  { z-index: 1; }
+  #cvr-{{ section_id }} .cvr-compare__before { z-index: 2; clip-path: inset(0 50% 0 0); }
+
+  #cvr-{{ section_id }} .cvr-compare__line {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 2px;
+    background: rgba(255,255,255,0.9);
+    z-index: 3;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__handle {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    background: linear-gradient(122.72deg, rgba(255, 255, 255, 0.3) 1.75%, rgba(166, 165, 165, 0.3) 33.05%, rgba(255, 255, 255, 0.3) 97.16%);
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    z-index: 4;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+    pointer-events: none;
+  }
+
+  #cvr-{{ section_id }} .cvr-compare__handle svg {
+    width: 20px; height: 20px;
+    stroke: var(--cvr-accent, #a07d57);
+  }
+
+
+  /* ────────────────────────────────────────
+     STAT CARD
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-stat {
+    margin-top: 16px;
+    background: color-mix(in srgb, var(--cvr-bg, #f8f6f3) 60%, #fff);
+    border-radius: {{ section.settings.image_radius }}px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  #cvr-{{ section_id }} .cvr-stat__number {
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1;
+    color: #CA003D;
+    margin-bottom: 8px;
+  }
+
+  #cvr-{{ section_id }} .cvr-stat__number span {
+    font-size: 26px;
+  }
+
+  #cvr-{{ section_id }} .cvr-stat__desc {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: var(--cvr-text);
+    margin:0;
+  }
+
+  /* ────────────────────────────────────────
+     CTA BUTTON
+  ──────────────────────────────────────── */
+  #cvr-{{ section_id }} .cvr-cta-wrap {
+    display: flex;
+      justify-content: center;
+      align-items: center;
+    margin-top: 32px;
+  }
+
+  /* ────────────────────────────────────────
+     MOBILE LAYOUT  ≤ 768px
+  ──────────────────────────────────────── */
+  {% comment %} @media screen and (max-width: 768px) { {% endcomment %}
+  @media screen and (max-width: 991px) {
+    #cvr-{{ section_id }} {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  #cvr-{{ section_id }} .main-container{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+    #cvr-{{ section_id }} .cvr-container{
+    }
+    #cvr-{{ section_id }} .cvr-desktop { display: none; }
+    #cvr-{{ section_id }} .cvr-mobile  { display: block; }
+
+    #cvr-{{ section_id }} .cvr-mob-header {
+      margin-bottom: 28px;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-header .cvr-heading {
+      font-size: 30px;
+      line-height:normal;
+      margin:0;
+      max-width: 270px;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-header .cvr-desc {
+      max-width: 100%;
+      margin-top: 8px;
+    }
+
+    /* Mobile accordion */
+    #cvr-{{ section_id }} .cvr-mob-tabs {
+      {% comment %} border-top: 1px solid color-mix(in srgb, var(--cvr-text) 18%, transparent); {% endcomment %}
+       display:flex;
+       flex-direction: column;
+       gap:24px;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 11px 0;
+      background: none;
+      border: none;
+      border-bottom: 1px solid color-mix(in srgb, var(--cvr-text) 18%, transparent);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__label {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--cvr-text) 50%, transparent);
+      transition: color 0.25s;
+      font-family: var(--argentum);
+      line-height: normal;
+    }
+     #cvr-{{ section_id }} .cvr-stat{
+      margin-top: 8px;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__icon {
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__icon svg {
+      width: 15px; height: 15px;
+      stroke: #000;
+    }
+    #cvr-{{ section_id }} .cvr-mob-tab__trigger.open{border-width:2px;border-color:#000;}
+    #cvr-{{ section_id }} .cvr-mob-tab__trigger.open .cvr-mob-tab__label { color: var(--cvr-text); }
+    #cvr-{{ section_id }} .cvr-mob-tab__trigger.open .cvr-mob-tab__icon  { transform: rotate(180deg); }
+    #cvr-{{ section_id }} .cvr-after-label{
+      margin-bottom: 8px;
+    }
+    /* Collapsible body */
+    #cvr-{{ section_id }} .cvr-mob-tab__body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease;
+      {% comment %} border-bottom: 1px solid color-mix(in srgb, var(--cvr-text) 18%, transparent); {% endcomment %}
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__body.open {
+      max-height: 3000px;
+    }
+
+    #cvr-{{ section_id }} .cvr-mob-tab__content {
+      padding: 24px 0 0;
+    }
+
+    /* Mobile sliders: vertical stack */
+    #cvr-{{ section_id }} .cvr-mob-sliders {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
+    #cvr-{{ section_id }} .cvr-slider-col {
+      width: calc(50% - 10px);
+    }
+    #cvr-{{ section_id }} .cvr-compare {
+      aspect-ratio: {{ section.settings.image_aspect_mobile }};
+      touch-action: pan-y;
+    }
+  }
+  @media(max-width: 767px){
+    #cvr-{{ section_id }} {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  #cvr-{{ section_id }} .cvr-slider-col {
+  width: 100%;
+}
+#cvr-{{ section_id }} .cvr-mob-sliders {
+      flex-direction: column;
+    }
+  }
+  @media(max-width: 475px){
+    #cvr-{{ section_id }} .cvr-cta-btn {
+      width: 100%;
+      min-width: 290px;
+  }
+  }
+  /* ────────────────────────────────────────
+     TABLET  769–1024px
+  ──────────────────────────────────────── */
+  {% comment %} @media screen and (min-width: 769px) and (max-width: 1024px) { {% endcomment %}
+  @media screen and (min-width: 991px) and (max-width: 1080px) {
+    #cvr-{{ section_id }} .cvr-desktop .cvr-container {
+      grid-template-columns: 260px 1fr;
+      gap: 40px;
+    }
+
+    #cvr-{{ section_id }} .cvr-heading {
+      font-size: clamp(28px, 3.5vw, 42px);
+    }
+
+    #cvr-{{ section_id }} .main-container{
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+    #cvr-{{ section_id }} .cvr-container {
+    }
+  }
+
+
+  @media(max-width: 375px){
+    #cvr-{{ section_id }} .cvr-stat__desc br{
+      display: none;
+    }
+    #cvr-{{ section_id }} .cvr-stat__number {
+    font-size: 46px;
+  }
+  }
+</style>
+
+<script>
+  (function () {
+    'use strict';
+
+    const sectionEl = document.getElementById('cvr-{{ section_id }}');
+    if (!sectionEl) return;
+
+    /* ── DESKTOP TAB SWITCH ── */
+    sectionEl.querySelectorAll('.cvr-tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const sectionId = btn.dataset.section;
+        const idx = btn.dataset.tabIndex;
+
+        sectionEl.querySelectorAll('.cvr-tab-btn').forEach(function (b) {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        sectionEl.querySelectorAll('.cvr-panel').forEach(function (p) {
+          p.classList.remove('active');
+        });
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const panel = document.getElementById('cvr-panel-' + sectionId + '-' + idx);
+        if (panel) panel.classList.add('active');
+      });
+    });
+
+    /* ── MOBILE ACCORDION ── */
+    sectionEl.querySelectorAll('[data-mob-trigger]').forEach(function (trigger) {
+      trigger.addEventListener('click', function () {
+        const bodyId = trigger.getAttribute('aria-controls');
+        const body = document.getElementById(bodyId);
+        const isOpen = trigger.classList.contains('open');
+
+        /* close all */
+        sectionEl.querySelectorAll('[data-mob-trigger]').forEach(function (t) {
+          t.classList.remove('open');
+          t.setAttribute('aria-expanded', 'false');
+        });
+        sectionEl.querySelectorAll('.cvr-mob-tab__body').forEach(function (b) {
+          b.classList.remove('open');
+        });
+
+        /* open clicked (if it was closed) */
+        if (!isOpen) {
+          trigger.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+          if (body) body.classList.add('open');
+        }
+      });
+    });
+
+    /* ── BEFORE/AFTER SLIDER ── */
+    function initSlider(wrap) {
+      const before = wrap.querySelector('[data-before]');
+      const line = wrap.querySelector('[data-line]');
+      const handle = wrap.querySelector('[data-handle]');
+      if (!before) return;
+
+      let dragging = false;
+
+      function setPos(clientX) {
+        const rect = wrap.getBoundingClientRect();
+        const pct = Math.max(2, Math.min(98, ((clientX - rect.left) / rect.width) * 100));
+        before.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        if (line) line.style.left = pct + '%';
+        if (handle) handle.style.left = pct + '%';
+      }
+
+      wrap.addEventListener('mousedown', function (e) {
+        dragging = true;
+        setPos(e.clientX);
+        e.preventDefault();
+      });
+
+      wrap.addEventListener(
+        'touchstart',
+        function (e) {
+          dragging = true;
+          setPos(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+
+      document.addEventListener('mousemove', function (e) {
+        if (dragging) setPos(e.clientX);
+      });
+
+      document.addEventListener(
+        'touchmove',
+        function (e) {
+          if (dragging) setPos(e.touches[0].clientX);
+        },
+        { passive: true }
+      );
+
+      document.addEventListener('mouseup', function () {
+        dragging = false;
+      });
+      document.addEventListener('touchend', function () {
+        dragging = false;
+      });
+    }
+
+    sectionEl.querySelectorAll('[data-slider]').forEach(initSlider);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Clinically Verified",
+  "tag": "section",
+  "class": "section-cvr",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge / Eyebrow Text",
+      "default": "Clinical Evidence"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CLINICALLY\nVERIFIED\nRESULTS*"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading HTML Tag",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our LED technology is validated through real clinical protocols to ensure the results you're viewing are accurate, repeatable, and backed by science."
+    },
+    {
+      "type": "textarea",
+      "id": "footnote",
+      "label": "Footnote / Disclaimer",
+      "default": "*Based on an independent, third-party 84-day clinical study conducted on 30 volunteers with once-daily use. Individual results may vary. For external use only."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f8f6f3"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#2c2420"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color (tabs, handle, badge)",
+      "default": "#a07d57"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Max Container Width (px)",
+      "min": 960,
+      "max": 1600,
+      "step": 20,
+      "default": 1380
+    },
+    {
+      "type": "range",
+      "id": "container_gutter",
+      "label": "Container Side Padding (px)",
+      "min": 16,
+      "max": 80,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "left_col_width",
+      "label": "Left Column Width (px)",
+      "min": 220,
+      "max": 420,
+      "step": 10,
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "col_gap",
+      "label": "Column Gap (px)",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "slider_gap",
+      "label": "Slider Column Gap (px)",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top (px)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom (px)",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "text",
+      "id": "image_aspect",
+      "label": "Image Aspect Ratio (Desktop)",
+      "info": "e.g. 3/4 (portrait) or 1/1 (square) or 4/3 (landscape)",
+      "default": "3/4"
+    },
+    {
+      "type": "text",
+      "id": "image_aspect_mobile",
+      "label": "Image Aspect Ratio (Mobile)",
+      "info": "e.g. 4/3 or 1/1",
+      "default": "4/3"
+    },
+    {
+      "type": "range",
+      "id": "image_radius",
+      "label": "Image Border Radius (px)",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "url"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_new_tab",
+      "label": "Open url in new tab"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Tab Label"
+        },
+        {
+          "type": "text",
+          "id": "tab_label",
+          "label": "Tab Label",
+          "default": "Crow's Feet & Dark Circle"
+        },
+        {
+          "type": "header",
+          "content": "Slider 1 — Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image_1",
+          "label": "Slider 1 — Before Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image_1",
+          "label": "Slider 1 — After Image"
+        },
+        {
+          "type": "header",
+          "content": "Slider 1 — Stat"
+        },
+        {
+          "type": "text",
+          "id": "stat_1",
+          "label": "Stat 1 — Percentage (number only)",
+          "default": "84"
+        },
+        {
+          "type": "text",
+          "id": "after_label_1",
+          "label": "\"After X weeks\" Label",
+          "default": "After 12 Weeks of Daily Use"
+        },
+        {
+          "type": "textarea",
+          "id": "stat_desc_1",
+          "label": "Stat 1 — Description",
+          "default": "saw visible improvement elasticity and firmness (Cutometer measurement)†"
+        },
+        {
+          "type": "header",
+          "content": "Slider 2 — Images"
+        },
+        {
+          "type": "image_picker",
+          "id": "before_image_2",
+          "label": "Slider 2 — Before Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "after_image_2",
+          "label": "Slider 2 — After Image"
+        },
+        {
+          "type": "header",
+          "content": "Slider 2 — Stat"
+        },
+        {
+          "type": "text",
+          "id": "stat_2",
+          "label": "Stat 2 — Percentage (number only)",
+          "default": "74"
+        },
+        {
+          "type": "text",
+          "id": "after_label_2",
+          "label": "\"After X weeks\" Label",
+          "default": "After 12 Weeks of Daily Use"
+        },
+        {
+          "type": "textarea",
+          "id": "stat_desc_2",
+          "label": "Stat 2 — Description",
+          "default": "saw visible improvements in crow's feet wrinkles (AEVA®-HIE measurement)†"
+        },
+        {
+          "type": "header",
+          "content": "CTA Button"
+        },
+        {
+          "type": "checkbox",
+          "id": "cta_new_tab",
+          "label": "Open in New Tab",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clinically Verified",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Crow's Feet & Dark Circle",
+            "stat_1": "84",
+            "stat_desc_1": "saw visible improvement elasticity and firmness (Cutometer measurement)†",
+            "stat_2": "74",
+            "stat_desc_2": "saw visible improvements in crow's feet wrinkles (AEVA®-HIE measurement)†"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Perioral Area & Lip Volume",
+            "stat_1": "83",
+            "stat_desc_1": "saw visible improvement in lip and perioral wrinkles (AEVA® measurement + dermatologic scoring)†",
+            "stat_2": "87",
+            "stat_desc_2": "saw visibly improved lip volume (AEVA®-volumetric lip analysis)†"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

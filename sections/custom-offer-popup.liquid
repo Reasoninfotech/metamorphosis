@@ -1,0 +1,312 @@
+
+{% style %}
+body.pop-up-show{
+    height: 100vh;
+    overflow: hidden;
+}
+ .offer-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999;
+  opacity: 0;
+  pointer-events: none; 
+  transition: opacity 0.5s ease;
+}
+
+.offer-popup.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.offer-popup .popup {
+  width: 100%;
+  max-width: 850px;
+  /* max-height: 455px; */
+  max-height: 500px;
+  background: white;
+  display: flex;
+  position: relative;
+  margin: 0 20px;
+}
+
+.offer-popup .popup-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.offer-popup .popup-left {
+  width: 50%;
+}
+
+.offer-popup .popup-right {
+  width: 50%;
+  /* padding: 40px; */
+  padding: 35px;
+  text-align: center;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.offer-popup  h2{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 35px;
+    text-align: center;
+    margin: 0 0 20px;
+    letter-spacing: normal;
+}
+.offer-popup h2{
+  max-width: 350px;
+}
+    .offer-popup .sub-heading {
+      /* max-width: 350px; */
+      max-width: 360px;
+    }
+.offer-popup .sub-heading p:first-child {
+    /* font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+    font-family: var(--argentum);
+    letter-spacing: normal;
+    color: #333333; */
+    margin-bottom: 26px;
+
+}
+.offer-popup .sub-heading p{
+  font-weight: 400;
+    font-size: 14px;
+    line-height: normal;
+    text-align: center;
+    font-family: var(--argentum);
+    letter-spacing: normal;
+    color: #333333;
+}
+.offer-popup  .sub-heading p{
+    margin:0;
+}
+.offer-popup .logo{
+    width: 84px;
+    margin: 0 auto 20px;
+}
+.offer-popup .logo img{
+    width: 100%;
+    height: auto;
+}
+.offer-popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.offer-popup .shop-btn {
+  /* padding: 12px 25px;
+  border: 1px solid red;
+  background: white;
+  cursor: pointer; */
+  margin: 20px auto 0;
+    width: fit-content;
+    min-width: 240px;
+    text-transform: uppercase;
+}
+
+@media(max-width: 767px){
+    .offer-popup .popup-right{
+        padding: 22px;
+    }
+    /* .offer-popup .popup-right{
+      width:100%;
+    } */
+}
+@media(max-width: 630px){
+    .offer-popup .popup-left {
+        display: none;
+    }
+    .offer-popup .popup-right{
+        width: 100%;
+    }
+    .offer-popup .popup {
+    width: auto;
+    }
+    .offer-popup .popup-right {
+        padding: 26px;
+    }
+    .offer-popup  h2 {
+    font-size: 26px;
+    }
+    .offer-popup  .sub-heading {
+    font-size: 12px;
+    }
+    .offer-popup .shop-btn {
+    min-width: auto;
+    /* margin: 20px auto 0; */
+    }
+    .offer-popup .logo {
+    margin: 0 auto 15px;
+    }
+    .offer-popup  h2 {
+        margin: 0 0 15px;
+    }
+}
+@media(max-width: 575px){
+  .offer-popup h2{
+    max-width: 300px;
+  }
+}
+
+@media(max-width: 340px){
+      .offer-popup .popup-right {
+        padding: 16px;
+    }
+        .offer-popup h2 {
+        font-size: 24px;
+    }
+    .offer-popup .sub-heading p {
+    font-size: 12px;
+    }
+    .offer-popup .shop-btn{
+      font-size: 12px;
+    }
+}
+{% endstyle %}
+<div id="popupOverlay" class="offer-popup">
+  <div class="popup">
+    <button class="close-btn" onclick="closePopup()">×</button>
+    <div class="popup-left">
+        <img src="{{section.settings.image | img_url: 'master'}}" alt="{{section.settings.image.alt}}">
+    </div>
+    
+    <div class="popup-right">
+        {% if section.settings.popup-logo != blank %}
+        <div class="logo">
+            <img src="{{ section.settings.popup-logo | img_url:'master' }}">
+        </div>
+    {% endif %}
+      <h2>{{section.settings.heading}}</h2>
+      <div class="sub-heading">{{section.settings.sub-heading}}</div>
+
+      <a href="{{ section.settings.btn-link }}" class="shop-btn common_btn" id="shop-btn">{{section.settings.btn-label}}</a>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const popup = document.getElementById("popupOverlay");
+  const popupInner = document.querySelector(".popup");
+  const closeBtn = document.querySelector(".close-btn");
+  const shopBtn = document.querySelector("#shop-btn");
+  const bodyElement = document.body;
+
+  function setCookie(name, value, hours) {
+    var date = new Date();
+    date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+    document.cookie = name + "=" + value + "; expires=" + date.toUTCString() + "; path=/";
+  }
+
+  function getCookie(name) {
+    return document.cookie.split('; ').find(row => row.startsWith(name + '='))?.split('=')[1];
+  }
+
+  function closePopup() {
+    bodyElement.classList.remove("pop-up-show")
+    popup.classList.remove("show");
+    setCookie("popupClosed", "true", 24);
+  }
+
+
+  {% comment %} auto start time zone EST {% endcomment %}
+   const startDate = new Date('2026-03-04T04:30:00Z');
+  const now = new Date();
+
+  if (now >= startDate && !getCookie("popupClosed")) {
+    setTimeout(function() {
+      bodyElement.classList.add("pop-up-show");
+      popup.classList.add("show");
+    }, 2000);
+  }
+  {% comment %} if (!getCookie("popupClosed")) {
+    setTimeout(function() {
+        bodyElement.classList.add("pop-up-show")
+      popup.classList.add("show");
+    }, 2000);
+  } {% endcomment %}
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closePopup();
+    });
+  }
+
+  if (shopBtn) {
+    shopBtn.addEventListener("click", function (e) {
+      closePopup();
+    });
+  }
+
+  popup.addEventListener("click", function () {
+    closePopup();
+  });
+
+  if (popupInner) {
+    popupInner.addEventListener("click", function (e) {
+      e.stopPropagation();
+    });
+  }
+
+});
+</script>
+{% schema %}
+{
+    "name": "offer popup",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "popup-logo",
+            "label": "Logo"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "textarea",
+            "id": "sub-heading",
+            "label": "Sub heading"
+        },
+        {
+            "type": "text",
+            "id": "btn-label",
+            "label": "Button label"
+        },
+        {
+            "type": "url",
+            "id": "btn-link",
+            "label": "Button link"
+        }
+    ],
+    "presets": [
+        {
+            "name": "offer popup",
+        }
+    ]
+}
+{% endschema %}

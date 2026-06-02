@@ -1,0 +1,188 @@
+
+
+{% schema %}
+  {
+    "name": "Exosome image Text",
+    "settings": [
+        {
+          "type": "text",
+          "id": "custom_class",
+          "label": "custom class "
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background color"
+        },      
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "html",
+          "id": "tite",
+          "label": "Title",
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "text",
+        },
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "button text",
+        },  
+        {
+          "type": "url",
+          "id": "btn_url",
+          "label": "button url",
+        }
+    ],
+    "presets": [
+      {
+        "name": "Exosome image Text",
+      }
+    ]
+  }
+{% endschema %}
+
+<section class="exosome_img_text_section {{ section.settings.custom_class }}" style="background-color:{{ section.settings.background }};">
+    {% comment %} <div class="page-width"> {% endcomment %}
+        <div class="exosome_werp">
+            <div class="exosome-text">
+                   {% if section.settings.tite != blank %}
+                <h2 class="main_title">{{ section.settings.tite }}</h2>
+            {% endif %}
+                {% if section.settings.text != blank%}
+                <div class="text">
+                    {{ section.settings.text }}
+                </div>
+                {% endif %}
+                <div  class="img-text-btn-wrp">
+                {% if section.settings.btn_url != blank%}
+                <a class="common_btn" href="{{ section.settings.btn_url }}">{{ section.settings.btn_text }}</a>
+                {% endif %}
+                </div>
+
+            </div>
+            <div class="exosome-img">
+                <figure>
+                    {% if section.settings.image != blank%}
+                    <img src="{{ section.settings.image | img_url: "master" }}" alt="{{ section.settings.image.alt }}" loading="lazy" />
+                    {% endif %}
+                </figure>
+            </div>
+        </div>
+    {% comment %} </div> {% endcomment %}
+</section>
+
+<style>
+
+.exosome_img_text_section .exosome_werp {
+	 display: flex;
+	 gap: 40px;
+	 flex-wrap: wrap;
+	 align-items: center;
+}
+ @media screen and (max-width: 767px) {
+	 .exosome_img_text_section .exosome_werp {
+		 gap: 20px;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-text {
+	 width: calc(60% - 20px);
+	 display: flex;
+	 flex-direction: column;
+	 align-items: center;
+	 gap: 48px;
+	 max-width: 670px;
+	 margin: auto;
+	 padding: 20px 0;
+	 padding-left: 30px;
+}
+ @media screen and (max-width: 991px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text {
+		 width: calc(50% - 20px);
+		 gap: 20px;
+	}
+}
+ @media screen and (max-width: 767px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text {
+		 width: 100%;
+		 padding: 40px 15px 0 15px;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-text h2 {
+	 text-transform: uppercase;
+}
+ .exosome_img_text_section .exosome_werp .exosome-text .text {
+	 display: flex;
+	 flex-direction: column;
+	 gap: 10px;
+}
+
+.exosome_img_text_section .exosome_werp .exosome-text .text strong{
+  color: #000000;
+}
+
+ @media screen and (max-width: 767px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text .text {
+		 gap: 0;
+	}
+}
+ @media screen and (max-width: 575px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text .text {
+		 max-width: 375px;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-text .text p {
+	 font-weight: 500;
+	 font-size: 20px;
+	 line-height: 100%;
+	 text-align: center;
+	 margin: 0;
+}
+ @media screen and (max-width: 767px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text .text p {
+		 font-size: 18px;
+     margin-bottom: 0px;
+	}
+  .exosome_img_text_section .exosome_werp .exosome-text .text p:last-child {
+     margin-bottom: 0;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-text .img-text-btn-wrp a {
+	 text-transform: uppercase;
+}
+ @media screen and (max-width: 991px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text .img-text-btn-wrp a {
+		 min-width: 260px;
+	}
+}
+ @media screen and (max-width: 575px) {
+	 .exosome_img_text_section .exosome_werp .exosome-text .img-text-btn-wrp a {
+		 min-width: 250px;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-img {
+	 width: calc(40% - 20px);
+}
+ @media screen and (max-width: 991px) {
+	 .exosome_img_text_section .exosome_werp .exosome-img {
+		 width: calc(50% - 20px);
+	}
+}
+ @media screen and (max-width: 767px) {
+	 .exosome_img_text_section .exosome_werp .exosome-img {
+		 width: 100%;
+	}
+}
+ .exosome_img_text_section .exosome_werp .exosome-img figure img {
+	 max-width: 100%;
+	 vertical-align: middle;
+}
+ 
+</style>
+

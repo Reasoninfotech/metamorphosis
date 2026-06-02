@@ -1,0 +1,157 @@
+{% schema %}
+{
+  "name": "Announcement Features Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#d6004d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Mobile Scroll Speed",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "default": 15,
+      "unit": "s"
+    },
+    {
+      "type": "number",
+      "id": "start_slide",
+      "label": "Start Infinight Slider",
+      "default": 1200
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "FDA cleared"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Features Bar"
+    }
+  ]
+}
+{% endschema %}
+
+
+{% if product.handle == 'old-rubyradiance-rejuvenator' or product.handle == 'rubyradiance-rejuvenator' %}
+<style>
+.features-bar {
+  background: {{ section.settings.bg_color }};
+  color: {{ section.settings.text_color }};
+  overflow: hidden;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.features-bar .features-bar__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  {% comment %} gap: 20px; {% endcomment %}
+  white-space: nowrap;
+}
+
+.features-bar .features-bar__item {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 300;
+  flex-shrink: 0;
+  font-family: var(--argentum);
+}
+
+.features-bar .features-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: {{ section.settings.text_color }};
+  margin: 0 16px;
+  flex-shrink: 0;
+}
+.features-bar .features-bar__wrapper_mobile{
+    display: none;
+}
+
+
+@media (max-width: {{ section.settings.start_slide }}px) {
+    .features-bar .features-bar__track {
+      display: flex;
+      width: max-content;
+      animation: marquee {{ section.settings.speed }}s linear infinite;
+    }
+    .features-bar .features-bar__wrapper_mobile{
+      display: flex;
+    }
+    
+    .features-bar .features-bar__wrapper {
+      justify-content: flex-start;
+      {% comment %} padding-right: 30px; {% endcomment %}
+    }
+    
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+}
+
+</style>
+
+<div class="features-bar">
+  <div class="features-bar__track">
+
+    <!-- First Set -->
+    <div class="features-bar__wrapper">
+      {% for block in section.blocks %}
+        <div class="features-bar__item" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.text }}</span>
+
+          {% unless forloop.last %}
+            <span class="features-bar__dot"></span>
+          {% endunless %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Duplicate Set For Infinite Loop -->
+    <div class="features-bar__wrapper features-bar__wrapper_mobile" aria-hidden="true">
+        <span class="features-bar__dot"></span>
+      {% for block in section.blocks %}
+        <div class="features-bar__item">
+          <span>{{ block.settings.text }}</span>
+
+          {% unless forloop.last %}
+            <span class="features-bar__dot"></span>
+          {% endunless %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endif %}

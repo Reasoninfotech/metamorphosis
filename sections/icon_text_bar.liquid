@@ -1,0 +1,254 @@
+<div id="feature-swiper-{{ section.id }}" class="feature-swiper-section {% if section.settings.margin_top == true %}mt_90{% endif %} {% if section.settings.margin_bottom == true %}mb_90 {% endif %}">
+  <div class="page-width">
+    <div class="swiper feature-swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="feature-item">
+              {% if block.settings.icon != blank %}
+                {% comment %} <img src="{{ block.settings.icon | img_url: '100x' }}" class="feature-icon" alt="{{ block.settings.icon.alt }}" loading="lazy"> {% endcomment %}
+                <img src="{{ block.settings.icon | image_url: width: block.settings.icon.width, format: 'webp' }}" 
+     class="feature-icon" 
+     alt="{{ block.settings.icon.alt | escape }}" 
+     loading="lazy">
+              {% endif %}
+              <p class="feature-text">{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .feature-swiper-section {
+  color: #fff;
+  padding: 14px 0;
+  background: #CA003D !important;
+  overflow: hidden;
+}
+
+.feature-swiper-section .page-width{
+   max-width: 1340px;
+}
+
+.feature-swiper-section .feature-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  flex-direction: row;
+  width: 100%;
+  padding: initial;
+  text-transform: uppercase;
+}
+.feature-swiper-section .swiper-slide {
+  width: auto;
+}
+.feature-swiper-section .feature-icon {
+  width: auto;
+  height: 30px;
+  object-fit: contain;
+  margin: 0;
+}
+.feature-swiper-section .feature-text {
+  font-size: 14px;
+  line-height: normal;
+  margin: 0;
+  color: #fff;
+  font-family: var(--argentum);
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: initial;
+}
+.feature-swiper-section .swiper-free-mode>.swiper-wrapper{
+  justify-content: center;
+}
+
+@media (max-width: 1599px){
+  .feature-swiper-section .page-width{
+   padding: 0 56px;
+  }
+}
+
+@media (max-width: 1399px){
+  .feature-swiper-section .page-width{
+   padding: 0 30px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .swiper.feature-swiper .swiper-wrapper{
+        display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .feature-swiper-section .feature-item{
+    gap: 4px;
+  }
+  .feature-swiper-section .swiper-slide{
+    width:calc(50% - 5px);
+    margin: 0 !important;
+  }
+  /* .feature-swiper-section .swiper-slide:nth-child(3),
+.feature-swiper-section .swiper-slide:nth-child(4){
+  width: calc(42% - 5px);
+} */
+  .feature-swiper-section .swiper-slide:nth-child(5){
+    display: none;
+  }
+  .feature-swiper-section .swiper-slide:nth-child(3),
+  .feature-swiper-section .swiper-slide:first-child{
+        order: -1;
+  }
+  .feature-swiper-section .feature-text {
+    font-size: 14px;
+  }
+  .feature-swiper-section .feature-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .feature-swiper-section .page-width{
+   padding: 0 15px;
+  }
+}
+@media (max-width: 575px) {
+
+  /* .feature-swiper-section .swiper-slide{
+    width: 100%;
+  } */
+
+  .feature-swiper-section .feature-icon {
+        width: 20px;
+        height: 20px;
+    }
+      .feature-swiper-section .feature-text {
+        font-size: 12px;
+    }
+}
+@media (max-width: 475px){
+  .feature-swiper-section .swiper-slide:nth-child(4) p{
+    max-width: 125px;
+  }
+}
+@media (max-width: 339px) {
+.swiper.feature-swiper .swiper-wrapper {
+        gap: 5px;
+    }
+   .feature-swiper-section .feature-text {
+        font-size: 11px;
+    }
+}
+{% endstylesheet %}
+
+<script>
+  {% comment %} document.addEventListener('DOMContentLoaded', function () {
+    new Swiper('#feature-swiper-{{ section.id }} .feature-swiper', {
+      slidesPerView: 'auto',
+      freeMode: true,
+      breakpoints: {
+        320: { 
+          spaceBetween: 30,
+          loop : true
+        },
+        768: { spaceBetween: 30, loop : true },
+        991: { spaceBetween: 40 },
+        1920: { spaceBetween: 55 },
+      }
+    });
+  }); {% endcomment %}
+
+  {% comment %} document.addEventListener('DOMContentLoaded', function () {
+
+  const swiper = new Swiper('#feature-swiper-{{ section.id }} .feature-swiper', {
+    slidesPerView: 'auto',
+    freeMode: true,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: false, // default off
+  });
+
+  function handleAutoplay() {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    if (isMobile) {
+      swiper.params.autoplay = { delay: 2500, disableOnInteraction: false };
+      {% comment %} swiper.autoplay.start(); {% endcomment %}
+      swiper.autoplay.stop();
+    } else {
+      swiper.autoplay.stop();
+      swiper.params.autoplay = false;
+    }
+  }
+
+  handleAutoplay();
+  window.addEventListener("resize", handleAutoplay);
+
+}); {% endcomment %}
+document.addEventListener('DOMContentLoaded', function () {
+
+  if (window.innerWidth < 768) return;
+
+  const swiper = new Swiper('#feature-swiper-{{ section.id }} .feature-swiper', {
+    slidesPerView: 'auto',
+    freeMode: true,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false
+    }
+  });
+
+});
+
+</script>
+
+{% schema %}
+{
+  "name": "Feature Swiper Slider",
+  "tag": "section",
+   "settings": [
+      {
+        "type": "checkbox",
+        "id": "margin_top",
+        "label": "Padding Top",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "margin_bottom",
+        "label": "Padding Bottom",
+        "default": false
+      }
+    ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Medical grade devices"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Feature Swiper Slider",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

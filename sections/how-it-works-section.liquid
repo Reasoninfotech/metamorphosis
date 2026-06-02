@@ -1,0 +1,134 @@
+{% style %}
+.how_it_work .page-width{max-width: 100%;padding: 0;}
+.how_it_work .main_title{margin-bottom: 48px;}  
+
+.how_it_work .img_with_text_block figure{overflow: hidden;position: relative;}
+.how_it_work .img_with_text_block figure img{width: 100%;vertical-align: middle;object-fit: cover;}
+.how_it_work .img_with_text_block figure .mobile-img{display:none;}
+
+.how_it_work .img_with_text_block .tooltip .hot-dot-wrp{position: absolute;left: 0;top: 0;padding: 5px;cursor: pointer;width: fit-content;background: transparent;color: #000;border-radius: 50px;display: block;box-shadow: 0 0 10px #fff;animation: zoom-in-zoom-out 5s ease-out infinite;}
+.how_it_work .img_with_text_block .tooltip .hot-dot-wrp .hotspot__dot{display: block;width: 18px;height: 18px;border-radius: 50px;border:1px solid #fff;}
+.how_it_work .img_with_text_block .tooltip .hot-dot-wrp.active .hotspot__dot{background: #fff;border: unset;}
+
+.how_it_work .img_with_text_block .hot-colse{position: absolute;background: #fff;padding: 5px;cursor: pointer;width: fit-content;background: #fff;color: #000;display:flex;right: 0;top: 0;}
+
+  
+.how_it_work .pro_title{display: flex;flex-direction: column;text-align: center;}
+.how_it_work .pro_title a{text-decoration: none;font-weight: 700;line-height: normal;font-size: 20px;max-width: 200px;margin: 0 auto;}
+.how_it_work .pro_title .price-money{color: #CA003D;font-weight: 700;font-size: 24px;line-height: normal;}
+
+.how_it_work .product-form__buttons{text-align:center;}
+.how_it_work .cus_add_to_cart .common_btn{min-width: 80%;background: transparent;}
+  
+.how_it_work figcaption{max-width: 970px;margin: 16px auto 0;text-align: center;}
+.how_it_work figcaption p{margin:0;font-size: 20px;line-height: normal;color:#000;padding: 0 15px;}
+
+.how_it_work .img-tooltip_btn_wrp{margin-top: 36px;text-align: center;}
+.how_it_work .img-tooltip_btn_wrp .common_btn{min-width: 280px;}
+
+
+@media screen and (max-width:1199px){
+  .how_it_work .pro_title a{font-size:18px;}
+}  
+
+@media screen and (max-width:991px){
+  .how_it_work .img_with_text_block figure .des_img{display:none;}
+  .how_it_work .img_with_text_block figure .mobile-img{display:block;}
+}  
+
+@media screen and (max-width:768px){
+  .how_it_work .pro_title a{font-size:16px;max-width: 100%;}
+  .how_it_work .cus_add_to_cart .common_btn{min-width:100%;padding:10px;}
+  .how_it_work .pro_title .price-money{fomnt-size:20px;}
+}
+
+@media screen and (max-width:575px){
+  .how_it_work .main_title{max-width: 260px;margin: 0 auto 16px;font-size:30px!important;}
+  .how_it_work figcaption{margin: 8px auto 0;}
+  .how_it_work .img-tooltip_btn_wrp{margin-top: 36px;}
+  
+
+  .how_it_work figcaption p{font-size: 18px;}
+}
+  
+{% endstyle %}
+
+ 
+<section class="section_{{ section.id }} how_it_work {% if section.settings.padding_top == true %}pt_90 {% endif %}{% if section.settings.padding_bottom == true %}pb_90 {% endif %}">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+     <h1 class="main_title">{{ section.settings.title }}</h1>
+    {% endif %}
+    <div class="img_with_text_block">
+     {% if section.settings.img != blank or section.settings.mobile-img != blank %} 
+      <figure>
+        <img class="des_img" src="{{ section.settings.img | image_url : width: 1920, format: 'webp' }}" alt="{{ section.settings.img.alt }}" loading="lazy" >
+        <img class="mobile-img" src="{{ section.settings.mobile-img | image_url : width:700, format: 'webp' }}" alt="{{ section.settings.mobile-img.alt }}" loading="lazy">
+      </figure>
+     {% endif %} 
+      {% if section.settings.content != blank %}
+         <figcaption class="f-400">{{ section.settings.content }}</figcaption>
+      {% endif %}
+      {% if section.settings.url != blank or section.settings.btn != blank %}
+      <div class="img-tooltip_btn_wrp">
+         <a href="{{ section.settings.url }}" class="common_btn">{{ section.settings.btn }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+    "name": "How It Works",
+	"class":"shopify-section--img_slider_ttip",
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "padding_top",
+          "label": "Padding Top",
+        },
+        {
+          "type": "checkbox",
+          "id": "padding_bottom",
+          "label": "Padding Bottom",
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile-img",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type":"text",
+          "id":"btn",
+          "label":"Button Label"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Url to Navigate"
+        }
+    ],
+    "presets": [
+        {
+            "name": "How It Works"
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,647 @@
+<style>
+  .quiz-root-container {
+    width: 100%;
+    max-width: 895px;
+    margin: 40px auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  .quiz-root-container.quiz-result-open {
+    max-width: 1200px;
+  }
+  .quiz-card {
+    position: relative;
+    box-sizing: border-box;
+  }
+  .quiz-question-step {
+    display: none;
+  }
+  .quiz-question-step.active-step {
+    display: block !important;
+  }
+  .quiz-header-progress {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .quiz-step-fraction, .progress {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ca003d;
+    text-transform: uppercase;
+  }
+  .progress { color: #828282; }
+  .quiz-bar-wrapper {
+    width: 100%;
+    height: 2px;
+    background: #f0f0f0;
+    margin-bottom: 35px;
+    position: relative;
+  }
+  .quiz-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: #ca003d;
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .quiz-card h2 {
+    font-size: 36px;
+    font-weight: 500;
+    line-height: normal;
+    margin: 0 0 25px 0;
+    color: #0A0A0A;
+    text-align: center;
+  }
+  .quiz-options-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+  }
+  .quiz-options-stack_img {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .quiz-interactive-option {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border: 1px solid #e8e8e8;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+  }
+  .quiz-options-stack_img .quiz-interactive-option {
+    width: calc(25% - 9px);
+    flex-direction: column;
+    padding: 15px 10px;
+    text-align: center;
+  }
+  @media (max-width: 992px) {
+    .quiz-options-stack_img .quiz-interactive-option { width: calc(33.33% - 8px); }
+  }
+  @media (max-width: 768px) {
+    .quiz-options-stack_img .quiz-interactive-option { width: calc(50% - 6px); }
+  }
+  .quiz-options-stack_img .quiz-interactive-option img {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  .quiz-interactive-option:hover, .quiz-interactive-option.selected-option {
+    border-color: #ca003d;
+    background: #fcfcfc;
+  }
+  .quiz-radio-indicator {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #cccccc;
+    border-radius: 50%;
+    margin-right: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+  }
+  .quiz-interactive-option.selected-option .quiz-radio-indicator {
+    background: #ca003d;
+    color: #fff;
+    border-color: #ca003d;
+  }
+
+  /* Form Styling */
+  .quiz-input-field-group {
+    margin-bottom: 20px;
+    text-align: left;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .quiz-input-field-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .quiz-text-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e8e8e8;
+    box-sizing: border-box;
+    font-size: 15px;
+    background: #fff;
+  }
+  .quiz-text-input:focus {
+    border-color: #ca003d;
+    outline: none;
+  }
+  .quiz-skip-link {
+    background: none;
+    border: none;
+    color: #828282;
+    text-decoration: underline;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .quiz-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+  }
+  .quiz-prime-button { background: #ca003d; color: white; padding: 12px 35px; border: none; cursor: pointer; font-size: 16px; }
+  .quiz-return-button { background: transparent; border: none; color: #828282; cursor: pointer; font-size: 16px; }
+  .quiz-validation-alert { color: #bc3e3e; font-size: 14px; margin-top: 12px; display: none; text-align: center; }
+  
+  /* Result CSS Layout */
+  #quiz-result { display: none; text-align: center; }
+  #quiz-result.result-visible { display: block !important; }
+  .result-main-title { font-size: 32px; margin-bottom: 10px; color: #0A0A0A; text-transform: uppercase; }
+  .result-sub-text { font-size: 16px; color: #666; margin-bottom: 30px; max-width: 750px; margin-left: auto; margin-right: auto; }
+  
+  .quiz-products-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px; }
+  .result-product-card {
+    background: #fff; border: 1px solid #e8e8e8; padding: 25px; width: calc(50% - 10px); box-sizing: border-box;
+    display: flex; flex-direction: column; text-align: left;
+  }
+  @media (max-width: 768px) { .result-product-card { width: 100%; } }
+  .result-product-card img { width: 100%; height: auto; margin-bottom: 15px; max-height: 350px; object-fit: contain; }
+  .result-product-card h3 { font-size: 20px; margin: 0 0 10px 0; color: #1a1a1a; }
+  .result-product-card p { font-size: 14px; color: #555; margin: 0 0 15px 0; line-height: 1.5; }
+  .result-btn-buy {
+    display: block; text-align: center; background: #000; color: #fff; padding: 12px; text-decoration: none;
+    font-size: 14px; font-weight: bold; margin-top: auto;
+  }
+  #quiz-loading { display: none; text-align: center; padding: 50px; font-size: 20px; }
+</style>
+
+<div class="quiz-root-container" id="quiz-block-root">
+  <div class="quiz-card">
+    
+    <div class="quiz-header-progress" id="quiz-header-runtime">
+      <div class="quiz-step-fraction" id="quiz-step-fraction-counter">Question 1 of 1</div>
+      <div class="progress" id="progress-count">0%</div>
+    </div>
+    <div class="quiz-bar-wrapper" id="quiz-bar-runtime">
+      <div class="quiz-bar-fill" id="quiz-bar-metric"></div>
+    </div>
+
+    {%- assign question_index = 0 -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'question' -%}
+        {%- assign question_index = question_index | plus: 1 -%}
+        <div class="quiz-question-step {% if question_index == 1 %}active-step{% endif %}" id="step-{{ question_index }}">
+          <h2>{{ block.settings.question_text }}</h2>
+          
+          {%- assign style_class = "quiz-options-grid" -%}
+          {%- if block.settings.layout_type == 'image_grid' -%}
+            {%- assign style_class = "quiz-options-stack_img" -%}
+          {%- endif -%}
+
+          <div class="{{ style_class }}">
+            {%- for i in (1..8) -%}
+              {%- capture opt_text_key -%}option_{{ i }}_text{%- endcapture -%}
+              {%- capture opt_img_key -%}option_{{ i }}_image{%- endcapture -%}
+              {%- capture opt_cond_key -%}option_{{ i }}_condition{%- endcapture -%}
+              
+              {%- assign label = block.settings[opt_text_key] -%}
+              {%- assign img = block.settings[opt_img_key] -%}
+              {%- assign cond = block.settings[opt_cond_key] -%}
+
+              {%- if label != blank -%}
+                <div class="quiz-interactive-option" 
+                     data-score-tag="{{ cond | upcase | strip }}" 
+                     onclick="selectQuizOption(this, 'input-{{ block.id }}-{{ i }}')">
+                  {%- if block.settings.layout_type == 'image_grid' and img != blank -%}
+                    <img src="{{ img | img_url: 'medium' }}" alt="{{ label }}">
+                  {%- else -%}
+                    <div class="quiz-radio-indicator">
+                      {%- case i -%}
+                        {% when 1 %}A{% when 2 %}B{% when 3 %}C{% when 4 %}D{% when 5 %}E{% when 6 %}F{% when 7 %}G{% when 8 %}H
+                      {%- endcase -%}
+                    </div>
+                  {%- endif -%}
+                  <span class="quiz-option-label-text">{{ label }}</span>
+                  <input type="radio" name="q_{{ block.id }}" id="input-{{ block.id }}-{{ i }}" style="position:absolute; opacity:0;">
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <div class="quiz-validation-alert" id="err-{{ question_index }}">Please select an option to continue.</div>
+          <div class="quiz-action-bar">
+            {%- if question_index > 1 -%}
+              <button class="quiz-return-button" type="button" onclick="navigateQuizPrev()">← Back</button>
+            {%- else -%}
+              <div></div>
+            {%- endif -%}
+            <button class="quiz-prime-button" type="button" onclick="navigateQuizNext()">Next Step</button>
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {% comment %} LEAD FORM STEP (Dynamically positioned as the last step) {% endcomment %}
+    {%- assign lead_step_index = question_index | plus: 1 -%}
+    <div class="quiz-question-step" id="step-{{ lead_step_index }}">
+      <h2>Where should we send your personalized Skin Report and a special welcome offer?</h2>
+      
+      <div class="quiz-input-field-group">
+        <label for="quiz_name">Full Name</label>
+        <input type="text" id="quiz_name" class="quiz-text-input" placeholder="Your Name">
+      </div>
+      
+      <div class="quiz-input-field-group">
+        <label for="quiz_email">Email Address</label>
+        <input type="email" id="quiz_email" class="quiz-text-input" placeholder="your@email.com">
+      </div>
+      
+      <div class="quiz-validation-alert" id="err-{{ lead_step_index }}">Please fill out all fields correctly.</div>
+      
+      <div class="quiz-action-bar">
+        <button class="quiz-return-button" type="button" onclick="navigateQuizPrev()">← Back</button>
+        <button class="quiz-prime-button common_btn" type="button" onclick="submitQuiz()">Submit and View Your Routine</button>
+      </div>
+      <div style="text-align: center; margin-top: 15px;">
+        <button type="button" class="quiz-skip-link" onclick="skipQuiz()">Skip and view Your Routine</button>
+      </div>
+    </div>
+
+    <div id="quiz-loading"><p>Analyzing your skin profile...</p></div>
+
+    <div id="quiz-result">
+      <h2 class="result-main-title" id="res-title">YOUR MATCH</h2>
+      <p class="result-sub-text" id="res-subtext"></p>
+      <div class="quiz-products-container" id="quiz-products-target"></div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz-conditions-rules" style="display: none;">
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'product_condition' -%}
+      <div class="condition-rule-block" data-expression="{{ block.settings.condition_expression | escape }}" data-title="{{ block.settings.match_title | escape }}" data-subtext="{{ block.settings.match_subtext | escape }}">
+        
+        {%- if block.settings.prod_1_title != blank -%}
+          <div class="rule-prod" data-url="{{ block.settings.prod_1_url }}" data-title="{{ block.settings.prod_1_title }}" data-desc="{{ block.settings.prod_1_desc | escape }}" data-img="{% if block.settings.prod_1_img != blank %}{{ block.settings.prod_1_img | img_url: 'large' }}{% endif %}"></div>
+        {%- endif -%}
+        {%- if block.settings.prod_2_title != blank -%}
+          <div class="rule-prod" data-url="{{ block.settings.prod_2_url }}" data-title="{{ block.settings.prod_2_title }}" data-desc="{{ block.settings.prod_2_desc | escape }}" data-img="{% if block.settings.prod_2_img != blank %}{{ block.settings.prod_2_img | img_url: 'large' }}{% endif %}"></div>
+        {%- endif -%}
+        
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+<script>
+  var currentQuizStep = 1;
+  var totalQuestions = {{ question_index }};
+  var totalQuizSteps = totalQuestions + 1; // Includes Lead Form
+
+  function selectQuizOption(element, inputId) {
+    var parent = element.closest('.quiz-options-grid, .quiz-options-stack_img');
+    parent.querySelectorAll('.quiz-interactive-option').forEach(opt => { opt.classList.remove('selected-option'); });
+    element.classList.add('selected-option');
+    var radio = document.getElementById(inputId);
+    if(radio) radio.checked = true;
+    element.closest('.quiz-question-step').querySelector('.quiz-validation-alert').style.display = 'none';
+  }
+
+  function updateQuizProgressUI() {
+    var fractionCounter = document.getElementById('quiz-step-fraction-counter');
+    var metricBar = document.getElementById('quiz-bar-metric');
+    var progressCount = document.getElementById('progress-count');
+    if(fractionCounter && metricBar) {
+      if(currentQuizStep > totalQuestions) {
+        fractionCounter.innerText = "ALMOST DONE!";
+      } else {
+        fractionCounter.innerText = "QUESTION " + currentQuizStep + " OF " + totalQuestions;
+      }
+      var percentage = Math.round(((currentQuizStep - 1) / totalQuizSteps) * 100);
+      progressCount.innerText = percentage + "%";
+      metricBar.style.width = percentage + "%";
+    }
+  }
+
+  function navigateQuizNext() {
+    var currentStepNode = document.getElementById('step-' + currentQuizStep);
+    var selectedOption = currentStepNode.querySelector('.quiz-interactive-option.selected-option');
+    if (!selectedOption) {
+      currentStepNode.querySelector('.quiz-validation-alert').style.display = 'block';
+      return;
+    }
+    if (currentQuizStep < totalQuizSteps) {
+      currentStepNode.classList.remove('active-step');
+      currentQuizStep++;
+      document.getElementById('step-' + currentQuizStep).classList.add('active-step');
+      updateQuizProgressUI();
+    }
+  }
+
+  function navigateQuizPrev() {
+    if (currentQuizStep > 1) {
+      document.getElementById('step-' + currentQuizStep).classList.remove('active-step');
+      currentQuizStep--;
+      document.getElementById('step-' + currentQuizStep).classList.add('active-step');
+      updateQuizProgressUI();
+    }
+  }
+
+  function submitQuiz() {
+    var nameField = document.getElementById('quiz_name');
+    var emailField = document.getElementById('quiz_email');
+    var alertBox = document.getElementById('err-' + totalQuizSteps);
+
+    if (!nameField.value.trim() || !emailField.value.trim() || !emailField.value.includes('@')) {
+      alertBox.style.display = 'block';
+      return;
+    }
+    alertBox.style.display = 'none';
+    processQuizScoreEngine();
+  }
+
+  function skipQuiz() {
+    processQuizScoreEngine();
+  }
+
+  function processQuizScoreEngine() {
+    document.getElementById('quiz-header-runtime').style.display = 'none';
+    document.getElementById('quiz-bar-runtime').style.display = 'none';
+    
+    // Hide all steps securely
+    document.querySelectorAll('.quiz-question-step').forEach(step => {
+       step.classList.remove('active-step');
+       step.style.display = 'none';
+    });
+    
+    document.getElementById('quiz-loading').style.display = 'block';
+
+    var scores = { DEVICE: 0, EYE: 0, MASK: 0, LIP: 0, ACNE: 0, SCULPT: 0, FACE: 0, SERUM: 0 };
+    for (var i = 1; i <= totalQuestions; i++) {
+      var selected = document.getElementById('step-' + i).querySelector('.quiz-interactive-option.selected-option');
+      if(selected) {
+        var tag = selected.getAttribute('data-score-tag') || "";
+        if(tag !== "" && scores[tag] !== undefined) {
+          scores[tag] = 5;
+        }
+      }
+    }
+
+    var ruleBlocks = document.querySelectorAll('.condition-rule-block');
+    var matchedRule = null;
+    for (var i = 0; i < ruleBlocks.length; i++) {
+      var expression = ruleBlocks[i].getAttribute('data-expression').trim().toUpperCase();
+      if(!expression) continue;
+
+      if(!expression.includes(',') && !expression.includes('|')) {
+        if(scores[expression] >= 5) { matchedRule = ruleBlocks[i]; break; }
+        continue;
+      }
+
+      if(expression.includes('|')) {
+        var parts = expression.split('|');
+        var isOrTrue = parts.some(part => scores[part.trim()] >= 5);
+        if(isOrTrue) { matchedRule = ruleBlocks[i]; break; }
+      } 
+      else if(expression.includes(',')) {
+        var parts = expression.split(',');
+        var isAndTrue = parts.every(part => scores[part.trim()] >= 5);
+        if(isAndTrue) { matchedRule = ruleBlocks[i]; break; }
+      }
+    }
+
+    if(!matchedRule && ruleBlocks.length > 0) {
+      matchedRule = ruleBlocks[0];
+    }
+
+    setTimeout(function() {
+      renderFinalMatch(matchedRule);
+    }, 1000);
+  }
+
+  {% comment %} function renderFinalMatch(ruleBlock) {
+    document.getElementById('quiz-loading').style.display = 'none';
+    
+    var resultNode = document.getElementById('quiz-result');
+    resultNode.classList.add('result-visible');
+    document.getElementById('quiz-block-root').classList.add('quiz-result-open');
+    
+    if(ruleBlock) {
+      document.getElementById('res-title').innerText = ruleBlock.getAttribute('data-title');
+      document.getElementById('res-subtext').innerText = ruleBlock.getAttribute('data-subtext');
+      
+      var products = ruleBlock.querySelectorAll('.rule-prod');
+      var targetDiv = document.getElementById('quiz-products-target');
+      var finalHTML = "";
+
+      products.forEach(prod => {
+        var title = prod.getAttribute('data-title');
+        var desc = prod.getAttribute('data-desc');
+        var url = prod.getAttribute('data-url') || '#';
+        var img = prod.getAttribute('data-img') || 'https://via.placeholder.com/300';
+
+        finalHTML += `
+          <div class="result-product-card">
+            <img src="${img}" alt="${title}">
+            <h3>${title}</h3>
+            <p>${desc}</p>
+            <a href="${url}" class="result-btn-buy">Shop Now</a>
+          </div>
+        `;
+      });
+      targetDiv.innerHTML = finalHTML;
+    }
+  } {% endcomment %}
+
+  function renderFinalMatch(ruleBlock) {
+  document.getElementById('quiz-loading').style.display = 'none';
+
+  const resultBox = document.getElementById('quiz-result');
+  resultBox.style.display = 'block';
+
+  document.getElementById('quiz-block-root')
+    .classList.add('quiz-result-open');
+
+  const titleEl = document.getElementById('res-title');
+  const subtextEl = document.getElementById('res-subtext');
+  const targetDiv = document.getElementById('quiz-products-target');
+
+  targetDiv.innerHTML = '';
+
+  // Debug
+  console.log('Matched Rule:', ruleBlock);
+
+  // No matching rule found
+  if (!ruleBlock) {
+    titleEl.innerText = 'Recommended For You';
+    subtextEl.innerText =
+      'Thank you for completing the quiz. No matching routine was found. Please review your quiz conditions.';
+
+    targetDiv.innerHTML = `
+      <div class="result-product-card">
+        <h3>No Products Configured</h3>
+        <p>Please add at least one Product Result Condition block in Theme Editor.</p>
+      </div>
+    `;
+    return;
+  }
+
+  titleEl.innerText =
+    ruleBlock.getAttribute('data-title') || 'Your Results';
+
+  subtextEl.innerText =
+    ruleBlock.getAttribute('data-subtext') || '';
+
+  const products = ruleBlock.querySelectorAll('.rule-prod');
+
+  console.log('Products Found:', products.length);
+
+  if (products.length === 0) {
+    targetDiv.innerHTML = `
+      <div class="result-product-card">
+        <h3>No Products Assigned</h3>
+        <p>This condition matched successfully but no products were added.</p>
+      </div>
+    `;
+    return;
+  }
+
+  let finalHTML = '';
+
+  products.forEach(prod => {
+
+    const title =
+      prod.getAttribute('data-title') || 'Product';
+
+    const desc =
+      prod.getAttribute('data-desc') || '';
+
+    const url =
+      prod.getAttribute('data-url') || '#';
+
+    const img =
+      prod.getAttribute('data-img') ||
+      'https://via.placeholder.com/400x400?text=Product';
+
+    finalHTML += `
+      <div class="result-product-card">
+        <img src="${img}" alt="${title}">
+        <h3>${title}</h3>
+        <p>${desc}</p>
+        <a href="${url}" class="result-btn-buy">
+          Shop Now
+        </a>
+      </div>
+    `;
+  });
+
+  targetDiv.innerHTML = finalHTML;
+}
+</script>
+
+{% schema %}
+{
+  "name": "Dynamic Skin Quiz",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Quiz Question Step",
+      "settings": [
+        { "type": "text", "id": "question_text", "label": "Question Heading" },
+        {
+          "type": "select",
+          "id": "layout_type",
+          "label": "Option Layout Type",
+          "options": [
+            { "value": "text_list", "label": "Text List Badge" },
+            { "value": "image_grid", "label": "Image Grid Column View" }
+          ],
+          "default": "text_list"
+        },
+        { "type": "header", "content": "Option 1" },
+        { "type": "text", "id": "option_1_text", "label": "Option 1 Label" },
+        { "type": "image_picker", "id": "option_1_image", "label": "Option 1 Image" },
+        { "type": "text", "id": "option_1_condition", "label": "Option 1 Score Tag", "info": "Ex: DEVICE, EYE, MASK, LIP, ACNE, SCULPT, FACE, SERUM" },
+        
+        { "type": "header", "content": "Option 2" },
+        { "type": "text", "id": "option_2_text", "label": "Option 2 Label" },
+        { "type": "image_picker", "id": "option_2_image", "label": "Option 2 Image" },
+        { "type": "text", "id": "option_2_condition", "label": "Option 2 Score Tag" },
+        
+        { "type": "header", "content": "Option 3" },
+        { "type": "text", "id": "option_3_text", "label": "Option 3 Label" },
+        { "type": "image_picker", "id": "option_3_image", "label": "Option 3 Image" },
+        { "type": "text", "id": "option_3_condition", "label": "Option 3 Score Tag" },
+
+        { "type": "header", "content": "Option 4" },
+        { "type": "text", "id": "option_4_text", "label": "Option 4 Label" },
+        { "type": "image_picker", "id": "option_4_image", "label": "Option 4 Image" },
+        { "type": "text", "id": "option_4_condition", "label": "Option 4 Score Tag" },
+
+        { "type": "header", "content": "Option 5" },
+        { "type": "text", "id": "option_5_text", "label": "Option 5 Label" },
+        { "type": "image_picker", "id": "option_5_image", "label": "Option 5 Image" },
+        { "type": "text", "id": "option_5_condition", "label": "Option 5 Score Tag" },
+
+        { "type": "header", "content": "Option 6" },
+        { "type": "text", "id": "option_6_text", "label": "Option 6 Label" },
+        { "type": "image_picker", "id": "option_6_image", "label": "Option 6 Image" },
+        { "type": "text", "id": "option_6_condition", "label": "Option 6 Score Tag" },
+
+        { "type": "header", "content": "Option 7" },
+        { "type": "text", "id": "option_7_text", "label": "Option 7 Label" },
+        { "type": "image_picker", "id": "option_7_image", "label": "Option 7 Image" },
+        { "type": "text", "id": "option_7_condition", "label": "Option 7 Score Tag" },
+
+        { "type": "header", "content": "Option 8" },
+        { "type": "text", "id": "option_8_text", "label": "Option 8 Label" },
+        { "type": "image_picker", "id": "option_8_image", "label": "Option 8 Image" },
+        { "type": "text", "id": "option_8_condition", "label": "Option 8 Score Tag" }
+      ]
+    },
+    {
+      "type": "product_condition",
+      "name": "Product Result Condition",
+      "settings": [
+        {
+          "type": "text",
+          "id": "condition_expression",
+          "label": "Condition Logic (AND / OR)",
+          "info": "AND માટે અલ્પવિરામ (,) કરો. OR માટે પાઇપ (|) કરો. Ex: DEVICE,EYE અથવા MASK|SERUM"
+        },
+        { "type": "text", "id": "match_title", "label": "Result Match Title" },
+        { "type": "textarea", "id": "match_subtext", "label": "Result Subtext Description" },
+        
+        { "type": "header", "content": "Recommended Product 1" },
+        { "type": "text", "id": "prod_1_title", "label": "Product 1 Title" },
+        { "type": "textarea", "id": "prod_1_desc", "label": "Product 1 Short Details" },
+        { "type": "url", "id": "prod_1_url", "label": "Product 1 Link (URL)" },
+        { "type": "image_picker", "id": "prod_1_img", "label": "Product 1 Image" },
+
+        { "type": "header", "content": "Recommended Product 2 (Optional)" },
+        { "type": "text", "id": "prod_2_title", "label": "Product 2 Title" },
+        { "type": "textarea", "id": "prod_2_desc", "label": "Product 2 Short Details" },
+        { "type": "url", "id": "prod_2_url", "label": "Product 2 Link (URL)" },
+        { "type": "image_picker", "id": "prod_2_img", "label": "Product 2 Image" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Advanced Dynamic Skin Quiz",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
