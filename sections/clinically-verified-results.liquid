@@ -124,7 +124,7 @@
                       <div class="cvr-compare__layer cvr-compare__after">
                         {%- if block.settings.after_image_1 != blank -%}
                           <img
-                            src="{{ block.settings.after_image_1 | image_url: width: 800, format: 'webp' }}"
+                            src="{{ block.settings.after_image_1 | image_url: width: 800 }}"
                             alt="{{ block.settings.after_image_1.alt | escape | default: 'After' }}"
                             width="{{ block.settings.after_image_1.width }}"
                             height="{{ block.settings.after_image_1.height }}"
@@ -140,7 +140,7 @@
                       <div class="cvr-compare__layer cvr-compare__before" data-before>
                         {%- if block.settings.before_image_1 != blank -%}
                           <img
-                            src="{{ block.settings.before_image_1 | image_url: width: 800, format: 'webp' }}"
+                            src="{{ block.settings.before_image_1 | image_url: width: 800 }}"
                             alt="{{ block.settings.before_image_1.alt | escape | default: 'Before' }}"
                             width="{{ block.settings.before_image_1.width }}"
                             height="{{ block.settings.before_image_1.height }}"
@@ -187,7 +187,7 @@
                       <div class="cvr-compare__layer cvr-compare__after">
                         {%- if block.settings.after_image_2 != blank -%}
                           <img
-                            src="{{ block.settings.after_image_2 | image_url: width: 800,format: 'webp' }}"
+                            src="{{ block.settings.after_image_2 | image_url: width: 800 }}"
                             alt="{{ block.settings.after_image_2.alt | escape | default: 'After' }}"
                             width="{{ block.settings.after_image_2.width }}"
                             height="{{ block.settings.after_image_2.height }}"
@@ -203,7 +203,7 @@
                       <div class="cvr-compare__layer cvr-compare__before" data-before>
                         {%- if block.settings.before_image_2 != blank -%}
                           <img
-                            src="{{ block.settings.before_image_2 | image_url: width: 800,format: 'webp' }}"
+                            src="{{ block.settings.before_image_2 | image_url: width: 800 }}"
                             alt="{{ block.settings.before_image_2.alt | escape | default: 'Before' }}"
                             width="{{ block.settings.before_image_2.width }}"
                             height="{{ block.settings.before_image_2.height }}"

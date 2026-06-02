@@ -1,0 +1,362 @@
+{% style %}
+.custome_video_section {
+	 padding: 48px 0;
+}
+ .custome_video_section .custome_video_container {
+	 position: relative;
+	 max-width: 1320px;
+	 margin: 0 auto;
+	 padding: 0 16px;
+}
+ .custome_video_section .custome_video_container video {
+	 cursor: pointer;
+}
+ .custome_video_section .custome_video_container .desktop_video {
+	 width: 100%;
+	 max-height: 800px;
+	 object-fit: cover;
+	 vertical-align: middle;
+}
+ .custome_video_section .custome_video_container .mobile_video {
+	 display: none;
+	 width: 100%;
+	 object-fit: cover;
+	 max-height: 800px;
+}
+ .custome_video_section .custome_video_container .video_controls {
+	 position: absolute;
+	 bottom: 50%;
+	 right: 50%;
+	 z-index: 50;
+	 transform: translate(50%, 50%);
+}
+ .custome_video_section .custome_video_container .video_controls .play_pause_btn {
+	 width: 99px;
+	 height: 99px;
+	 background: transparent;
+	 border-radius: 50%;
+	 border: none;
+	 cursor: pointer;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 padding: 0;
+}
+ .custome_video_section .custome_video_container .video_controls .play_pause_btn svg {
+	 width: 100%;
+	 height: 100%;
+	 fill: #fff;
+}
+ @media (max-width: 767px) {
+	 .custome_video_section {
+		 padding: 28px 0;
+	}
+	 .custome_video_section .custome_video_container .desktop_video {
+    {% if section.settings.mob_video != blank %}
+		 display: none;
+     {% endif %}
+
+	}
+	 .custome_video_section .custome_video_container .mobile_video {
+		 display: block;
+	}
+	 .custome_video_section .custome_video_container .video_controls .play_pause_btn {
+		 width: 61px;
+		 height: 61px;
+	}
+}
+.video_sound_button {
+    position: absolute;
+    bottom: 34px;
+    right: 50px;
+    background: #ca003d;
+    padding: 10px;
+    border-radius: 10px;
+}
+{% endstyle %}
+
+<div class="custome_video_section">
+  <div class="custome_video_container">
+
+    {% if section.settings.desktop_video != blank %}
+      <video
+        {% if section.settings.desktop_poster != blank %}poster="{{ section.settings.desktop_poster | img_url: 'master' }}"{% endif %}
+        alt="{{ section.settings.desktop_poster.alt }}"
+        {% if section.settings.auto_loop %}autoplay loop muted playsinline{% endif %}
+        class="desktop_video"
+      >
+        <source src="{{ section.settings.desktop_video.sources[0].url }}" type="video/mp4">
+      </video>
+    {% endif %}
+
+    {% if section.settings.mob_video != blank %}
+      <video
+        {% if section.settings.mobile_poster != blank %}poster="{{ section.settings.mobile_poster | img_url: 'master' }}"{% endif %}
+        alt="{{ section.settings.mobile_poster.alt }}"
+        {% if section.settings.auto_loop %}autoplay loop muted playsinline{% endif %}
+        class="mobile_video"
+      >
+        <source src="{{ section.settings.mob_video.sources[0].url }}" type="video/mp4">
+      </video>
+    {% endif %}
+
+    {% unless section.settings.auto_loop %}
+      <div class="video_controls">
+        <button class="play_pause_btn"></button>
+      </div>
+    {% endunless %}
+
+    <div class="video_sound_button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none" class="sound_off" style="display: block;">
+        <g clip-path="url(#clip0_15_183)">
+          <rect width="24" height="24"></rect>
+          <path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M14.5 15L20.5 9" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M14.5 9L20.5 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+        <defs>
+          <clipPath id="clip0_15_183">
+            <rect width="24" height="24"></rect>
+          </clipPath>
+        </defs>
+      </svg>
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none" class="sound_on" style="display: none;">
+        <g clip-path="url(#clip0_15_174)">
+          <rect width="24" height="24"></rect>
+          <path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M13 9C13 9 15 9.5 15 12C15 14.5 13 15 13 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M15 7C15 7 18 7.83333 18 12C18 16.1667 15 17 15 17" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+          <path d="M17 5C17 5 21 6.16667 21 12C21 17.8333 17 19 17 19" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"></path>
+        </g>
+        <defs>
+          <clipPath id="clip0_15_174">
+            <rect width="24" height="24"></rect>
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
+
+  </div>
+</div>
+
+
+
+<script>
+{% comment %} document.addEventListener('DOMContentLoaded', function () {
+  const isMobile = window.innerWidth <= 767;
+  const vid = isMobile
+    ? document.querySelector('.custome_video_section .mobile_video')
+    : document.querySelector('.custome_video_section .desktop_video');
+
+  const btn = document.querySelector('.custome_video_section .play_pause_btn');
+  const soundBtn = document.querySelector('.custome_video_section .video_sound_button');
+  const soundOn = soundBtn ? soundBtn.querySelector('.sound_on') : null;
+  const soundOff = soundBtn ? soundBtn.querySelector('.sound_off') : null;
+  const playSVG = `
+    <svg width="26" height="26" viewBox="0 0 170 170" fill="#000">
+      <path d="M85.1484 0C132.093 0 170.148 38.0558 170.148 85C170.148 131.944 132.093 170 85.1484 170C38.2042 170 0.148438 131.944 0.148438 85C0.148437 38.0558 38.2042 0 85.1484 0ZM65.5986 43.1377C64.0667 43.1379 62.5612 43.5409 61.2344 44.3066C59.9077 45.0724 58.8056 46.1738 58.0391 47.5C57.2725 48.8263 56.8684 50.3314 56.8672 51.8633V118.137C56.8583 119.671 57.2578 121.179 58.0244 122.508C58.7911 123.836 59.8979 124.937 61.2305 125.697C62.5553 126.471 64.0623 126.879 65.5967 126.879C67.131 126.879 68.6381 126.471 69.9629 125.697L127.354 92.5605C128.681 91.7938 129.782 90.6913 130.548 89.3643C131.314 88.0372 131.717 86.5321 131.717 85C131.717 83.4679 131.314 81.9628 130.548 80.6357C129.782 79.3087 128.681 78.2062 127.354 77.4395L69.9629 44.3057C68.6359 43.5403 67.1306 43.1375 65.5986 43.1377Z"/>
+    </svg>
+  `;
+
+  const pauseSVG = `
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="#000">
+      <path d="M16 0C7.16 0 0 7.16 0 16s7.16 16 16 16 16-7.16 16-16S24.84 0 16 0zM14 22c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12zm8 0c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12z"/>
+    </svg>
+  `;
+  if (!btn && vid) {
+    vid.muted = true;
+    vid.loop = true;
+    vid.autoplay = true;
+    vid.play().then(() => {
+      console.log('▶ Auto Loop: Video playing successfully');
+    }).catch((err) => {
+      console.warn('⚠️ Auto Loop: Video play failed:', err);
+    });
+  }
+
+  // Play/Pause logic — માત્ર btn હોય ત્યારે જ
+  if (btn && vid) {
+    console.log('✅ Play/Pause: Initializing...');
+    btn.innerHTML = playSVG;
+    btn.style.transition = "opacity 0.5s ease";
+
+    function toggleVideo() {
+      if (vid.paused) {
+        console.log('▶ Video: Playing');
+        vid.play();
+        btn.innerHTML = pauseSVG;
+        btn.style.opacity = "1";
+        setTimeout(() => btn.style.opacity = "0", 1000);
+      } else {
+        console.log('⏸ Video: Paused');
+        vid.pause();
+        btn.innerHTML = playSVG;
+        btn.style.opacity = "1";
+      }
+    }
+
+    vid.addEventListener('click', function () {
+      console.log('🖱 Video clicked');
+      toggleVideo();
+    });
+
+    btn.addEventListener('click', function (e) {
+      console.log('🖱 Play/Pause button clicked');
+      e.stopPropagation();
+      toggleVideo();
+    });
+
+    vid.addEventListener('ended', function () {
+      console.log('🏁 Video: Ended — Resetting');
+      vid.pause();
+      vid.currentTime = 0;
+      vid.load();
+      btn.innerHTML = playSVG;
+      btn.style.opacity = "1";
+    });
+
+  } else if (!btn) {
+    console.log('ℹ️ Play/Pause: Skipped — Auto Loop Mode active');
+  } else {
+    console.warn('⚠️ Play/Pause: Skipped — vid missing');
+  }
+
+  // Sound toggle logic
+  if (soundBtn && vid) {
+    console.log('✅ Sound Button: Initializing...');
+    soundBtn.addEventListener('click', function () {
+      vid.muted = !vid.muted;
+      console.log('🔊 Sound toggled:', vid.muted ? 'MUTED 🔇' : 'UNMUTED 🔊');
+      if (vid.muted) {
+        soundOn.style.display = 'none';
+        soundOff.style.display = 'block';
+      } else {
+        soundOn.style.display = 'block';
+        soundOff.style.display = 'none';
+      }
+    });
+  } else {
+    console.warn('⚠️ Sound Button: Skipped — soundBtn or vid missing');
+  }
+
+  console.log('✅ Video Section Script: Done');
+
+}); {% endcomment %}
+document.addEventListener('DOMContentLoaded', function () {
+  const isMobile = window.innerWidth <= 767;
+  const vid = isMobile
+    ? document.querySelector('.custome_video_section .mobile_video')
+    : document.querySelector('.custome_video_section .desktop_video');
+
+  const btn = document.querySelector('.custome_video_section .play_pause_btn');
+  const soundBtn = document.querySelector('.custome_video_section .video_sound_button');
+  const soundOn = soundBtn ? soundBtn.querySelector('.sound_on') : null;
+  const soundOff = soundBtn ? soundBtn.querySelector('.sound_off') : null;
+
+  const playSVG = `
+    <svg width="26" height="26" viewBox="0 0 170 170" fill="#000">
+      <path d="M85.1484 0C132.093 0 170.148 38.0558 170.148 85C170.148 131.944 132.093 170 85.1484 170C38.2042 170 0.148438 131.944 0.148438 85C0.148437 38.0558 38.2042 0 85.1484 0ZM65.5986 43.1377C64.0667 43.1379 62.5612 43.5409 61.2344 44.3066C59.9077 45.0724 58.8056 46.1738 58.0391 47.5C57.2725 48.8263 56.8684 50.3314 56.8672 51.8633V118.137C56.8583 119.671 57.2578 121.179 58.0244 122.508C58.7911 123.836 59.8979 124.937 61.2305 125.697C62.5553 126.471 64.0623 126.879 65.5967 126.879C67.131 126.879 68.6381 126.471 69.9629 125.697L127.354 92.5605C128.681 91.7938 129.782 90.6913 130.548 89.3643C131.314 88.0372 131.717 86.5321 131.717 85C131.717 83.4679 131.314 81.9628 130.548 80.6357C129.782 79.3087 128.681 78.2062 127.354 77.4395L69.9629 44.3057C68.6359 43.5403 67.1306 43.1375 65.5986 43.1377Z"/>
+    </svg>
+  `;
+
+  const pauseSVG = `
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="#000">
+      <path d="M16 0C7.16 0 0 7.16 0 16s7.16 16 16 16 16-7.16 16-16S24.84 0 16 0zM14 22c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12zm8 0c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12z"/>
+    </svg>
+  `;
+
+  if (!btn && vid) {
+    vid.muted = true;
+    vid.loop = true;
+    vid.autoplay = true;
+    vid.play().catch(() => {});
+  }
+
+  if (btn && vid) {
+    btn.innerHTML = playSVG;
+    btn.style.transition = "opacity 0.5s ease";
+
+    function toggleVideo() {
+      if (vid.paused) {
+        vid.play();
+        btn.innerHTML = pauseSVG;
+        btn.style.opacity = "1";
+        setTimeout(() => btn.style.opacity = "0", 1000);
+      } else {
+        vid.pause();
+        btn.innerHTML = playSVG;
+        btn.style.opacity = "1";
+      }
+    }
+
+    vid.addEventListener('click', toggleVideo);
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      toggleVideo();
+    });
+
+    vid.addEventListener('ended', function () {
+      vid.pause();
+      vid.currentTime = 0;
+      vid.load();
+      btn.innerHTML = playSVG;
+      btn.style.opacity = "1";
+    });
+  }
+
+  if (soundBtn && vid) {
+    soundBtn.addEventListener('click', function () {
+      vid.muted = !vid.muted;
+      if (vid.muted) {
+        soundOn.style.display = 'none';
+        soundOff.style.display = 'block';
+      } else {
+        soundOn.style.display = 'block';
+        soundOff.style.display = 'none';
+      }
+    });
+  }
+
+});
+</script>
+{% schema %}
+{
+  "name": "Custome video section",
+  "class": "header-slider",
+  "settings": [
+    {
+      "type": "video",
+      "id": "desktop_video",
+      "label": "Desktop Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_poster",
+      "label": "Desktop Video Poster"
+    },
+    {
+      "type": "video",
+      "id": "mob_video",
+      "label": "Mobile Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_poster",
+      "label": "Mobile Video Poster"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_loop",
+      "label": "Autoplay + Loop",
+      "default": true
+    },
+  ],
+  "presets": [
+    {
+      "name": "Custome video section"
+    }
+  ]
+}
+{% endschema %}

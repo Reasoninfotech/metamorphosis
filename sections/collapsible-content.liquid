@@ -73,31 +73,6 @@
 	</div>
 </div>
 
-
-{%- if request.page_type == 'page' and section.blocks.size > 0 and template.name == 'faqs'-%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {%- for block in section.blocks -%}
-      {%- if block.settings.question != blank and block.settings.answer != blank -%}
-    {
-      "@type": "Question",
-      "name": {{ block.settings.question | strip_html | strip | json }},
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": {{ block.settings.answer | strip_html | strip_newlines | json }}
-      }
-    }{%- unless forloop.last -%},{%- endunless -%}
-      {%- endif -%}
-    {%- endfor -%}
-  ]
-}
-</script>
-{%- endif -%}
-
-
 {% schema %}
 {
 	"name": "t:sections.collapsible-content.name",

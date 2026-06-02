@@ -1,0 +1,43 @@
+{{ 'about-txt-banner-section.css' | asset_url | stylesheet_tag }}
+
+<div class="about-txt-banner-section pb_90 pt_90" {% if section.settings.image != blank %}style="background-image:url('{{ section.settings.image | img_url : "master" }}')"{% endif %}>
+  <div class="page-width">
+    <div class="about_text_row">
+      {% if section.settings.about-content != blank %}
+        <div class="about_row_content">{{ section.settings.about-content }}</div>
+      {% endif %}
+      {% if section.settings.about_sub_text != blank %}
+        <spna class="about_sub_text">{{ section.settings.about_sub_text }}</spna>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About Text Banner Section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type":"richtext",
+        "id":"about-content",
+        "label":"Content",
+         "default": "<p>“I will always be a small town girl with big, big dreams”</p>"
+      },
+      {
+        "type":"text",
+        "id":"about_sub_text",
+        "label":"Sub Text",
+      }
+    ],
+    "presets": [
+      {
+        "name": "About Text Banner Section",
+      }
+    ]
+  }
+{% endschema %}

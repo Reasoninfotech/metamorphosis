@@ -6,11 +6,7 @@
           <div class="swiper-slide">
             <div class="feature-item">
               {% if block.settings.icon != blank %}
-                {% comment %} <img src="{{ block.settings.icon | img_url: '100x' }}" class="feature-icon" alt="{{ block.settings.icon.alt }}" loading="lazy"> {% endcomment %}
-                <img src="{{ block.settings.icon | image_url: width: block.settings.icon.width, format: 'webp' }}" 
-     class="feature-icon" 
-     alt="{{ block.settings.icon.alt | escape }}" 
-     loading="lazy">
+                <img src="{{ block.settings.icon | img_url: '100x' }}" class="feature-icon" alt="{{ block.settings.icon.alt }}" loading="lazy">
               {% endif %}
               <p class="feature-text">{{ block.settings.text }}</p>
             </div>
