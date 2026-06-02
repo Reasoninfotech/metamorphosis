@@ -1,0 +1,70 @@
+{{ 'product-plumper-slider.css' | asset_url | stylesheet_tag }}
+<section id="sec_{{ section.id }}" class="product-plumper-slider-section">
+  <div class="plumper-slider_container">
+    <div class="swiper plumper-slider">
+      <div class="swiper-wrapper">
+        {% for block in product.metafields.plumper.img %}
+          {% assign i = forloop.index0 %}
+          <div class="swiper-slide">
+            <div class="plumper-slider-block">
+              {% if product.metafields.plumper.img[i] != blank %}
+                <figure>
+                  <img
+                    src="{{ product.metafields.plumper.img[i] }}"
+                    alt="Metamorphosis {{ product.metafields.plumper.other_text[i] | remove: '<p>' | remove: '</p>' }}"
+                  >
+                </figure>
+              {% endif %}
+              <div class="plumper_text_block">
+                <div class="text_block_wrp">
+                  <div class="plumper_text_wrp">
+                    {% if product.metafields.plumper.title[i] != blank %}
+                      <h2 class="main_title">{{ product.metafields.plumper.title[i] }}</h2>
+                    {% endif %}
+                    {% if product.metafields.plumper.sub_text[i] != blank %}
+                      <span>{{ product.metafields.plumper.sub_text[i] }}</span>
+                    {% endif %}
+                  </div>
+                  <div class="content_wrp">
+                    {% if product.metafields.content.title[i] != blank %}
+                      <span class="content_title">{{ product.metafields.content.title[i] }}</span>
+                    {% endif %}
+                    {% if product.metafields.plumper.other_text[i] != blank %}
+                      <div class="pulmber_other_text">{{ product.metafields.plumper.other_text[i] }}</div>
+                    {% endif %}
+                  </div>
+                  <div class="pulmber_dots" style="display: block;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  var swiper = new Swiper('#sec_{{ section.id }} .plumper-slider', {
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: function (index, className) {
+        return '<span class="' + className + '">' + (index + 1) + '</span>';
+      },
+    },
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Pulmper Section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Product Pulmper Section"
+    }
+  ]
+}
+{% endschema %}
