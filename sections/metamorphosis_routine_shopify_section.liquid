@@ -1,0 +1,327 @@
+<style>
+  .metaroutine-section{padding:60px 0;}
+  .metaroutine-container{
+    max-width:1280px;
+    margin:0 auto;
+    display:flex;
+    padding: 0 15px;
+    {% comment %} align-items:flex-start; {% endcomment %}
+  }
+  /* LEFT */
+  .metaroutine-left{flex:1.1;    display: flex;flex-direction: column;justify-content: space-between;}
+  .metaroutine-left h2{    text-align: left;}
+  .metaroutine-left .instruction-title{    
+      min-height: 157px;
+      color: #828282;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 100%;
+      text-transform: uppercase;
+      font-family: var(--argentum);
+      position:relative;
+          margin-bottom: 64px;
+              padding: 21px 0;
+  }
+  .metaroutine-left .instruction-title:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      border-top: 1px solid #BDBDBD;
+  }
+  .metaroutine-left .instruction-title:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-bottom: 1px solid #BDBDBD;
+  }
+  .metaroutine-left p{font-size:15px;color:#555;line-height:1.6}
+  /* RIGHT */
+  .metaroutine-right{flex:2}
+  .metaroutine-card{text-align:center;}
+  {% comment %} .metaroutine-card .metaroutine-card-groups{    padding-right: 21px;} {% endcomment %}
+  .metaroutine-img{
+    position:relative;
+    overflow:hidden;
+  }
+  .metaroutine-img img{
+    width:100%;
+    display:block;
+    transition:opacity .4s ease;
+  }
+  .metaroutine-img img.hover{
+    position:absolute;
+    inset:0;
+    opacity:0;
+  }
+  .metaroutine-card:hover img.hover{opacity:1}
+  .metaroutine-title{font-size: 30px;color: #000000;text-align: left;margin: 0;padding: 21px 0;}
+  .metaroutine-instruction-groups {
+      position: relative;
+      padding-top: 21px;
+  }
+  .metaroutine-instruction-groups:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% + 21px);
+      border-top: 1px solid #BDBDBD;
+  }
+  .metaroutine-instruction{
+       font-size: 14px;
+      line-height: 100%;
+      text-align: left;
+      padding-bottom: 8px;
+      color: #828282;
+          display: none;
+  }
+  .metaroutine-text{
+        min-height: 115px;
+      color: #000000;
+      font-weight: 400;
+      line-height: 23px;
+      text-align: left;
+      margin: 0;
+          font-size: 20px;
+            position: relative;
+           padding: 0 0 21px 0;
+
+  }
+  .metaroutine-text:after {
+      content: "";
+      position: absolute;
+         bottom: 0;
+      left: 0;
+      width: calc(100% + 21px);
+      border-bottom: 1px solid #BDBDBD;
+
+  }
+
+  .metaroutine-right  .common_btn{
+    background:transparent;
+    padding:12px 36px;
+
+  }
+  .metaroutine-right .common_btn {
+         min-width: calc(100% - 74px);
+         max-width: calc(100% - 74px);
+            margin-top: 21px;
+      }
+  .metaroutine-right .swiper-wrapper .swiper-slide:last-child .metaroutine-card-groups ,
+  .metaroutine-right .swiper-wrapper .swiper-slide:last-child .metaroutine-instruction-groups .metaroutine-text {
+          padding-right: 0;
+  }
+
+
+  @media(max-width:991px){
+
+    .metaroutine-section{padding: 40px 0;}
+
+   .metaroutine-container {
+          flex-direction: column;
+  }
+  .metaroutine-left .instruction-title {
+      display:none;
+  }
+  .metaroutine-instruction {
+  display:block;
+  }
+  .metaroutine-right {
+      width: 100%;
+  }
+  .metaroutine-left h2 {
+      text-align: center;
+      margin-bottom: 32px;
+  }
+  .metaroutine-text:after {
+      width:100%;
+  }
+  .metaroutine-instruction-groups:before {
+       width:100%;
+  }
+  }
+    @media(max-width:575px){
+        .metaroutine-text {
+           font-size: 18px;
+               padding: 0 0 18px 0;
+
+        }
+        .metaroutine-instruction-groups {
+            padding-top: 18px;
+        }
+        .metaroutine-title {
+            font-size: 20px;
+                padding: 18px 0;
+        }
+    }
+
+</style>
+
+<section class="metaroutine-section">
+  <div class="metaroutine-container">
+    <!-- LEFT -->
+    <div class="metaroutine-left">
+      <h2 class="main_title">{{ section.settings.heading }}</h2>
+      <div class="instruction-title">INSTRUCTIONS</div>
+      <p>{{ section.settings.instructions }}</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="metaroutine-right swiper">
+        
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          {% assign product = all_products[block.settings.product] %}
+
+          <div class="swiper-slide">
+            <div class="metaroutine-card">
+              <div class="metaroutine-card-groups">
+                <div class="metaroutine-img">
+                  {% comment %} <a href="{{ product.url }}"> {% endcomment %}
+                    {% if block.settings.image != blank %}
+                      <img src="{{ block.settings.image | image_url: width: 600 }}" loading="lazy" alt="{{ block.settings.image.alt | escape }}">
+                    {% endif %}
+                    {% if block.settings.hover_image != blank %}
+                      <img class="hover" src="{{ block.settings.hover_image | image_url: width: 600 }}"  loading="lazy" alt="{{ block.settings.hover_image.alt | escape }}">
+                    {% endif %}
+                  {% comment %} </a> {% endcomment %}
+                </div>
+                <h3 class="metaroutine-title ">
+                  {{ block.settings.title | default: product.title }}
+                </h3>
+              </div>
+
+              <div class="metaroutine-instruction-groups">
+                <div class="metaroutine-instruction">INSTRUCTIONS</div>
+                <p class="metaroutine-text">{{ block.settings.instructions }}</p>
+                <button
+                  class="common_btn"
+                  data-id="{{ product.selected_or_first_available_variant.id }}"
+                >
+                  BUY NOW
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  new Swiper('.metaroutine-right', {
+    slidesPerView: 1.3,
+    spaceBetween: 0,
+    breakpoints: {
+        0: {
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+      },
+      575: {
+        slidesPerView: 1.5,
+        spaceBetween: 16,
+      },
+      768: {
+        slidesPerView: 2.3,
+        spaceBetween: 21,
+      },
+      992: {
+        slidesPerView: 1.8,
+        spaceBetween: 21,
+      },
+      1024: {
+        slidesPerView: 2.5,
+        spaceBetween: 21,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 21,
+      },
+    },
+  });
+
+  $(document).ready(function () {
+    $('.metaroutine-section .common_btn').click(function (e) {
+      e.preventDefault();
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [
+            {
+              id: $(this).data('id'),
+              quantity: 1,
+            },
+          ],
+        }),
+      }).then(() => {
+        window.location.href = '/checkout';
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Metamorphosis Routine",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "THE FULL METAMORPHOSIS ROUTINE"
+    },
+    {
+      "type": "textarea",
+      "id": "instructions",
+      "label": "Left Instructions"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Routine Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Default image"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Hover image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom title"
+        },
+        {
+          "type": "textarea",
+          "id": "instructions",
+          "label": "Product Instructions"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Metamorphosis Routine – Slider",
+      "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }]
+    }
+  ]
+}
+{% endschema %}

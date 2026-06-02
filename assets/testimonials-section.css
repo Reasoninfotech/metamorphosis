@@ -1,0 +1,65 @@
+.testimonials-section .testimonial-text-wrp{font-family: var(--argentum);font-weight:300;text-align:center;line-height: normal;font-size:14px;}
+
+.testimonials-section .swiper-wrapper{padding-bottom: 50px;}
+.testimonials-section .testimonial-slider .testimonials-block{max-width: 840px;margin: 0 auto;text-align:center;}
+
+.testimonials-section .testimonials-block figure img{vertical-align: middle;}
+
+.testimonials-section .testimonials-block p{margin:20px 0;}
+.testimonials-section .testimonials-block p em {
+    font-size: 30px;
+    line-height: normal;
+    font-weight: 300;
+    font-family: Cormorant-Italic;
+}
+.testimonials-section .testimonials-block p strong{font-family: var(--argentum);font-weight: 300;text-transform: uppercase;font-size: 14px;line-height: 1.5;}
+
+.testimonials-section .swiper-pagination-bullet{border: 1px solid #fff;opacity: 1;}
+.testimonials-section .swiper-pagination-bullet-active{background: #ffff;border: unset;}
+
+.testimonials-section .full_dec{display:none;}
+
+.testimonials-section .city_name{
+   font-size: 14px;
+   color: #fff;
+   text-transform: uppercase;
+   display:block;
+   margin-top:20px;
+   margin-bottom: 20px;
+}
+
+.testimonials-section .swiper-button-next,
+.testimonials-section .swiper-button-prev{
+  width:40px;
+  height:28px;
+}
+
+.testimonials-section .swiper-button-next:after,
+.testimonials-section .swiper-button-prev:after{
+  content:unset;
+}
+
+
+@media screen and (max-width:1399px){
+  .testimonials-section .testimonials-block p{margin: 35px 0;}
+  .testimonials-section .testimonials-block p em{font-size: 28px;}
+}  
+
+
+@media screen and (max-width: 991px){
+  .testimonials-section .swiper-button-next,
+  .testimonials-section .swiper-button-prev{
+    display:none;
+  }
+}  
+
+
+@media screen and (max-width: 768px){
+  .testimonials-section .testimonials-block p em{font-size:24px;}
+}  
+
+@media screen and (max-width: 575px){
+  .testimonials-section .testimonial-text-wrp{font-weight:400;}
+  .testimonials-section .testimonials-block p em{font-size:20px;}
+  .testimonials-section .testimonials-block p strong{font-size: 10px;}
+}

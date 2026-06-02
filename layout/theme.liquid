@@ -1,0 +1,992 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+  <head>
+    <!-- Signals Gateway Pixel + Meta Pixel Code -->
+    <script>
+      function assign(t) {
+        for (var i = 1; i < arguments.length; i++) {
+          var s = arguments[i];
+          if (s) for (var k in s) if (Object.prototype.hasOwnProperty.call(s, k)) t[k] = s[k];
+        }
+        return t;
+      }
+      !(function (f, b, e, v, vv, n, nn, t, s, tt, ss) {
+        if (!f.cbq) {
+          nn = f.cbq = function () {
+            nn.initialized ? nn.apply(f.cbq, arguments) : nn.queue.push(arguments);
+          };
+          if (!f._cbq) f._cbq = nn;
+          nn.push = nn;
+          nn.loaded = !0;
+          nn.version = '2.0';
+          nn.queue = [];
+          tt = b.createElement(e);
+          tt.async = !0;
+          tt.src = vv;
+          ss = b.getElementsByTagName(e)[0];
+          ss.parentNode.insertBefore(tt, ss);
+        }
+        if (f.xbq) return;
+        if (f.fbq) f.xbq = f.fbq;
+        n = f.fbq = function () {
+          var args = Array.prototype.slice.call(arguments);
+          var m = args[0];
+          var isT = m === 'track' || m === 'trackCustom';
+          var isS = m === 'trackSingle' || m === 'trackSingleCustom';
+          var mId = args[isT ? 1 : 2] + '.' + Date.now() + Math.random().toString(36);
+          if (isT && args.length < 4)
+            arguments = args.concat(args.length < 3 ? [{}, { eventID: mId }] : [{ eventID: mId }]);
+          else if (isS && arguments.length < 5)
+            arguments = args.concat(args.length < 4 ? [{}, { eventID: mId }] : [{ eventID: mId }]);
+          if (isT && (!arguments[3] || !arguments[3].eventID))
+            arguments[3] = assign({}, arguments[3] || {}, { eventID: mId });
+          if (isS && (!arguments[4] || !arguments[4].eventID))
+            arguments[4] = assign({}, arguments[4] || {}, { eventID: mId });
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+          if (typeof m === 'string' && m.indexOf('track') === 0) {
+            if (isS) arguments[1] = f.fbq.instance.pixelsByID[arguments[1]].cId;
+            if (arguments[1]) f.cbq.initialized ? f.cbq.apply(f.cbq, arguments) : f.cbq.queue.push(arguments);
+          }
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = f.xbq ? f.xbq.queue : [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        'script',
+        'https://connect.facebook.net/en_US/fbevents.js',
+        'https://sgw.stape.ac/sdk/1602166059015539537/events.js'
+      );
+      fbq('init', '346409711871258');
+      fbq('track', 'PageView');
+      cbq('setHost', 'https://sgw.stape.ac/');
+      cbq('init', '1602166059015539537');
+      fbq('set', 'cId', '1602166059015539537', '346409711871258');
+      cbq('set', 'integrationMethod', 'forkFromSnippetCode');
+    </script>
+    <!-- End Signals Gateway Pixel + Meta Pixel Code -->
+
+    {%- if content_for_header contains 'tapita-seo-script-tags' -%}{%- include 'tapita-seo-schema' -%}{%- endif -%}
+
+    {% if request.path == '/collections/all' %}
+      <script>
+        window.location = '/collections/all-collection';
+      </script>
+    {% endif %}
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-WMM88KKV');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    {% if template contains 'template-product-lushLips-transformation' %}
+      <meta name="robots" content="noindex">
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <meta name="theme-color" content="">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="//connect.facebook.net">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//code.jquery.com">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+    {%- endif -%}
+
+    <title>{{ page_title }}</title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    {% render 'meta-tags', page_description: page_description, page_title: page_title %}
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+      integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+      integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+        integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      >
+    </noscript>
+
+    <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'custom.min.js' | asset_url }}" defer="defer"></script>
+
+    {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
+
+    {%- liquid
+      assign body_font_ligh = settings.type_body_font | font_modify: 'weight', '300'
+      assign body_font_regular = settings.type_body_font | font_modify: 'weight', '400'
+      assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
+      assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
+      assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+      assign heading_font_italic = settings.type_header_font | font_modify: 'style', 'italic'
+    %}
+
+    {% style %}
+      {{ settings.type_body_font | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font | font_face: font_display: 'swap' }}
+      {{ settings.type_button_font | font_face: font_display: 'swap' }}
+      {{ settings.type_header_font_card | font_face: font_display: 'swap' }}
+      {{ settings.type_text_font_card | font_face: font_display: 'swap' }}
+      {{ settings.type_header_menu_font | font_face: font_display: 'swap' }}
+      {{ settings.type_footer_menu_font | font_face: font_display: 'swap' }}
+      {{ settings.type_popups_heading_font | font_face: font_display: 'swap' }}
+      {{ settings.type_popups_text_font | font_face: font_display: 'swap' }}
+      {{ body_font_ligh | font_face: font_display: 'swap' }}
+      {{ body_font_regular | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+      {{ body_font_italic | font_face: font_display: 'swap' }}
+      {{ heading_font_italic | font_face: font_display: 'swap' }}
+      {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+
+      :root {
+      --spaced-section: {{ settings.indent_section }}px;
+
+      --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+      --font-body-style: {{ settings.type_body_font.style }};
+      --font-body-weight: {{ settings.type_body_font.weight }};
+
+      --font-body-size: {{ settings.body_size }}px;
+      --font-body-line-height: {{ settings.type_body_line_height }};
+
+      --font-heading-family: {{ settings.type_header_font.family }}, {{ settings.type_header_font.fallback_families }};
+      --font-heading-style: {{ settings.type_header_font.style }};
+      --font-heading-weight: {{ settings.type_header_font.weight }};
+      --font-heading-letter-spacing: {{ settings.type_header_letter_spacing }}em;
+      --font-heading-line-height: {{ settings.type_header_line_height }};
+
+      --font-heading-h1-size: {{ settings.heading_h1_size }}px;
+      --font-heading-h2-size: {{ settings.heading_h2_size }}px;
+      --font-heading-h3-size: {{ settings.heading_h3_size }}px;
+      --font-heading-h4-size: {{ settings.heading_h4_size }}px;
+      --font-heading-h5-size: {{ settings.heading_h5_size }}px;
+      --font-heading-h6-size: {{ settings.heading_h6_size }}px;
+
+      --font-heading-card-family: {{ settings.type_header_font_card.family }}, {{ settings.type_header_font_card.fallback_families }};
+      --font-heading-card-style: {{ settings.type_header_font_card.style }};
+      --font-heading-card-weight: {{ settings.type_header_font_card.weight }};
+      --font-heading-card-text-transform: {{ settings.heading_text_transform_card }};
+      --font-text-card-family: {{ settings.type_text_font_card.family }}, {{ settings.type_text_font_card.fallback_families }};
+      --font-text-card-style: {{ settings.type_text_font_card.style }};
+      --font-text-card-weight: {{ settings.type_text_font_card.weight }};
+
+      --font-heading-card-size: {{ settings.heading_size_card }}px;
+      --font-text-card-size: {{ settings.text_size_card }}px;
+
+      --font-button-family: {{ settings.type_button_font.family }}, {{ settings.type_button_font.fallback_families }};
+      --font-button-style: {{ settings.type_button_font.style }};
+      --font-button-weight: {{ settings.type_button_font.weight }};
+      --font-button-text-transform: {{ settings.button_text_transform }};
+      --font-button-letter-spacing: 0.075em;
+
+      --font-header-menu-family: {{ settings.type_header_menu_font.family }}, {{ settings.type_header_menu_font.fallback_families }};
+      --font-header-menu-style: {{ settings.type_header_menu_font.style }};
+      --font-header-menu-weight: {{ settings.type_header_menu_font.weight }};
+      --font-header-menu-text-transform: {{ settings.header_menu_text_transform }};
+      --font-big-number-style: {{ settings.type_big_number_font }};
+
+      --font-footer-menu-family: {{ settings.type_footer_menu_font.family }}, {{ settings.type_footer_menu_font.fallback_families }};
+      --font-footer-menu-style: {{ settings.type_footer_menu_font.style }};
+      --font-footer-menu-weight: {{ settings.type_footer_menu_font.weight }};
+      --font-footer-link-size: {{ settings.link_size_footer }}px;
+      --font-footer-bottom-link-size: {{ settings.link_size_footer_bottom }}px;
+
+      --font-popups-heading-family: {{ settings.type_popups_heading_font.family }}, {{ settings.type_popups_heading_font.fallback_families }};
+      --font-popups-heading-style: {{ settings.type_popups_heading_font.style }};
+      --font-popups-heading-weight: {{ settings.type_popups_heading_font.weight }};
+      --font-popups-text-family: {{ settings.type_popups_text_font.family }}, {{ settings.type_popups_text_font.fallback_families }};
+      --font-popups-text-style: {{ settings.type_popups_text_font.style }};
+      --font-popups-text-weight: {{ settings.type_popups_text_font.weight }};
+      --font-popup-heading-size: {{ settings.popup_heading_size }}px;
+      --font-popup-text-size: {{ settings.popup_text_size }}px;
+      --font-notification-heading-size: {{ settings.notification_heading_size }}px;
+      --font-notification-text-size: {{ settings.notification_text_size }}px;
+
+      --font-span-heading-style: {{ settings.font_style }};
+
+      --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
+      --color-title-text: {{ settings.colors_text_title.red }}, {{ settings.colors_text_title.green }}, {{ settings.colors_text_title.blue }};
+      --color-secondary-text: {{ settings.colors_text_secondary.red }}, {{ settings.colors_text_secondary.green }}, {{ settings.colors_text_secondary.blue }};
+
+      --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
+      --color-base-background-2: {{ settings.colors_background_2.red }}, {{ settings.colors_background_2.green }}, {{ settings.colors_background_2.blue }};
+      --color-base-background-5: {{ settings.colors_background_5.red }}, {{ settings.colors_background_5.green }}, {{ settings.colors_background_5.blue }};
+      --color-base-background-3: {{ settings.colors_background_3.red }}, {{ settings.colors_background_3.green }}, {{ settings.colors_background_3.blue }};
+      --color-base-background-4: {{ settings.colors_background_4.red }}, {{ settings.colors_background_4.green }}, {{ settings.colors_background_4.blue }};
+
+      --color-announcement-bar-background-1: {{ settings.colors_background_announcement_bar_1.red }}, {{ settings.colors_background_announcement_bar_1.green }}, {{ settings.colors_background_announcement_bar_1.blue }};
+      --color-announcement-bar-background-2: {{ settings.colors_background_announcement_bar_2.red }}, {{ settings.colors_background_announcement_bar_2.green }}, {{ settings.colors_background_announcement_bar_2.blue }};
+
+      --color-base-solid-button-labels: {{ settings.colors_solid_button_labels.red }}, {{ settings.colors_solid_button_labels.green }}, {{ settings.colors_solid_button_labels.blue }};
+      --color-base-outline-button-labels: {{ settings.colors_outline_button_labels.red }}, {{ settings.colors_outline_button_labels.green }}, {{ settings.colors_outline_button_labels.blue }};
+      --color-base-button-background: {{ settings.colors_solid_button_background.red }}, {{ settings.colors_solid_button_background.green }}, {{ settings.colors_solid_button_background.blue }};
+      --payment-terms-background-color: {{ settings.colors_background_1 }};
+      --color-overlay-background: {{ settings.colors_background_overlay.red }}, {{ settings.colors_background_overlay.green }}, {{ settings.colors_background_overlay.blue }};
+      --color-big-number: {{ settings.color_big_number.red }}, {{ settings.color_big_number.green }}, {{ settings.color_big_number.blue }};
+
+
+
+      --color-base-background-input: {{ settings.colors_input_background.red }}, {{ settings.colors_input_background.green }}, {{ settings.colors_input_background.blue }};
+
+      --color-base-border-input: {{ settings.colors_input_border.red }}, {{ settings.colors_input_border.green }}, {{ settings.colors_input_border.blue }};
+      --color-hover-border-input: {{ settings.colors_input_hover_border.red }}, {{ settings.colors_input_hover_border.green }}, {{ settings.colors_input_hover_border.blue }};
+
+
+      --color-badge-icon: {{ settings.badge_icon_color }};
+      --color-border: {{ settings.card_border }};
+      --color-background-card: {{ settings.background_card }}
+      }
+
+      *,
+      *::before,
+      *::after {
+      box-sizing: inherit;
+      }
+
+      html {
+      box-sizing: border-box;
+      font-size: 10px;
+      height: 100%;
+      }
+
+      body {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-columns: 100%;
+      min-height: 100%;
+      margin: 0;
+      font-size: var(--font-body-size);
+      line-height: 1.8;
+      letter-spacing: -0.02em;
+      font-family: var(--font-body-family);
+      font-style: var(--font-body-style);
+      font-weight: var(--font-body-weight);
+      letter-spacing: -0.02em;
+      overflow-x: hidden;
+      }
+
+
+      @font-face {
+        font-family: Cormorant;
+        src: url('https://cdn.shopify.com/s/files/1/0693/9849/5445/files/Cormorant-SemiBold.ttf?v=1736741726') format("truetype");
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: Argentum;
+        src: url('https://cdn.shopify.com/s/files/1/0693/9849/5445/files/ArgentumSans-Light_1.ttf?v=1736747398');
+        font-weight: 300;
+      }
+
+      @font-face {
+        font-family: Argentum;
+        src: url('https://cdn.shopify.com/s/files/1/0693/9849/5445/files/ArgentumSans-Regular_7db201fc-2b1a-4f51-86b5-0b649aaa4e49.ttf?v=1736242380') format("truetype");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: Nebula;
+        src: url('https://cdn.shopify.com/s/files/1/0693/9849/5445/files/Nebulas-Regular.otf?v=1736250627') format("truetype");
+      }
+      @font-face {
+        font-family: Cormorant-Italic;
+        src: url('https://cdn.shopify.com/s/files/1/0693/9849/5445/files/Cormorant-Italic-VariableFont_wght.ttf?v=1738743744');
+      }
+    {% endstyle %}
+    <link rel="preload" href="{{ 'flickity.min.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'flickity.min.css' | asset_url }}"></noscript>
+    <link rel="preload" href="{{ 'jquery.fancybox.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'jquery.fancybox.css' | asset_url }}"></noscript>
+    <link rel="preload" href="{{ 'quickview.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'quickview.css' | asset_url }}"></noscript>
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'component-heading-animation.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
+
+    {%- if settings.predictive_search_enabled -%}
+      <link
+        rel="stylesheet"
+        href="{{ 'component-predictive-search.css' | asset_url }}"
+        media="print"
+        onload="this.media='all'"
+      >
+    {%- endif -%}
+
+    {%- unless settings.type_body_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+    {%- unless settings.type_header_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+    {%- unless settings.type_button_font.system? -%}
+      <link rel="preload" as="font" href="{{ settings.type_button_font | font_url }}" type="font/woff2" crossorigin>
+    {%- endunless -%}
+
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode');
+      }
+    </script>
+    <noscript>
+      <style>
+        .js-split-text {
+          opacity: 1;
+        }
+      </style>
+    </noscript>
+    {% render 'organization-schema' %}
+  </head>
+  <body
+    id="home-scroll"
+    class="template-{{ template.name }} template-{{ template | replace: '.', '-' }} product_{{ product.handle }}"
+  >
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WMM88KKV"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="stiky_btn" style="display: none;">
+      <div class="stiky_btn_row">
+        <a class="stiky_btn_inner shop_now" href="/collections/all-collection">
+          <span>
+            <svg width="65" height="65" viewBox="0 0 95 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="47.5" cy="47.5" r="47" fill="#CA003D" stroke="#F5ACB8"/>
+              <rect x="31.2012" y="29.7004" width="32.5994" height="27.7995" stroke="#FAFAFA"/>
+              <path d="M40.2988 36.3998V31.5998C40.2988 28.3999 41.7388 22 47.4987 22C53.2586 22 54.6986 27.5999 54.6986 30.3999V36.3998" stroke="#FAFAFA"/>
+              <path d="M21.12 72.07C19.9933 72.07 19.04 71.6967 18.26 70.95L18.77 69.93C19.57 70.6233 20.36 70.97 21.14 70.97C21.5867 70.97 21.9167 70.885 22.13 70.715C22.3433 70.545 22.45 70.3367 22.45 70.09C22.45 69.75 22.2933 69.4967 21.98 69.33C21.8267 69.2467 21.6667 69.175 21.5 69.115C21.3333 69.055 21.13 68.9933 20.89 68.93C20.2633 68.75 19.83 68.5867 19.59 68.44C19.2567 68.2333 19.0333 68.0367 18.92 67.85C18.7533 67.57 18.67 67.2433 18.67 66.87C18.67 66.2433 18.9133 65.7583 19.4 65.415C19.8867 65.0717 20.4933 64.9 21.22 64.9C22.16 64.9 22.9767 65.1433 23.67 65.63L23.18 66.67C22.4267 66.2367 21.7433 66.02 21.13 66.02C20.8033 66.02 20.5317 66.0783 20.315 66.195C20.0983 66.3117 19.99 66.5033 19.99 66.77C19.99 67.0367 20.1083 67.26 20.345 67.44C20.5817 67.6167 20.9767 67.7767 21.53 67.92C22.3367 68.1333 22.9233 68.4133 23.29 68.76C23.57 69.04 23.7267 69.4633 23.76 70.03C23.76 70.4833 23.6417 70.86 23.405 71.16C23.1383 71.4833 22.8033 71.7167 22.4 71.86C22 72 21.5733 72.07 21.12 72.07ZM31.2107 72H30.0307V69.1H26.3207V72H25.1407V65H26.3207V68.04H30.0307V65H31.2107V72ZM36.1809 72.09C35.1342 72.09 34.2542 71.7417 33.5409 71.045C32.8275 70.3483 32.4709 69.4967 32.4709 68.49C32.4709 67.4767 32.8259 66.6283 33.5359 65.945C34.2459 65.2617 35.1275 64.92 36.1809 64.92C37.2342 64.92 38.1159 65.265 38.8259 65.955C39.5359 66.645 39.8909 67.49 39.8909 68.49C39.8909 69.4967 39.5342 70.3483 38.8209 71.045C38.1075 71.7417 37.2275 72.09 36.1809 72.09ZM36.1909 71.02C36.4975 71.02 36.7992 70.965 37.0959 70.855C37.3925 70.745 37.6592 70.5833 37.8959 70.37C38.1359 70.1567 38.3259 69.8933 38.4659 69.58C38.6092 69.2633 38.6809 68.9 38.6809 68.49C38.6809 67.77 38.4342 67.1733 37.9409 66.7C37.4475 66.2267 36.8642 65.99 36.1909 65.99C35.5175 65.99 34.9292 66.225 34.4259 66.695C33.9225 67.165 33.6709 67.7633 33.6709 68.49C33.6709 69.2167 33.9242 69.82 34.4309 70.3C34.9375 70.78 35.5242 71.02 36.1909 71.02ZM42.3266 72H41.1466V65H43.9366C44.7632 65 45.4316 65.195 45.9416 65.585C46.4516 65.975 46.7066 66.5767 46.7066 67.39C46.7066 67.8567 46.6149 68.28 46.4316 68.66C46.2482 69.0367 45.9482 69.3383 45.5316 69.565C45.1249 69.7817 44.5932 69.89 43.9366 69.89H42.3266V72ZM43.8866 68.83C45.0132 68.83 45.5766 68.36 45.5766 67.42C45.5766 66.5133 45.0132 66.06 43.8866 66.06H42.3266V68.83H43.8866ZM56.9431 72H55.7831L52.0531 66.96V72H50.8731V65H52.0331L55.7831 70.06V65H56.9431V72ZM61.923 72.09C60.8764 72.09 59.9964 71.7417 59.283 71.045C58.5697 70.3483 58.213 69.4967 58.213 68.49C58.213 67.4767 58.568 66.6283 59.278 65.945C59.988 65.2617 60.8697 64.92 61.923 64.92C62.9764 64.92 63.858 65.265 64.568 65.955C65.278 66.645 65.633 67.49 65.633 68.49C65.633 69.4967 65.2764 70.3483 64.563 71.045C63.8497 71.7417 62.9697 72.09 61.923 72.09ZM61.933 71.02C62.2397 71.02 62.5414 70.965 62.838 70.855C63.1347 70.745 63.4014 70.5833 63.638 70.37C63.878 70.1567 64.068 69.8933 64.208 69.58C64.3514 69.2633 64.423 68.9 64.423 68.49C64.423 67.77 64.1764 67.1733 63.683 66.7C63.1897 66.2267 62.6064 65.99 61.933 65.99C61.2597 65.99 60.6714 66.225 60.168 66.695C59.6647 67.165 59.413 67.7633 59.413 68.49C59.413 69.2167 59.6664 69.82 60.173 70.3C60.6797 70.78 61.2664 71.02 61.933 71.02ZM74.0913 72H72.8713L71.1813 66.5L69.4613 72H68.2513L65.8913 65H67.1613L68.8913 70.71L70.6213 65H71.7813L73.5213 70.71L75.2413 65H76.4613L74.0913 72Z" fill="#FAFAFA"/>
+            </svg>
+          </span>
+        </a>
+        <a class="stiky_btn_inner sticky_arrow_icon" href="#home-scroll">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 95 95" fill="none">
+              <circle cx="47.5" cy="47.5" r="47" fill="#000" stroke="#000"/></circle>
+               <path d="M61.6667 43.8765L61.6667 44.8556C58.6508 43.7468 55.9642 42.1814 53.7712 40.2553C51.5783 38.3292 49.9251 36.0829 48.913 33.6538L48.913 68H47.7536L47.7536 33.6538C46.7429 36.0845 45.0904 38.3325 42.8974 40.2602C40.7043 42.1879 38.017 43.7546 35 44.8644L35 43.8765C38.8382 42.3772 42.0591 40.1022 44.3089 37.3014C46.5588 34.5006 47.7507 31.2824 47.7536 28H48.913C48.916 31.2824 50.1079 34.5006 52.3577 37.3014C54.6076 40.1022 57.8285 42.3772 61.6667 43.8765Z" fill="white"/></path>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener(
+          'scroll',
+          function () {
+            var btn = document.querySelector('.stiky_btn');
+            if (btn) btn.style.display = window.scrollY > 100 ? 'block' : 'none';
+          },
+          { passive: true }
+        );
+      });
+    </script>
+    <style>
+       html {
+         scroll-behavior: smooth;
+       }
+       body {
+          scroll-behavior: smooth;
+       }
+       .stiky_btn {
+           position: fixed;
+           right: 15px;
+           z-index: 100;
+           bottom: 15px;
+       }
+       .stiky_btn_row {
+           display: flex;
+           flex-direction: column;
+           justify-Content: center;
+           align-items: center;
+           gap: 5px;
+       }
+       .stiky_btn .stiky_btn_inner span{display:flex;}
+       .stiky_btn .stiky_btn_inner svg {
+        width:65px;
+        height:65px;
+      }
+
+      .template-product .stiky_btn {
+           bottom: 120px;
+       }
+
+       .template-collection .stiky_btn .stiky_btn_inner.shop_now,
+       .template-product .stiky_btn .stiky_btn_inner.shop_now{
+         display: none;
+       }
+
+       .stiky_btn .stiky_btn_inner.shop_now svg{
+         width:70px;
+         height:70px;
+       }
+
+       @media(max-width:1199px) {
+         .stiky_btn .stiky_btn_inner svg {
+             width: 60px;
+         }
+       }
+       @media(max-width:991px) {
+         .stiky_btn .stiky_btn_inner svg {
+             width: 50px;
+             height:50px;
+         }
+
+         .stiky_btn .stiky_btn_inner.shop_now svg{
+           width: 60px;
+           height: 60px;
+         }
+
+       }
+         @media(max-width:768px) {
+         .stiky_btn .stiky_btn_inner svg {
+             width: 35px;
+             height:35px;
+         }
+
+         .stiky_btn .stiky_btn_inner.shop_now svg{
+           width: 45px;
+           height: 45px;
+         }
+
+         .template-product .stiky_btn {
+           bottom: 105px;
+         }
+       }
+    </style>
+    {% sections 'top-accordion' %}
+    {% sections 'header-group' %}
+    {% sections 'overlay-group' %}
+    {% if settings.show_breadcrumbs %}
+      {% render 'breadcrumbs' %}
+    {% endif %}
+    {% assign template_base = template | split: '.' | first %}
+    <main
+      id="MainContent"
+      class="content-for-layout focus-none {% if settings.show_breadcrumbs != true and template_base != 'index' %}content-for-layout--without-breadcrumbs{% endif %}"
+      role="main"
+      tabindex="-1"
+    >
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+    {% section 'promo-box' %}
+    
+    {% if template.name != 'login' %}
+    {% section 'custom-offer-popup' %}
+    {% endif %}
+
+    {% if settings.show_back_to_top %}
+      {% render 'scroll-top' %}
+    {% endif %}
+
+    {%- if request.page_type != 'cart' -%}
+      {%- render 'cart-drawer' -%}
+    {%- endif -%}
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    </ul>
+
+    <script src="{{ 'jquery.fancybox.js' | asset_url }}" defer></script>
+    <script src="{{ 'flickity.js' | asset_url }}" defer></script>
+    <script src="{{ 'quickview.js' | asset_url }}" defer></script>
+    <script src="{{ 'split-type.js' | asset_url }}" defer></script>
+    <script src="{{ 'heading-animation.js' | asset_url }}" defer></script>
+    <script src="{{ 'popup.js' | asset_url }}" defer></script>
+    {% if settings.show_back_to_top %}
+      <script src="{{ 'scroll-top.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+    {% if settings.type_color_swatch == 'custom' %}
+      <script src="{{ 'product-card.js' | asset_url }}" defer="defer"></script>
+      {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    <script>
+      {% capture content %}{% include 'quickview' %}{% endcapture %}
+      var content = {{ content | json }};
+    </script>
+
+    <script>
+			window.routes = {
+				cart_add_url: '{{ routes.cart_add_url }}',
+				cart_change_url: '{{ routes.cart_change_url }}',
+				cart_update_url: '{{ routes.cart_update_url }}',
+				cart_url: '{{ routes.cart_url }}',
+				predictive_search_url: '{{ routes.predictive_search_url }}'
+			};
+
+			window.cartStrings = {
+				error: `{{ 'sections.cart.cart_error' | t }}`,
+				quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t }}`,
+				empty: `{{ 'general.cart.empty_cart' | t }}`,
+				shop_now: `{{ 'customer.account.account_button_shop' | t }}`,
+				collections_url: `{{ routes.collections_url | sort_by: 'best-selling' }}`
+			}
+
+			window.variantStrings = {
+				addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+				soldOut: `{{ 'products.product.sold_out' | t }}`,
+				unavailable: `{{ 'products.product.unavailable' | t }}`,
+				unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`
+			}
+
+			window.theme = {
+				moneyFormat: {{ shop.money_format | json }},
+				quickviewText: `{{ settings.quickview }}`,
+				quickviewMore: `{{ 'general.card.view__more' | t }}`
+			}
+    </script>
+    <script
+      src="//cool-image-magnifier.product-image-zoom.com/js/core/main.min.js?timestamp=1667790148&shop=handmade-dv.myshopify.com"
+      defer
+    ></script>
+    <script async type="text/javascript" src="//s.skimresources.com/js/12345X67890.skimlinks.js"></script>
+
+    {%- if settings.predictive_search_enabled -%}
+      <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
+      <script
+        src="{{ 'predictive-search.js' | asset_url }}"
+        defer="defer"
+      ></script>
+    {%- endif -%}
+    {% comment %}
+      <script>
+        window._klOnsite = window._klOnsite || [];
+        window._klOnsite.push(['openForm', 'RM6Nqp']);
+      </script>
+    {% endcomment %}
+    {% comment %}
+      <script>
+         window._klOnsite = window._klOnsite || [];
+         window._klOnsite.push(['openForm', 'U77wCX']);
+      </script>
+    {% endcomment %}
+
+    {% comment %} ============my code=========== {% endcomment %}
+
+    <script>
+      window.BuyXGetY = [
+        { paidId: 47309158416597, freeId: 47499773935829 },
+        {% comment %} {paidId: 47309160284373, freeId: 47499782389973 },
+        {paidId: 47309160284373, freeId: 52670796333269 } {% endcomment %}
+      ];
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.buy-it-now').forEach((button) => {
+          button.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const startDate = new Date('2026-04-07T04:30:00Z');
+            const endDate = new Date('2029-05-07T04:59:59Z');
+            const now = new Date();
+            const isPromoActive = now >= startDate && now <= endDate;
+
+            const paidVariantId = Number(this.dataset.cart);
+
+            const form = this.closest('form');
+            let paidQty = 1;
+            if (form) {
+              const qtyInput = form.querySelector('.quantity__input');
+              if (qtyInput) paidQty = Number(qtyInput.value) || 1;
+            }
+            
+            const items = [{ id: paidVariantId, quantity: paidQty }];
+
+            if (isPromoActive) {
+              const pair = window.BuyXGetY.find((p) => p.paidId === paidVariantId);
+              if(pair){
+                {% comment %} const qtyInput = form.querySelector('.quantity__input');
+                if (pair) {
+                  items.push({ id: pair.freeId, quantity: Number(qtyInput.value) });
+                } {% endcomment %}
+                let freeQty = paidQty;
+  
+                if (form) {
+                  const qtyInput = form.querySelector('.quantity__input');
+                  if (qtyInput) freeQty = Number(qtyInput.value) || 1;
+                }
+  
+                  items.push({ id: pair.freeId, quantity: freeQty });
+              }
+            }
+
+            const cartItems = items.map((i) => `${i.id}:${i.quantity}`).join(',');
+            const checkoutUrl = '/cart/' + cartItems + '?checkout';
+            window.location.href = checkoutUrl;
+          });
+        });
+      });
+    </script>
+
+    <script>
+      (function () {
+        const startDate = new Date('2026-04-07T04:30:00Z');
+        const endDate = new Date('2029-05-07T04:59:59Z');
+        const now = new Date();
+        if (now < startDate || now > endDate) return;
+
+        window.freeGiftPairs = [
+          { triggerId: 47309158416597, giftId: 47499773935829 },
+          {% comment %} {triggerId: 47309160284373, giftId: 47499782389973 },
+        {triggerId: 47309160284373, giftId: 52670796333269 } {% endcomment %}
+        ];
+
+        async function getCart() {
+          const res = await fetch('/cart.js', { headers: { Accept: 'application/json' } });
+          return res.json();
+        }
+
+        async function addGift(id, qty) {
+          return fetch('/cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ items: [{ id, quantity: qty }] }),
+          });
+        }
+
+        async function changeItem(lineKey, qty) {
+          return fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: lineKey, quantity: qty }),
+          });
+        }
+
+        async function removeItem(lineKey) {
+          return fetch('/cart/change.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: lineKey, quantity: 0 }),
+          });
+        }
+
+        function showLoader() {
+          const cartDrawer = document.getElementById('CartDrawer');
+          if (!cartDrawer) return;
+
+          let loader = cartDrawer.querySelector('.free-gift-loader');
+          if (!loader) {
+            loader = document.createElement('div');
+            loader.className = 'free-gift-loader';
+            loader.innerHTML = `
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.9); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+          <div style="width: 50px; height: 50px; border: 5px solid #f3f3f3; border-top: 5px solid #c5003e; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        </div>
+        <style>
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        </style>
+      `;
+            cartDrawer.style.position = 'relative';
+            cartDrawer.appendChild(loader);
+          }
+          loader.style.display = 'flex';
+        }
+
+        function hideLoader() {
+          const cartDrawer = document.getElementById('CartDrawer');
+          if (!cartDrawer) return;
+
+          const loader = cartDrawer.querySelector('.free-gift-loader');
+          if (loader) {
+            loader.style.display = 'none';
+          }
+        }
+
+        function refreshCartUI() {
+          document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+
+          if (window.theme && window.theme.cart && typeof window.theme.cart.getCart === 'function') {
+            window.theme.cart.getCart();
+          }
+
+          document.dispatchEvent(new CustomEvent('cart:updated'));
+
+          if (typeof Shopify !== 'undefined' && Shopify.theme && Shopify.theme.sections) {
+            fetch('/cart?sections=cart-drawer,cart-notification,cart-icon-bubble')
+              .then((res) => res.json())
+              .then((sections) => {
+                Object.keys(sections).forEach((sectionId) => {
+                  const element = document.getElementById(sectionId);
+                  if (element) {
+                    const div = document.createElement('div');
+                    div.innerHTML = sections[sectionId];
+                    element.innerHTML = div.querySelector(`#${sectionId}`).innerHTML;
+                  }
+                });
+              });
+          }
+
+          fetch('/cart.js')
+            .then((res) => res.json())
+            .then((cart) => {
+              document.querySelectorAll('.cart-count-bubble, [data-cart-count], .cart__count').forEach((el) => {
+                el.textContent = cart.item_count;
+                if (cart.item_count > 0) {
+                  el.classList.remove('hidden');
+                }
+              });
+
+              const cartDrawer = document.querySelector('cart-drawer, [data-cart-drawer]');
+              if (cartDrawer && cartDrawer.classList.contains('active')) {
+                fetch('/?sections=cart-drawer')
+                  .then((r) => r.json())
+                  .then((s) => {
+                    if (s['cart-drawer']) {
+                      const temp = document.createElement('div');
+                      temp.innerHTML = s['cart-drawer'];
+                      const newContent = temp.querySelector('.drawer__inner');
+                      const oldContent = cartDrawer.querySelector('.drawer__inner');
+                      if (newContent && oldContent) {
+                        oldContent.innerHTML = newContent.innerHTML;
+                      }
+                    }
+                  });
+              }
+            });
+        }
+
+        let syncing = false;
+        let syncTimeout = null;
+        let lastCartState = null;
+
+        async function syncFreeGifts() {
+          if (syncing) return;
+          syncing = true;
+
+          showLoader();
+
+          try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
+            const cart = await getCart();
+            let madeChanges = false;
+
+            const map = {};
+            cart.items.forEach((item) => {
+              if (!map[item.variant_id]) map[item.variant_id] = [];
+              map[item.variant_id].push(item);
+            });
+
+            for (const pair of window.freeGiftPairs) {
+              const paidTriggerItems = map[pair.triggerId] || [];
+              const totalPaidQty = paidTriggerItems.reduce((sum, item) => sum + item.quantity, 0);
+
+              const giftItems = map[pair.giftId] || [];
+              const freeGiftItems = giftItems.filter((item) => item.final_price === 0 || item.price === 0);
+              const paidGiftItems = giftItems.filter((item) => item.final_price > 0 && item.price > 0);
+
+              const totalFreeQty = freeGiftItems.reduce((sum, item) => sum + item.quantity, 0);
+              const totalPaidGiftQty = paidGiftItems.reduce((sum, item) => sum + item.quantity, 0);
+
+              // Previous state tracking
+              const oldFreeQty = lastCartState?.[`${pair.giftId}_free`] || 0;
+              const oldPaidQty = lastCartState?.[pair.triggerId] || 0;
+              const oldPaidGiftQty = lastCartState?.[`${pair.giftId}_paid`] || 0;
+
+              // CASE 1: Free gift quantity decreased (user manually reduced free gift)
+              if (totalFreeQty < oldFreeQty && totalFreeQty >= 0) {
+                const targetQty = totalFreeQty;
+
+                // Update trigger item to match free gift quantity
+                if (totalPaidQty !== targetQty && paidTriggerItems.length > 0) {
+                  await changeItem(paidTriggerItems[0].key, targetQty);
+                  madeChanges = true;
+                }
+
+                // Update free gift to exact quantity
+                if (freeGiftItems.length > 0 && totalFreeQty !== targetQty) {
+                  await changeItem(freeGiftItems[0].key, targetQty);
+                  madeChanges = true;
+                }
+              }
+              // CASE 2: Free gift quantity increased
+              else if (totalFreeQty > oldFreeQty) {
+                // Cap free gifts to trigger quantity
+                if (totalFreeQty > totalPaidQty && freeGiftItems.length > 0) {
+                  await changeItem(freeGiftItems[0].key, totalPaidQty);
+                  madeChanges = true;
+                }
+              }
+              // CASE 3: Paid gift quantity changed (should NOT affect free gifts)
+              else if (totalPaidGiftQty !== oldPaidGiftQty) {
+                // Do nothing - paid gifts are independent
+                // User can remove paid gifts without affecting free gifts
+              }
+              // CASE 4: Normal sync - ensure free gifts match trigger quantity
+              else {
+                if (totalPaidQty > 0) {
+                  if (totalFreeQty === 0) {
+                    // Add free gifts
+                    await addGift(pair.giftId, totalPaidQty);
+                    madeChanges = true;
+                  } else if (totalFreeQty !== totalPaidQty) {
+                    // Adjust free gifts to match trigger
+                    if (freeGiftItems.length > 0) {
+                      await changeItem(freeGiftItems[0].key, totalPaidQty);
+                      madeChanges = true;
+                    }
+                  }
+                } else if (totalFreeQty > 0) {
+                  // Remove all free gifts if no trigger items
+                  for (const freeGift of freeGiftItems) {
+                    await removeItem(freeGift.key);
+                    madeChanges = true;
+                  }
+                }
+              }
+            }
+
+            // Update last cart state
+            lastCartState = {};
+            cart.items.forEach((item) => {
+              window.freeGiftPairs.forEach((pair) => {
+                if (item.variant_id === pair.giftId) {
+                  if (item.final_price === 0 || item.price === 0) {
+                    if (!lastCartState[`${pair.giftId}_free`]) lastCartState[`${pair.giftId}_free`] = 0;
+                    lastCartState[`${pair.giftId}_free`] += item.quantity;
+                  } else {
+                    if (!lastCartState[`${pair.giftId}_paid`]) lastCartState[`${pair.giftId}_paid`] = 0;
+                    lastCartState[`${pair.giftId}_paid`] += item.quantity;
+                  }
+                } else if (item.variant_id === pair.triggerId) {
+                  if (!lastCartState[pair.triggerId]) lastCartState[pair.triggerId] = 0;
+                  lastCartState[pair.triggerId] += item.quantity;
+                }
+              });
+            });
+
+            if (madeChanges) {
+              await new Promise((resolve) => setTimeout(resolve, 300));
+              refreshCartUI();
+            }
+
+            await new Promise((resolve) => setTimeout(resolve, 200));
+            hideLoader();
+          } catch (err) {
+            console.error('[FREE GIFT ERROR]', err);
+            hideLoader();
+          }
+
+          syncing = false;
+        }
+
+        function triggerSync(delay = 800) {
+          if (syncTimeout) clearTimeout(syncTimeout);
+          syncTimeout = setTimeout(syncFreeGifts, delay);
+        }
+
+        const origFetch = window.fetch;
+        window.fetch = function (...args) {
+          return origFetch.apply(this, args).then((res) => {
+            const url = args[0]?.toString() || '';
+            if (url.includes('/cart/add') || url.includes('/cart/change') || url.includes('/cart/update')) {
+              triggerSync(800);
+            }
+            return res;
+          });
+        };
+
+        document.addEventListener('submit', (e) => {
+          if (e.target.matches('form[action*="/cart/add"]')) {
+            triggerSync(800);
+          }
+        });
+
+        document.addEventListener('click', (e) => {
+          if (
+            e.target.closest('[name="plus"]') ||
+            e.target.closest('[name="minus"]') ||
+            e.target.closest('.quantity__button')
+          ) {
+            triggerSync(900);
+          }
+        });
+
+        document.addEventListener('change', (e) => {
+          if (e.target.matches('.quantity__input') || e.target.matches('input[type="number"]')) {
+            triggerSync(900);
+          }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+          triggerSync(1000);
+        });
+
+        window.addEventListener('pageshow', (e) => {
+          if (e.persisted) triggerSync(1000);
+        });
+
+        document.addEventListener('click', (e) => {
+          if (e.target.closest('[data-cart-drawer-toggle]') || e.target.closest('.cart-link')) {
+            triggerSync(500);
+          }
+        });
+      })();
+    </script>
+
+    <script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
+  </body>
+</html>

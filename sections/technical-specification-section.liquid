@@ -1,0 +1,92 @@
+{{ 'technical-specification-section.css' | asset_url | stylesheet_tag }}
+
+{% if product.metafields.text.title !=  blank %} 
+<section id="section_bundle{{ section.id }}" class="tec-spe-section pt_90 pb_90 {% if product.handle == "sculpt-and-lift-facial-transformation-kit" or product.handle == "stickers-for-red-light-devices" %}mb_90{% endif %}">
+  <div class="page-width">
+    <div class="technical-wrp">
+      <div class="technical-tabel-block">
+       {% if product.metafields.text.title !=  blank %} 
+        <h2 class="main_title">{{ product.metafields.text.title }}</h2>
+        {% endif %} 
+        {% if product.metafields.tabel.content != blank %}
+        <div class="tec-tabel-wrp">
+          {{ product.metafields.tabel.content }}
+        </div>
+        {% endif %}
+      </div>
+      <div class="technical-img-block">
+        {% if product.metafields.img.img_block != blank %}
+        <figure>
+          <img src="{{ product.metafields.img.img_block}}" alt="{{ product.metafields.Image.alt }}" loading="lazy">
+        </figure>
+        {% endif %}
+        <div class="technical-img-wrp">
+          {% if product.metafields.img_block.img != blank %} 
+           <figure>
+             <img src="{{ product.metafields.img_block.img }}" loading="lazy" alt="">
+           </figure>
+          {% endif %}
+          {% if product.metafields.img.text-block != blank %}
+           <figcaption>{{ product.metafields.img.text-block }}</figcaption>
+          {% endif %} 
+        </div>
+        {% if product.metafields.product.buy_now != blank %}
+        {% assign bundle_product = all_products[product.metafields.product.buy_now.value] %}
+        <div class="technical-button_wrp">
+          {% comment %} <button class="common_btn" title="Buy" data-id="{{ bundle_product.selected_or_first_available_variant.id }}" >BUY NOW</button> {% endcomment %}
+          {% comment %} my code {% endcomment %}
+          <a href="https://metamorphosisredlighttherapy.com/cart/{{ bundle_product.selected_or_first_available_variant.id }}:1" {% if bundle_product.selected_or_first_available_variant.available == false %}disabled{% endif %}  class=" buy-it-now common_btn" data-cart="{{ bundle_product.selected_or_first_available_variant.id }}" {% if bundle_product.selected_or_first_available_variant.available == false %} disabled {% endif %}>
+            BUY NOW
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<script>
+  $(document).ready(function(){
+         $('#section_bundle{{ section.id }} .common_btn').click(function(event){
+         event.preventDefault();
+        let formData = {
+             'items': [{
+             'id': $(this).data('id'),
+             'quantity': 1
+             }]
+            };
+         fetch(window.Shopify.routes.root + 'cart/add.js', {
+             method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+           },
+             body: JSON.stringify(formData)
+            })
+            .then(response => {
+              return response.json();
+           })
+              .then(response => {
+                window.location.href = "/checkout";
+           })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+     });
+
+ });
+  
+</script>
+
+
+{% schema %}
+  {
+    "name": "Technical Section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Technical Section",
+      }
+    ]
+  }
+{% endschema %}

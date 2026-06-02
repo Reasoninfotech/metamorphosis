@@ -1,0 +1,25 @@
+.clinical-studie-section {background:#FAFAFA;}
+
+.clinical-studie-section .main_title{margin-bottom:48px;}
+
+.clinical-studie-section .clinical_studie_block{display:flex;flex-wrap:wrap;border-top: 0.5px solid #BDBDBD;border-left: 0.5px solid #BDBDBD;}
+.clinical-studie-section .clinical_studie_block .clinical_studie_row{width:33.33%;padding:32px;border-right: 0.5px solid #BDBDBD;border-bottom: 0.5px solid #BDBDBD;} 
+.clinical-studie-section .clinical_studie_block .clinical_studie_row .clinical_studie_row_wrp{display: flex;flex-direction: column;gap: 24px;}
+
+.clinical-studie-section .clinical_studie_row span{font-family:var(--argentum);color: #828282;font-size: 14px;line-height: normal;display: flex;flex-direction: column;gap: 24px;font-weight:300;}
+
+.clinical-studie-section .clinical_studie_row_title{margin: 0;font-size: 24px;font-weight: 500;line-height: normal;margin-top:8px;}
+.clinical-studie-section .clinical_studie_row_content p{margin:0;font-size:18px;line-height:normal;word-break:break-word;}
+
+.clinical-studie-section .clinical_studie_row_read{line-height:normal;margin-top:24px;}
+.clinical-studie-section .clinical_studie_row_read a{text-decoration: none;font-family: var(--argentum);font-size: 14px;color: #828282;font-weight: 400;}
+
+@media screen and (max-width:991px){
+  .clinical-studie-section .clinical_studie_block .clinical_studie_row a{width:100%;}
+}
+
+@media screen and (max-width:575px){
+  .clinical-studie-section .clinical_studie_block{row-gap:0;border-top:0.5px solid #BDBDBD;}
+  .clinical-studie-section .clinical_studie_block .clinical_studie_row{width:100%;border-top:0;margin:0;}
+
+}

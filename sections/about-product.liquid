@@ -1,0 +1,470 @@
+{% style %}
+  /* description read more */
+.ap_desc > *:not(:first-child) {
+  display: none;
+}
+
+
+.ap_desc.active > *:not(:first-child) {
+  display: block;
+}
+
+/* video */
+.ap_video_col {
+  position: relative;
+}
+.ap_sound_btn {
+  position: absolute;
+  top: 12px;
+  right: 7px;
+  display: flex;
+  cursor: pointer;
+}
+.ap_play_btn {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: flex;
+}
+
+.ap_sound_btn svg path {
+  fill: #fff;
+}
+
+.ap_play_btn.active .ap_pause,
+.ap_sound_btn.active .ap_sound_on {
+  display: inline !important;
+}
+.ap_play_btn.active .ap_play,
+.ap_sound_btn.active .ap_sound_off {
+  display: none !important;
+}
+
+/* layout */
+.ap_vd_col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* min-height: 717px; */
+  max-height: 720px;
+  overflow: hidden;
+  gap: 20px;
+}
+
+.ap_vd_col.active {
+  max-height: 100%;
+  overflow: unset;
+}
+
+.ap_video_col,
+.ap_video_inner,
+.ap_video_inner video {
+  height: 100%;
+}
+
+.ap_video_inner video {
+  object-fit: cover;
+}
+
+/* text area */
+.ap_vd_text {
+  /* padding: 96px 85px; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ap_vd_col .content{
+  text-align: left;
+    max-width: 565px;
+}
+.ap_logo {
+  margin-top: 40px;
+}
+
+.ap_desc {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ap_desc > * {
+  margin: 0;
+  /* line-height: 1.4;
+  font-size: 20px;
+  font-weight: 500; */
+
+  font-weight: 400;
+    font-size: 20px;
+    line-height: normal;
+    text-align: start;
+    color: #000;
+}
+
+/* alignment */
+.ap_vd_col.right .ap_vd_media {
+  order: 1;
+}
+
+/* image */
+.ap_image_wrap {
+  display: flex;
+  height: 100%;
+}
+.ap_image_wrap img {
+  /* height: 720px; */
+  height: 466px;
+  object-fit: cover;
+  width: 100%;
+}
+.ap_vd_col.active .ap_image_wrap img {
+  height: 100%;
+}
+.ap_vd_wrapper {
+  padding: 60px 0 0;
+}
+/* container */
+.ap_vd_full {
+  max-width: 1470px;
+  margin: auto;
+  width: 100%;
+  padding: 0 75px;
+}
+
+/* title */
+.ap_title {
+  margin:0;
+  margin-bottom: 24px;
+font-weight: 500;
+font-size: 30px;
+line-height: 30px;
+text-transform: uppercase;
+text-align: start;
+
+}
+.ap_read_more {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: #000;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+      font-family: var(--argentum);
+      font-weight: 400;
+    line-height: normal;
+    color: #828282;
+    padding:0;
+}
+.ap_read_more svg{
+  width:7px;
+  height: 7px;
+}
+/* responsive */
+@media (max-width: 1199px) {
+  .ap_vd_text {
+    /* padding: 76px 45px; */
+  }
+}
+
+@media (max-width: 991px) {
+.ap_vd_full {
+  padding: 0 25px;
+}
+  .ap_vd_col {
+    grid-template-columns: 1fr;
+    background-color: #fff !important;
+    max-height: 100%;
+    min-height: auto;
+    overflow: unset;
+  }
+
+  .ap_image_wrap img {
+    height: auto;
+  }
+
+  .ap_vd_text {
+    /* padding: 20px 45px 76px; */
+  }
+
+  .ap_vd_wrapper {
+    /* margin-bottom: 65px; */
+    padding: 50px 0 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .ap_vd_full {
+  padding: 0 15px;
+}
+  .ap_vd_text {
+    /* padding: 20px 46px 35px; */
+  }
+
+  .ap_desc > * {
+    /* font-size: 18px; */
+  }
+
+
+  .ap_vd_wrapper {
+    /* margin-bottom: 56px; */
+    padding: 40px 0 0;
+  }
+}
+
+@media (max-width: 575px) {
+
+  .ap_title {
+    margin-bottom: 16px;
+  }
+  .product_metamorphosis-magic-moon-eye-evolution .ap_title br{
+    display: none;
+  }
+
+  .ap_image_wrap img,
+  .ap_video_inner video {
+    min-height: 250px;
+  }
+
+  .ap_vd_text {
+    /* padding: 20px 20px 32px; */
+  }
+
+  .ap_logo {
+    margin-top: 30px;
+  }
+  
+}
+@media (max-width: 475px) {
+.ap_vd_col .content {
+    max-width: 380px;
+}
+}
+@media (max-width: 400px) {
+  .ap_title{
+    font-size: 26px;
+  }
+  .ap_title br{
+    display: none;
+  }
+  .ap_desc > * {
+    font-size: 18px;
+  }
+}
+
+
+
+{% endstyle %}
+{% if product.metafields.about_product_content.about_product_img != blank %}
+<div class="ap_vd_wrapper {% if section.settings.marginBottom %}ap_mb_90{% endif %}">
+  <div class="ap_vd_row {% if section.settings.container %}page-width{% else %}ap_vd_full{% endif %}">
+    <div class="ap_vd_col {{ section.settings.aligment }}" style="background-color: {{ section.settings.bgColor }};">
+      
+      <div class="ap_vd_media">
+
+        {% if section.settings.video_url != blank %}
+          <div class="ap_video_col">
+            <div class="ap_video_inner">
+              <video loop muted playsinline width="100%" height="100%">
+                <source src="{{ section.settings.video_url }}" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="ap_sound_btn">
+              <span class="ap_sound_off">🔇</span>
+              <span class="ap_sound_on" style="display:none;">🔊</span>
+            </div>
+
+            <div class="ap_play_btn">
+              <span class="ap_play">▶</span>
+              <span class="ap_pause" style="display:none;">⏸</span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if product.metafields.about_product_content.about_product_img != blank %}
+          <div class="ap_image_wrap">
+            <img
+              src="{{ product.metafields.about_product_content.about_product_img | image_url: width: 1200 }}"
+              alt="About product image"
+              loading="lazy"
+              width="1200"
+              height="800"
+            >
+          </div>
+        {% endif %}
+
+        {% comment %} {% if product.metafields.about_product_content.about_product_title != blank %}
+          <h2 class="ap_title">
+            {{ product.metafields.about_product_content.about_product_title }}
+          </h2>
+        {% endif %} {% endcomment %}
+      </div>
+
+      <div class="ap_vd_text">
+        <div class="content">
+          {% if product.metafields.about_product_content.about_product_title != blank %}
+            <h2 class="ap_title">
+              {{ product.metafields.about_product_content.about_product_title }}
+            </h2>
+          {% endif %}
+  
+          {% if product.metafields.about_product_content.about_product_desc != blank %}
+            <div class="ap_desc">
+              {{ product.metafields.about_product_content.about_product_desc }}
+            </div>
+          {% endif %}
+          <button class="ap_read_more">Read more <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+<path d="M3.52777 6.0059H2.47777V3.5559H-0.000234373V2.4499H2.47777V-0.000102043H3.52777V2.4499H5.99177V3.5559H3.52777V6.0059Z" fill="#828282"/>
+</svg></button>
+          {% if section.settings.showLogo %}
+            <div class="ap_logo">
+              <!-- your svg logo stays same -->
+            </div>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "About Product Image Video",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bgColor",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "marginBottom",
+      "label": "Spacing Bottom",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "container",
+      "label": "Container",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "showLogo",
+      "label": "Show Logo",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "aligment",
+      "label": "Media Alignment",
+      "options": [
+        { "label": "Left", "value": "left" },
+        { "label": "Right", "value": "right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Product Image Video"
+    }
+  ]
+}
+{% endschema %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".ap_sound_btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const video = this.closest(".ap_video_col").querySelector("video");
+      video.muted = !video.muted;
+
+      this.querySelector(".ap_sound_off").style.display = video.muted ? "inline" : "none";
+      this.querySelector(".ap_sound_on").style.display = video.muted ? "none" : "inline";
+    });
+  });
+
+  document.querySelectorAll(".ap_play_btn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const video = this.closest(".ap_video_col").querySelector("video");
+
+      if (video.paused) {
+        video.play();
+        this.querySelector(".ap_play").style.display = "none";
+        this.querySelector(".ap_pause").style.display = "inline";
+      } else {
+        video.pause();
+        this.querySelector(".ap_play").style.display = "inline";
+        this.querySelector(".ap_pause").style.display = "none";
+      }
+    });
+  });
+
+});
+</script>
+{% comment %} <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".ap_read_more").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const desc = this.previousElementSibling;
+
+      desc.classList.toggle("active");
+
+      this.html = desc.classList.contains("active")
+        ? "Read less"
+        : "Read more";
+    });
+  });
+
+});
+</script> {% endcomment %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll(".ap_read_more").forEach(btn => {
+
+    btn.addEventListener("click", function () {
+
+      const desc = this.previousElementSibling;
+      desc.classList.toggle("active");
+
+      if (desc.classList.contains("active")) {
+
+        // Read Less (Minus icon)
+        this.innerHTML = `
+          Read less
+          <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+  <path d="M0 3H6" stroke="#828282" stroke-width="1"/>
+</svg>
+
+        `;
+
+      } else {
+
+        // Read More (Plus icon)
+        this.innerHTML = `
+          Read more
+          <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+            <path d="M3.52777 6.0059H2.47777V3.5559H-0.000234373V2.4499H2.47777V-0.000102043H3.52777V2.4499H5.99177V3.5559H3.52777V6.0059Z" fill="#828282"/>
+          </svg>
+        `;
+
+      }
+
+    });
+
+  });
+
+});
+</script>

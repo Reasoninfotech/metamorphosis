@@ -1,0 +1,619 @@
+.search-activehtml {
+  scroll-behavior: smooth;
+body}
+
+bod{
+ overflow-y:hidden;
+}y{
+  background-color:#fff!important;
+  color:#000; 
+}
+
+figure{margin:0;}
+:root{
+    --cormorant:Cormorant;
+    --argentum:Argentum;
+}
+.mb_90 {
+  margin-bottom: 60px!important;
+} 
+.mt_90 {
+  margin-top: 60px!important;
+} 
+.pb_90 {
+  padding-bottom: 60px!important;
+} 
+.pt_90 {
+  padding-top: 60px!important;
+}
+
+.pt_50{
+  padding-top:50px;
+}
+
+.f-400{
+  font-weight:400!important;
+  color:#000;
+}
+.main_title {
+    text-align: center;
+    margin: 0;
+    font-size: 40px;
+    line-height: 1.3;
+    letter-spacing:0.5px;
+    font-family: var(--cormorant); 
+    font-weight:500;
+}
+.common_btn {
+    font-size: 14px;
+    line-height: 1.2;
+    color: #CA003D;
+    border: 1px solid #CA003D;
+    display: inline-block;
+    padding: 16px;
+    min-width: 400px;
+    text-align: center;
+    font-family: var(--argentum);
+    transition: .4s;
+    text-decoration:none; 
+    cursor: pointer;
+    font-weight:500;
+}
+.common_btn:hover {
+    background: #CA003D!important;
+    color: #fff;
+}
+.collapsible-content__separator .collapsible-content__item .collapsible-content__icon svg path {
+    fill: #000;
+}
+
+@media(max-width:1199px) {
+  .mb_90 {
+    margin-bottom: 55px!important;
+  } 
+  .mt_90 {
+    margin-top: 55px!important;
+  } 
+  .pb_90 {
+    padding-bottom: 55px!important;
+  } 
+  .pt_90 {
+    padding-top: 55px!important;
+  } 
+  .main_title {
+    font-size: 36px;
+}
+}
+@media(max-width:991px) {
+   .mb_90 {
+    margin-bottom: 50px!important;
+  } 
+  .mt_90 {
+    margin-top: 50px!important;
+  } 
+  .pb_90 {
+    padding-bottom: 50px!important;
+  } 
+  .pt_90 {
+    padding-top: 50px!important;
+  } 
+  .main_title {
+    font-size: 32px;
+}
+}
+@media(max-width:767px) {
+   .mb_90 {
+      margin-bottom: 40px!important;
+    } 
+    .mt_90 {
+      margin-top: 40px!important;
+    } 
+    .pb_90 {
+      padding-bottom: 40px!important;
+    } 
+    .pt_90 {
+      padding-top: 40px!important;
+    } 
+  .main_title {
+    font-size: 30px;
+}
+}
+@media(max-width:575px) {
+   .main_title {
+    font-size: 22px!important;
+ }
+}
+
+
+#shopify-section-template--18624292683989__newsletter,
+.newsletter_custom{padding:0!important;}
+
+.template-page-contact .content-for-layout--without-breadcrumbs,
+.template-page-about-us .content-for-layout--without-breadcrumbs,
+.template-page-affiliate .content-for-layout--without-breadcrumbs,
+.template-collection .content-for-layout--without-breadcrumbs{margin:0}
+
+.template-page-affiliate .content-for-layout .shopify-section:last-child:not(.image-collage-section):not(.contact-section):not(.shopify-section-video):not(.slideshow-section):not(.video-banner-section){
+  padding-bottom:0;
+}
+
+.template-page-contact .page-header{padding-bottom:0;}
+.template-page-contact .page_main_custom .rte{text-align: center;}
+.template-page-contact .page_section_wrp,
+.template-page-contact .contact{background:#FAFAFA;}
+
+.template-page .page_main_custom .rte p{line-height:normal;margin:12px 0;}
+
+.template-page .page_main_custom .rte ul{margin: 0;}
+.template-page .page_main_custom .rte ul li{padding-left: 0;margin: 0 0rem;line-height:normal;}
+
+.template-page .page_main_custom .rte a,
+.template-page-contact .page_main_custom .rte a{color: #ca003d;font-size:16px;line-height:normal;}
+
+body.search-active{
+ overflow-y:hidden;
+}
+/* body.search_input-wrp{
+  display:none;
+}
+ */
+
+.product_sculpt-and-lift-facial-transformation-kit .section_template--18624293109973__service_icon_hEBpVU,
+.product_stickers-for-red-light-devices .section_template--18624293109973__service_icon_hEBpVU{
+  display:none;
+} 
+
+.oke-reviewCarousel-header .oke-reviewCarousel-header-title.oke-title{
+  font-size: 40px!important;
+  line-height: 1.3!important;
+  letter-spacing: 0.5px!important;
+  font-family: var(--cormorant)!important;
+  font-weight: 500!important;
+  text-transform: uppercase;
+}
+
+@media(max-width:991px) {
+  .oke-reviewCarousel-header .oke-reviewCarousel-header-title.oke-title{
+  font-size: 32px!important;
+}
+}
+
+@media(max-width:991px) {
+  .oke-reviewCarousel-header .oke-reviewCarousel-header-title.oke-title{
+    font-size: 30px!important;
+  }
+}
+
+@media(max-width:575px) {
+  .oke-reviewCarousel-header .oke-reviewCarousel-header-title.oke-title{
+    font-size: 26px!important;
+  }
+}
+
+.announcement-bar__message{padding: 1rem 0;text-decoration: none;}
+
+.announcement_Swiper .swiper-wrapper{
+  align-items:center;
+}
+
+@media screen and (max-width:575px){
+  .announcement-bar__text{font-size:12px;}
+}
+
+@media screen and (max-width:430px){
+  .announcement-bar__text{font-size:10px;}
+}
+
+.template-404 predictive-search{display:none;}
+.template-404 .main-page-title{text-align:center;}
+
+ .btn_404_wrp{margin-top:30px;}
+.btn_404_wrp .common_btn{min-width:auto;}
+
+.home-collection-grid .products-grid__text{
+  margin-bottom: 0;
+  text-align:center;
+  padding: 0 15px;
+}
+
+.home-collection-grid .product_list_button{text-align:center;padding-top:48px;}
+.home-collection-grid .product_list_button .common_btn{min-width:280px;background: transparent;color: #CA003D;}
+.home-collection-grid .product_list_button .common_btn:hover{color: #fff;background: #CA003D !important;}
+
+
+@media screen and (max-width:1440px){
+  .home-collection-grid .container{padding: 0px;}
+}
+
+@media screen and (max-width:1399px){
+  .home-collection-grid .product_list_button{text-align:center;padding-top:40px;}
+}
+
+@media screen and (max-width:991px){
+  .home-collection-grid .product_list_button{text-align:center;padding-top:32px;}
+  .home-collection-grid .container{padding: 0 15px;}
+  
+}
+@media screen and (min-width: 990px) {
+    .home-collection-grid .products-grid__products {
+        margin-top: 4.4rem;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+ .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 61%;}
+ .home-collection-grid.mobile_hide{display:none;}
+}
+
+
+@media screen and (max-width: 575px) {
+ .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 59%;}
+
+ .home-collection-grid .product_list_button{padding-top: 16px;}
+ .home-collection-grid .products-grid__text{max-width: 280px;font-size: 18px;line-height: 18px;margin: 4px auto 0;}
+ .products-grid__products{margin-top: 16px;}
+}
+
+
+@media screen and (max-width: 424px) {
+ .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 57%;}
+ .product_morphoglow .product-plumper-slider-section .swiper-pagination{bottom: 53%;}
+ .home-collection-grid .products-grid__text{font-size: 16px;}
+}
+
+
+@media screen and (max-width: 389px) {
+ .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 54%;}
+}
+
+
+/* ======================== */
+
+.article-template .article-template__content h1,
+.article-template .article-template__content h2,
+.article-template .article-template__content h3,
+.article-template .article-template__content h4,
+.article-template .article-template__content h5,
+.article-template .article-template__content h6{margin: 0;font-size: 40px;line-height: 1.3;letter-spacing:0.5px;font-family: var(--cormorant);font-weight:400;}
+
+@media(max-width:1199px) {
+.article-template .article-template__content h1,
+.article-template .article-template__content h2,
+.article-template .article-template__content h3,
+.article-template .article-template__content h4,
+.article-template .article-template__content h5,
+.article-template .article-template__content h6{font-size: 36px;}
+}
+
+@media(max-width:991px) {
+.article-template .article-template__content h1,
+.article-template .article-template__content h2,
+.article-template .article-template__content h3,
+.article-template .article-template__content h4,
+.article-template .article-template__content h5,
+.article-template .article-template__content h6{font-size: 32px;}
+}
+
+@media(max-width:767px) {
+.article-template .article-template__content h1,
+.article-template .article-template__content h2,
+.article-template .article-template__content h3,
+.article-template .article-template__content h4,
+.article-template .article-template__content h5,
+.article-template .article-template__content h6{font-size: 30px;}
+}
+
+@media(max-width:575px) {
+.article-template .article-template__content h1,
+.article-template .article-template__content h2,
+.article-template .article-template__content h3,
+.article-template .article-template__content h4,
+.article-template .article-template__content h5,
+.article-template .article-template__content h6{font-size: 26px;}
+}
+
+
+.article-template .article-template__content img{margin-top: 2rem;margin-bottom: 2rem;}
+.article-template .article-template__info{margin-bottom:4rem!important;}
+
+
+
+.product_hydrogel-face-star .section_template--19210539434197__service_icon_hEBpVU,
+.product_hydrogel-pink-lip .section_template--19210539434197__service_icon_hEBpVU,
+.product_hydrogel-eye-star .section_template--19210539434197__service_icon_hEBpVU,
+.product_skinexcellence-exosome-serum .section_template--19210539434197__service_icon_hEBpVU{
+  display: none;
+}
+
+.product_skinexcellence-exosome-serum .section_template--19503508553941__product_service_icon_MJNa3n{display: none;}
+/* 
+.product_skinexcellence-exosome-serum #shopify-section-template--19210539434197__cosmoprof_awards_section_WcKzBg,
+.product_rubyradiance-rejuvenator #shopify-section-template--19210539434197__cosmoprof_awards_section_WcKzBg{
+  display: none;
+} */
+
+@media screen and (max-width:767px){
+.product_skinexcellence-exosome-serum .pulmber_other_text{
+  max-width: 270px!important;
+}
+
+.product_skinexcellence-exosome-serum .product-plumper-slider-section .swiper-pagination{
+  bottom: 62%;
+}
+  
+}
+
+@media screen and (max-width:468px){
+
+.product_skinexcellence-exosome-serum .product-plumper-slider-section .swiper-pagination{
+  bottom: 59%;
+}
+  
+}
+
+@media screen and (max-width:389px){
+
+.product_skinexcellence-exosome-serum .product-plumper-slider-section .swiper-pagination{
+  bottom: 54%;
+}
+  
+}
+
+
+.product-media-modal__content img:nth-child(1){
+  display: none;
+}
+
+.product_hydrogel-pink-lip #shopify-section-template--19503508521173__service_icon_hEBpVU,
+.product_hydrogel-face-star #shopify-section-template--19503508521173__service_icon_hEBpVU, 
+.product_hydrogel-eye-star #shopify-section-template--19503508521173__service_icon_hEBpVU{display: none;}
+
+
+.product_skinexcellence-exosome-serum .tec-spe-section .technical-tabel-block .specification-detail span br,
+.product_skinexcellence-exosome-serum .tec-spe-section .technical-tabel-block .specification-detail p br{display: block!important;}
+
+
+/* subscribe-and-save */
+.template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons{flex-wrap: wrap !important;}
+.template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-parameters{order: 1;max-width: 226px !important;}
+.template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-form__submit{order:2;width: calc(100% - 246px) !important;}
+.template-product-subscribe-and-save product-form.cus_product_form .appstle_widget_title,
+.template-product-subscribe-and-save .product__info-wrapper #appstle_subscription_widget0 .appstle_select_label,
+.template-product-subscribe-and-save .product__info-wrapper .appstle-save-badge,
+.template-product-subscribe-and-save .product__info-wrapper .appstle_subscription_compare_amount,
+.template-product-subscribe-and-save product-form.cus_product_form .appstle-tootltip-parent{display: none !important;}
+.template-product-subscribe-and-save .product__info-wrapper #appstle_subscription_widget0,
+.template-product-subscribe-and-save .product__info-wrapper .main_pr0_buyButton,
+.template-product-subscribe-and-save .product__info-wrapper .product__info-container .price-wrapper{margin: 0px !important;}
+.template-product-subscribe-and-save .product__info-wrapper #appstle_subscription_widget0 .appstle_subscription_wrapper{display: flex;flex-direction: column-reverse;}
+.template-product-subscribe-and-save .product__info-wrapper .main_pr0_buyButton .product-form__buttons{gap: 20px;}
+.template-product-subscribe-and-save .product__info-wrapper #appstle_subscription_widget0 .appstle_subscription_wrapper_option{padding: 24px !important;border: 1px solid #828282; border-radius: 0px;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_one_time_text,
+.template-product-subscribe-and-save .product__info-wrapper .appstle_subscribe_save_text{font-family: var(--font-heading-card-family);font-weight: 500;font-size: 20px;line-height: 30px;text-transform: uppercase;color: #101B13;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_one_time_price_wrapper,
+.template-product-subscribe-and-save .product__info-wrapper .appstle_subscription_amount_wrapper{font-family: var(--font-heading-card-family);font-weight: 700;font-size: 24px;line-height: 100%;vertical-align: middle;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_subscription_amount{color: var(--atlas-text-negative) !important;}
+.template-product-subscribe-and-save .product__info-wrapper #appstle_subscription_widget0 .appstle_subscription_wrapper{border-radius: 0px !important;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_subscribe_option_grid{display: flex;flex-direction: column-reverse;}
+.template-product-subscribe-and-save .product__info-wrapper .appstleSelectedSellingPlanOptionDescription{margin-top: 0;word-wrap: break-word;font-family: var(--argentum);font-weight: 400;font-size: 14px !important;line-height: normal;color: #828282;}
+.template-product-subscribe-and-save .product__info-wrapper .appstleSelectedSellingPlanOptionDescription p{margin: 8px 0px;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_custom_select{max-width: 100% !important;}
+.template-product-subscribe-and-save .product__info-wrapper #appstle_selling_plan0{border-width: 0px 0px 1px 0px !important;border-radius: 0px !important;border-color: #BDBDBD !important;font-family: var(--font-heading-card-family);font-weight: 500;font-size: 18px;line-height: 100%;padding: 8px 0px !important;}
+.template-product-subscribe-and-save .product__info-wrapper .appstle_custom_select:before{width: 10px !important;height: 16px !important;background-image: url(https://cdn.shopify.com/s/files/1/0693/9849/5445/files/arrow.png?v=1752237391);
+    background-size: contain;background-repeat: no-repeat;border: 0px !important;right: 10px;top: calc(50% - 7px);transform: unset;pointer-events: none;}
+.template-product-subscribe-and-save .product__info-wrapper .appstleSelectedSellingPlanOptionDescription ul{padding-left: 15px;}
+
+@media (max-width: 991px) {
+  .template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-parameters {max-width: 150px !important;}
+  .template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-form__submit{width: calc(100% - 170px) !important;min-width: auto;}
+}
+
+@media (max-width: 575px) {
+  .template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-parameters {max-width: 100px !important;}
+  .template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .product-form__submit{width: calc(100% - 120px) !important;min-width: auto;}
+  .template-product-subscribe-and-save product-form.cus_product_form .product-form__buttons .quantity__button {width: 3rem;}
+}
+
+/* END subscribe-and-save */
+
+.product_rubyradiance-rejuvenator #shopify-section-template--19503508521173__171800536627f40222,
+.product_ultimate-glow-kit #shopify-section-template--19503508521173__171800536627f40222{display: none;}
+
+.product_morphoglow #shopify-section-template--19503508521173__171800536627f40222{display: none;}
+
+.product_morphoglow .feature-testimonials-section{display: none;}
+
+.product_morphoglow .plumper-slider .plumper-slider-block .pulmber_other_text{max-width: 300px;}
+
+
+
+/* custome video */
+
+.template-page-exosome .content-for-layout--without-breadcrumbs{
+  margin: 0;
+}
+
+.template-product-subscribe-and-save .section_template--20373157019861__product_service_icon_MJNa3n{display: none;}
+
+/* Black Friday changes */
+
+.product .price--on-sale .price-item--regular {font-size: 28px!important;color: #000!important;text-decoration-color: #000!important;}
+.product .price__sale dd{margin-left: 0px!important;}
+.product .price--on-sale .price-item--sale{font-size: 30px!important;}
+
+.dicoount_badge{position: absolute;top: 0;right: 24px;z-index: 2;}
+.dicoount_badge img{
+  /* width: 75px;
+  height: 85px; */
+  width: 61px;
+  height: 70px;
+  object-fit: contain;
+}
+
+
+.price--on-sale .price-item--sale{font-size: 24px !important;color: #ca003d!important;}
+
+.bf_black_bar{display: flex;align-items: center;gap: 8px;background: #5FA900;color: #fff;padding: 4px 8px;width: 100%;max-width: fit-content;margin: 0 auto 10px;}
+.bf_black_bar img{width: 100%;vertical-align: middle;max-width: 12px;flex-shrink: 0;}
+.bf_black_bar .bf_text_block{text-transform: uppercase;font-family: var(--argentum);font-weight: 300;font-size: 10px;line-height: 16px;margin-top: 2px;letter-spacing: 1px;text-align: left;}
+
+.product__info-container .bf_black_bar,
+.card-information__wrapper .bf_black_bar{margin: 0;margin-bottom: 10px;}
+
+.product__info-container .bf_black_bar{padding: 6px 8px;}
+.product__info-container .bf_black_bar .bf_text_block{font-size: 13px;line-height: 16px;}
+
+.skin_pro_title_wrp .bf_black_bar .bf_text_block{font-size: 8px;}
+
+@media (max-width: 575px){
+  .bf_black_bar .bf_text_block{font-size: 8px;letter-spacing: 0;font-weight: 500;}
+  .product__info-container .bf_black_bar {max-width: 330px;padding: 6px 8px;}
+  .product__info-container .bf_black_bar img {max-width: 14px;}
+  .product__info-container .bf_black_bar .bf_text_block{font-size: 12px;line-height: 16px;}
+  .dicoount_badge img{
+    width: 40px;
+    height: 45px;
+  }
+
+}
+
+.product_absorbable-bio-collagen-eye-masks #shopify-section-template--20373156987093__171800536627f40222.spaced-section{display: none!important;}
+
+.search_popup_close{position: absolute;right: 15px;max-width: 3rem;padding: 7px;min-width: 3rem;max-width: 3rem;height: 3rem;}
+.oke-reviewContent-date{display: none;}
+
+/* gift card Css  */
+
+.template-product-giftcard .collapsible-content{background: transparent;}
+
+.template-product-giftcard .product-form__group-name{font-weight: 300;}
+
+.template-product-giftcard .product-form__controls-group{gap: 8px;margin: 0;justify-content: end;}
+
+.template-product-giftcard .product-form__controls-group label{margin-left: 0;margin-top: 0;border: 1px solid #828282;width: calc(33.33% - 5.33px);padding: 8px 16px;justify-content: space-between;font-size: 18px;font-weight: 700;}
+
+.radio_circle{position: relative;display: flex;height: 18px;width: 18px;border: 2px solid #3a3a3a;border-radius: 50%;margin-right: 10px;justify-content: center;align-items: center;flex-shrink: 0;border-color: #000!important;}
+.radio_circle .radio_dot{height: 10px;width: 10px;transform: scale(0);background-color: #3a3a3a;border-radius: 50%;flex-shrink: 0;transition: all 0.2s;}
+.product-form__controls-group input[type=radio]:checked + label .radio_circle .radio_dot{transform: scale(1);}
+
+.template-product-giftcard .product-parameters{margin-bottom: 25px;}
+
+.template-product-giftcard .buy-it-now.button{display: none;}
+
+.template-product-giftcard .product-form__submit{background: #c5003e;color: #fff;}
+.template-product-giftcard .product-form__submit:hover{background: transparent;color: #c5003e;}
+
+@media (max-width: 767px){
+  .template-product-giftcard .product-form__controls-group label{font-size: 16px;padding: 8px 8px;height: 38px;}
+}
+
+@media (max-width: 374px){
+   .template-product-giftcard .product-form__controls-group label{width: calc(50% - 4px);}
+}
+
+
+/* ------------------ Silicone Patch Collection */
+
+
+.template-product-silicone-patch-collection .product_dis_in span#pro_read_dis{display: none!important;}
+.template-product-silicone-patch-collection .product_dis_in.moreHeight>*:first-child{height: auto!important;}
+
+.template-product-silicone-patch-collection .product-form__controls-group{flex-direction: column;gap: 8px;align-items: normal;}
+.template-product-silicone-patch-collection .product-form__controls-group label{width: 100%;justify-content: start;border-color: #828282!important;}
+
+.template-product-silicone-patch-collection .variant_value{display: flex;align-items: center;margin: 0;width: 100%;justify-content: space-between;font-size: 18px;font-weight: 600;line-height: 22px;gap: 10px;}
+.template-product-silicone-patch-collection .value_price{margin: 0;flex-shrink: 0;}
+
+.template-product-silicone-patch-collection  .product-parameters {margin-bottom: 0;}
+@media (max-width: 1024px){
+  .template-product-silicone-patch-collection .variant_value {font-size: 16px;}
+    .template-product-silicone-patch-collection .product-form__controls-group label {height: auto;padding: 8px 16px;}
+}
+
+@media(max-width: 767px){
+  
+  .template-product-silicone-patch-collection .plumper_text_block .content_title{display: none;}
+
+}
+
+@media(max-width: 575px){
+
+  .start_your_metamorphosis_today .exosome_werp{gap: 0!important;}
+
+  .start_your_metamorphosis_today .exosome-text{padding: 5px 0 5px 5px!important;gap: 16px!important;}
+  .start_your_metamorphosis_today .exosome-text h2{font-size: 18px !important;}
+
+  .start_your_metamorphosis_today .exosome-text{
+    width: 55%!important;
+  }
+  .start_your_metamorphosis_today .exosome-img {
+    width: 45%!important;
+  }
+
+}
+
+@media(max-width: 429px){
+  .start_your_metamorphosis_today .exosome_werp{gap: 10px!important;} 
+  .start_your_metamorphosis_today .exosome-text{padding: 10px 0 0 5px!important;}
+
+  .start_your_metamorphosis_today .exosome-text,
+  .start_your_metamorphosis_today .exosome-img {
+    width: 100%!important;
+  }
+}
+
+/* ------------------ Silicone Patch Collection */
+
+.template-product-silicone-patch-collection .metafield-rich_text_field ol {
+  margin:0 !important;
+}
+
+.okeReviews[data-oke-container] .oke-reviewContent-title, div.okeReviews .oke-reviewContent-title {
+    font-family: var(--argentum) !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    line-height: 100% !important;
+    color: #000000;
+}
+
+
+
+
+
+/* home klaviyo popup */
+.kl-private-reset-css-Xuajs1 input{
+  border: none !important;
+  border-bottom: 1px solid #BDBDBD !important;
+}
+.kl-private-reset-css-Xuajs1 h1{
+      max-width: 300px;
+      margin: auto !important;
+}
+
+.kl-private-reset-css-Xuajs1 button.kl-private-reset-css-Xuajs1.go1126593629 {
+  padding: 0 60px !important
+}
+
+@media(max-width: 749px){
+  .kl-private-reset-css-Xuajs1 h1{
+      max-width: 250px;
+}
+}
+
+.icon-btn,
+button[aria-label],
+.social-links a,
+.header__icon,
+.cart-count-bubble,
+[class*="icon-btn"],
+.social-link,
+.nav-arrow,
+button[class*="icon"],
+.stiky_btn_inner {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

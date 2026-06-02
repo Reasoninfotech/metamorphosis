@@ -1,0 +1,1275 @@
+<div class="video_loop {% if section.settings.padding_top == true %}pt_90 {% endif %}{% if section.settings.padding_bottom == true %}pb_90 {% endif %}">
+  <div class="page-width product__body-wrap ">
+      <div class="video_loop_title">
+        {% if section.settings.title != blank %}
+          <h2 class="main_title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.content != blank %}
+         <span class="f-400">{{ section.settings.content }}</span>
+        {% endif %}  
+      </div>
+      <div class="video_loop_slider swiper-container">
+        <div class="video_loop_row swiper-wrapper">
+          {% for block in section.blocks %}
+            <div class="video_loop_col swiper-slide" data-index="{{ forloop.index }}" >
+              {% if block.settings.video != blank %}
+                <div class="video_loop_inner">
+                  <video control="false" loop="true" autoplay muted width="100%" height="100%" poster="{{ block.settings.image | img_url : "master" }}" alt="{{ block.settings.image.alt }}">
+                    <source type="video/mp4" src="{{ block.settings.video }}">
+                  </video>
+                </div>
+              {% endif %}
+              <div class="video_sound_button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="sound_off"
+                >
+                  <g clip-path="url(#clip0_15_183)">
+                  <rect width="24" height="24"/>
+                  <path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.5 15L20.5 9" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.5 9L20.5 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_15_183">
+                  <rect width="24" height="24"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="sound_on"
+                  style="display:none;"
+                >
+                  <g clip-path="url(#clip0_15_174)">
+                  <rect width="24" height="24"/>
+                  <path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M13 9C13 9 15 9.5 15 12C15 14.5 13 15 13 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M15 7C15 7 18 7.83333 18 12C18 16.1667 15 17 15 17" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17 5C17 5 21 6.16667 21 12C21 17.8333 17 19 17 19" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_15_174">
+                  <rect width="24" height="24"/>
+                  </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div class="video_play_push_button">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  class="push_on"
+                  style="display:none;"
+                >
+                  <path d="M8 5V19M16 5V19" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35px"
+                  height="35px"
+                  viewBox="0 0 256 256"
+                  class="play_on"
+                >
+                  <path d="M59 61.922c0-9.768 13.016-15.432 22.352-11.615 10.695 7.017 101.643 58.238 109.869 65.076 8.226 6.838 10.585 17.695-.559 25.77-11.143 8.074-99.712 60.203-109.31 64.73-9.6 4.526-21.952-1.632-22.352-13.088-.4-11.456 0-121.106 0-130.873zm13.437 8.48c0 2.494-.076 112.852-.216 115.122-.23 3.723 3 7.464 7.5 5.245 4.5-2.22 97.522-57.704 101.216-59.141 3.695-1.438 3.45-5.1 0-7.388C177.488 121.952 82.77 67.76 80 65.38c-2.77-2.381-7.563 1.193-7.563 5.023z" stroke="#fff" fill="#fff" fill-rule="evenodd"/>
+                </svg>
+              </div>
+              {% if block.settings.title != blank %}
+                <div class="video_loop_V-title">
+                  <h3>{{ block.settings.title }}</h3>
+                </div>
+              {% endif %}
+            </div>
+
+          {% endfor %}
+        </div>
+
+        <div class="video_swiper_btn swiper-button-next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+            <path d="M24.1235 27.2948L23.1444 27.2948C24.2532 24.279 25.8186 21.5924 27.7447 19.3994C29.6708 17.2065 31.9171 15.5533 34.3462 14.5412L0 14.5412V13.3818L34.3462 13.3818C31.9155 12.3711 29.6675 10.7186 27.7398 8.52554C25.8121 6.33252 24.2454 3.64517 23.1356 0.628174L24.1235 0.628174C25.6228 4.46637 27.8978 7.68725 30.6986 9.93712C33.4994 12.187 36.7176 13.3788 40 13.3818V14.5412C36.7176 14.5442 33.4994 15.736 30.6986 17.9859C27.8978 20.2358 25.6228 23.4566 24.1235 27.2948Z" fill="#000"></path>
+          </svg>
+        </div>
+        <div class="video_swiper_btn swiper-button-prev">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+            <path d="M15.8765 0.628004L16.8556 0.628004C15.7468 3.64384 14.1814 6.33048 12.2553 8.52343C10.3292 10.7164 8.08286 12.3695 5.6538 13.3816L40 13.3816V14.5411L5.6538 14.5411C8.08447 15.5518 10.3325 17.2043 12.2602 19.3973C14.1879 21.5903 15.7546 24.2777 16.8644 27.2947L15.8765 27.2947C14.3772 23.4565 12.1022 20.2356 9.30141 17.9857C6.50063 15.7359 3.28236 14.544 0 14.5411L0 13.3816C3.28236 13.3787 6.50063 12.1868 9.30141 9.93695C12.1022 7.68708 14.3772 4.4662 15.8765 0.628004Z" fill="#000"></path>
+          </svg>
+        </div>
+
+         <div class="video_loop_swiper_dot">
+           <div class="swiper-pagination"></div>
+         </div>
+
+      </div>
+
+     {% if section.settings.button_link != blank or section.settings.btn_text != blank %}
+      <div class="cus_button-wrp">
+        <a class="button--primary common_btn" href="{{ section.settings.button_link }}">{{ section.settings.btn_text }}</a>
+      </div>
+    {% endif %}
+                    
+  </div>
+</div>
+
+{% for block in section.blocks %}
+<div class="video_loop_popup_block" data-index="{{ forloop.index }}">
+  <div class="page-width">
+    <div class="video_loop_wrp">
+
+        <div class="video_popup_close">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+            <line x1="0.353553" y1="0.3536" x2="16.3535" y2="16.3535" stroke="black"/>
+            <line x1="16.3536" y1="1.06071" x2="0.353646" y2="17.0606" stroke="black"/>
+          </svg>
+        </div>
+
+        <div class="popup_video_block">
+            {% if block.settings.video != blank %}
+              <div class="video_loop_inner">
+                <video control="false" loop="true" autoplay muted width="100%" height="100%" poster="{{ block.settings.image | img_url : "master" }}" alt="{{ block.settings.image.alt }}">
+                  <source type="video/mp4" src="{{ block.settings.video }}">
+                </video>
+              </div>
+            {% endif %}
+            <div class="video_sound_button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none" class="sound_off" > <g clip-path="url(#clip0_15_183)"> <rect width="24" height="24"/> <path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14.5 15L20.5 9" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14.5 9L20.5 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/> </g> <defs> <clipPath id="clip0_15_183"> <rect width="24" height="24"/></clipPath></defs> </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none" class="sound_on" style="display:none;"><g clip-path="url(#clip0_15_174)"><rect width="24" height="24"/><path d="M3 16V8H6L11 4V20L6 16H3Z" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 9C13 9 15 9.5 15 12C15 14.5 13 15 13 15" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7C15 7 18 7.83333 18 12C18 16.1667 15 17 15 17" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 5C17 5 21 6.16667 21 12C21 17.8333 17 19 17 19" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"/></g><defs><clipPath id="clip0_15_174"> <rect width="24" height="24"/> </clipPath></defs> </svg>
+            </div>
+            <div class="video_play_push_button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 24 24" fill="none" class="push_on" style="display:none;"><path d="M8 5V19M16 5V19" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="35px" height="35px" viewBox="0 0 256 256" class="play_on"><path d="M59 61.922c0-9.768 13.016-15.432 22.352-11.615 10.695 7.017 101.643 58.238 109.869 65.076 8.226 6.838 10.585 17.695-.559 25.77-11.143 8.074-99.712 60.203-109.31 64.73-9.6 4.526-21.952-1.632-22.352-13.088-.4-11.456 0-121.106 0-130.873zm13.437 8.48c0 2.494-.076 112.852-.216 115.122-.23 3.723 3 7.464 7.5 5.245 4.5-2.22 97.522-57.704 101.216-59.141 3.695-1.438 3.45-5.1 0-7.388C177.488 121.952 82.77 67.76 80 65.38c-2.77-2.381-7.563 1.193-7.563 5.023z" stroke="#fff" fill="#fff" fill-rule="evenodd"/></svg>
+            </div>
+        </div>
+        {% assign videoproduct = block.settings.product %}
+        {% if videoproduct != blank %}
+          <div class="popup_product_block">
+              <figure class="video_product_img">
+                  <img src="{{ videoproduct.media[1] | img_url : "master" }}" loading="lazy"> 
+              </figure>
+
+              <div class="video_popup_content_row">
+              <figcaption>
+                <div class="video_product_sub_text">{{ block.settings.sub_text }}</div>
+                <h4 class="video_product_title">
+                  {% if block.settings.product_title != blank %}
+                  {{ block.settings.product_title }}
+                  {% else %}
+                    {{ videoproduct.title }}
+                  {% endif %}
+                </h4>
+                <div class="review_block">
+                  {% render 'okendo-reviews-product-rating-summary', product: videoproduct %}
+                </div>
+                <span class="video_product_price">{{ videoproduct.price | money }}</span>
+              </figcaption>
+
+              
+                {% comment %} {% if block.settings.product_btn_url != blank %}
+                  <div class="video_product_button"> 
+                    <a href="{{ block.settings.product_btn_url }}" class="common_btn">{{ block.settings.product_btn }}</a>
+                  </div>
+                {% endif %} {% endcomment %}
+
+                <div class="video_product_button"> 
+                 {%- liquid assign gift_card_recipient_feature_active = false 
+                    if videoproduct.gift_card? 
+                    assign gift_card_recipient_feature_active = true 
+                    endif 
+                    assign show_dynamic_checkout = false 
+                    if gift_card_recipient_feature_active == false 
+                    assign show_dynamic_checkout = true 
+                    endif 
+                -%}
+                <product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+                  <div class="product-form__error-message-wrapper" role="alert" hidden>
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13" >
+                      <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/></circle>
+                      <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/></circle>
+                      <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></path>
+                      <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>                                                                                                                                                                                                                                                                                                                                                                                                                                              
+                    </svg>
+                    <span class="product-form__error-message"></span>
+                  </div>
+                  {%- assign product_form_id = 'product-form-' | append: section.id -%}      
+                  {%- form 'product',
+                    videoproduct,
+                    id: product_form_id,
+                    class: 'form',
+                    novalidate: 'novalidate',
+                    data-type: 'add-to-cart-form'
+                  -%}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ videoproduct.selected_or_first_available_variant.id }}"
+                      disabled
+                    >
+
+                    <div class="product-form__buttons" style="margin:0;">
+                      <button
+                        id="ProductSubmitButton-{{ section.id }}"
+                        type="submit"
+                        name="add"
+                        class="product-form__submit common_btn product-section__button button--primary-size button--arrow button--primary"
+                        
+                          {% if block.settings.show_dynamic_checkout and videoproduct.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}
+                        
+                        {% if videoproduct.selected_or_first_available_variant.available == false %}
+                          disabled
+                        {% endif %}
+                      >
+                        {%- if videoproduct.selected_or_first_available_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      </button>
+                    </div>
+                  {%- endform -%}
+              </product-form>
+              </div>
+
+                
+
+
+
+              </div>
+
+          </div>
+        {% endif %}
+
+    </div>
+   </div> 
+</div>
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Video Loop",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "padding_top",
+      "label": "Padding Top",
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+    },
+    {
+      "type":"text",
+      "id":"title",
+      "label":"Title"
+    },
+    {
+      "type": "html",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Shop the CERA System"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type":"video",
+      "name":"Video",
+      "settings": [
+        {
+          "type":"image_picker",
+          "id":"image",
+          "label":"Image"
+        },
+        {
+          "type":"textarea",
+          "id":"video",
+          "label":"Video URL"
+        },
+        {
+          "type":"text",
+          "id":"title",
+          "label":"Title"
+        },
+        {
+         "type": "product",
+         "id": "product",
+         "label": "Product"
+        },
+        {
+         "type": "richtext",
+         "id": "sub_text",
+         "label": "Product Sub text"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Product Title"
+        },
+        {
+          "type": "text",
+          "id": "product_btn",
+          "label": "Product Button Text",
+          "default": "VIEW DEVICE"
+        },
+        {
+          "type": "url",
+          "id": "product_btn_url",
+          "label": "Product Button Url"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name":"Video Loop"
+    }
+  ]
+}
+{% endschema %}
+
+
+  <script>
+  {% comment %} document.addEventListener("DOMContentLoaded", function() {
+    var Swipes = new Swiper('.video_loop_slider', {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1.5,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            991: {
+              slidesPerView: 4,
+              spaceBetween: 20
+            },
+            575: {
+              slidesPerView: 2.5,
+              spaceBetween: 15
+            },
+            420: {
+              slidesPerView: 1.7,
+              spaceBetween: 10
+            }
+        }
+    });
+
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.setAttribute('playsinline', '');
+        });
+    }
+    
+    $(document).ready(function(){
+
+      $('.video_sound_button').on('click', function() {
+        const $this = $(this);
+        const $videoLoopCol = $this.closest('.video_loop_col');
+        const $video = $videoLoopCol.find('video').get(0);
+        if ($video.muted) {
+          $('video').each(function() {
+            this.muted = true;
+            $(this).closest('.video_loop_col').find('.video_sound_button')
+              .removeClass('active');
+          });
+          $video.muted = false;
+          $this.addClass('active');
+        } 
+        else {
+          $video.muted = true;
+          $this.removeClass('active');
+        }
+      });
+
+
+      $('.video_play_push_button').on('click', function() {
+        $(this).toggleClass("active");
+        const videoLoopCol = $(this).closest('.video_loop_col');
+        const video = videoLoopCol.find('video');
+        if (video.get(0).paused) {
+          video.get(0).play();
+        } else {
+          video.get(0).pause();
+        }
+      });
+
+    });
+
+     $('.video_loop_col').on('click', function(e) {
+
+          if ($(e.target).closest('.video_sound_button').length ||
+              $(e.target).closest('.video_play_push_button').length) {
+              return;
+          }
+
+          let index = $(this).data('index');
+          console.log('index', index);
+
+          $('.video_loop_popup_block').hide();
+
+          $('.video_loop_popup_block[data-index="' + index + '"]').fadeIn(200);
+      });
+
+    $('.video_loop_popup_block').on('click', function(e){
+        if (!$(e.target).closest('.popup_video_block, .popup_product_block').length){
+            $('.video_loop_popup_block').hide();
+        }
+    });
+
+
+  }); {% endcomment %}
+
+
+  {% comment %} document.addEventListener("DOMContentLoaded", function() {
+    var Swipes = new Swiper('.video_loop_slider', {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1.5,
+        loopFillGroupWithBlank: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            991: {
+              slidesPerView: 4,
+              spaceBetween: 20
+            },
+            575: {
+              slidesPerView: 2.5,
+              spaceBetween: 15
+            },
+            420: {
+              slidesPerView: 1.7,
+              spaceBetween: 10
+            }
+        }
+    });
+
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.setAttribute('playsinline', '');
+        });
+    }
+
+    $(document).ready(function(){
+
+        $('.video_loop_col .video_sound_button').on('click', function(e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.video_loop_col').find('video').get(0);
+
+            if (video.muted) {
+                // mute all videos first
+                $('video').each(function () {
+                    this.muted = true;
+                    $(this).closest('.video_loop_col').find('.video_sound_button').removeClass('active');
+                });
+
+                video.muted = false;
+                $btn.addClass('active');
+            } else {
+                video.muted = true;
+                $btn.removeClass('active');
+            }
+        });
+
+        $('.video_loop_col .video_play_push_button').on('click', function(e) {
+            e.stopPropagation();
+
+            $(this).toggleClass("active");
+
+            const video = $(this).closest('.video_loop_col').find('video').get(0);
+            video.paused ? video.play() : video.pause();
+        });
+
+        $('.video_loop_col').on('click', function(e) {
+
+            if ($(e.target).closest('.video_sound_button, .video_play_push_button').length) {
+                return;
+            }
+
+            let index = $(this).data('index');
+
+            $(".video_loop_popup_block").hide();
+            $('.video_loop_popup_block[data-index="' + index + '"]')
+            .css({ display: 'flex', opacity: 0 })
+            .animate({ opacity: 1 }, 200);
+        });
+
+        $('.video_loop_popup_block').on('click', function(e) {
+            if (!$(e.target).closest('.popup_video_block, .popup_product_block').length) {
+                $('.video_loop_popup_block').hide();
+            }
+        });
+
+        $('.video_loop_popup_block .video_play_push_button').on('click', function(e) {
+            e.stopPropagation();
+
+            $(this).toggleClass("active");
+
+            let video = $(this).closest('.popup_video_block').find('video').get(0);
+            video.paused ? video.play() : video.pause();
+        });
+
+        $('.video_loop_popup_block .video_sound_button').on('click', function(e) {
+            e.stopPropagation();
+
+            let video = $(this).closest('.popup_video_block').find('video').get(0);
+            $(this).toggleClass('active');
+
+            video.muted = !video.muted;
+        });
+
+
+        $('.video_popup_close').on('click', function(e) {
+            e.stopPropagation();
+            $('.video_loop_popup_block').hide();
+        });
+
+
+    });
+
+}); {% endcomment %}
+
+
+{% comment %} document.addEventListener("DOMContentLoaded", function() {
+    var Swipes = new Swiper('.video_loop_slider', {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1,
+        loopFillGroupWithBlank: true,
+        breakpoints: {
+            992: { 
+              slidesPerView: 4,
+              spaceBetween: 20,
+            },
+            575: { 
+              slidesPerView: 2.5, 
+              spaceBetween: 15,
+            },
+            420: { 
+              slidesPerView: 1,
+              spaceBetween: 10,
+            }
+        },
+        navigation: {
+         nextEl: '.video_swiper_btn.swiper-button-next',
+         prevEl: '.video_swiper_btn.swiper-button-prev',
+       },
+       pagination: {
+          el: '.video_loop_swiper_dot .swiper-pagination',
+          clickable: true,
+       },
+    });
+
+    // For iOS devices
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        const videos = document.querySelectorAll('video');
+        videos.forEach(video => {
+            video.setAttribute('playsinline', '');
+        });
+    }
+
+    $(document).ready(function(){
+
+        // ----- SLIDER VIDEO SOUND TOGGLE -----
+        $('.video_loop_col .video_sound_button').on('click', function(e) {
+            e.stopPropagation();
+            const $btn = $(this);
+            const video = $btn.closest('.video_loop_col').find('video').get(0);
+
+            if (video.muted) {
+                // Mute all other slider videos first
+                $('.video_loop_col video').each(function () {
+                    this.muted = true;
+                    $(this).closest('.video_loop_col').find('.video_sound_button').removeClass('active');
+                });
+                video.muted = false;
+                $btn.addClass('active');
+            } else {
+                video.muted = true;
+                $btn.removeClass('active');
+            }
+        });
+
+        // ----- SLIDER VIDEO PLAY/PAUSE -----
+        $('.video_loop_col .video_play_push_button').on('click', function(e) {
+            e.stopPropagation();
+            $(this).toggleClass("active");
+            const video = $(this).closest('.video_loop_col').find('video').get(0);
+            video.paused ? video.play() : video.pause();
+        });
+
+        // ----- OPEN POPUP -----
+        $('.video_loop_col').on('click', function(e) {
+            if ($(e.target).closest('.video_sound_button, .video_play_push_button').length) return;
+
+            let index = $(this).data('index');
+
+            // Hide all other popups
+            $(".video_loop_popup_block").hide();
+
+            // Show current popup
+            const $popup = $('.video_loop_popup_block[data-index="' + index + '"]');
+            $popup.css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 200);
+
+            // ----- MUTE ALL SLIDER VIDEOS WHEN POPUP OPENS -----
+            $('.video_loop_col video').each(function() {
+                this.muted = true;
+                $(this).closest('.video_loop_col').find('.video_sound_button').removeClass('active');
+            });
+
+            // Reset popup video to muted
+            const popupVideo = $popup.find('video').get(0);
+            popupVideo.muted = true;
+            $popup.find('.video_sound_button').removeClass('active');
+        });
+
+        // ----- CLOSE POPUP -----
+        $('.video_loop_popup_block, .video_popup_close').on('click', function(e) {
+            if ($(e.target).closest('.popup_video_block, .popup_product_block').length) return;
+
+            const $popup = $(this).closest('.video_loop_popup_block');
+            const popupVideo = $popup.find('video').get(0);
+
+            // Pause and reset only the popup video
+            popupVideo.pause();
+            popupVideo.currentTime = 0;
+            popupVideo.muted = true;
+            $popup.find('.video_sound_button').removeClass('active');
+
+            $popup.hide();
+        });
+
+        // ----- POPUP VIDEO PLAY/PAUSE -----
+        $('.video_loop_popup_block .video_play_push_button').on('click', function(e) {
+            e.stopPropagation();
+            $(this).toggleClass("active");
+            const video = $(this).closest('.popup_video_block').find('video').get(0);
+            video.paused ? video.play() : video.pause();
+        });
+
+        // ----- POPUP VIDEO SOUND TOGGLE -----
+        $('.video_loop_popup_block .video_sound_button').on('click', function(e) {
+            e.stopPropagation();
+            const video = $(this).closest('.popup_video_block').find('video').get(0);
+
+            // Mute all other popup videos first
+            $('.video_loop_popup_block video').each(function() {
+                if (this !== video) this.muted = true;
+            });
+
+            video.muted = !video.muted;
+            $(this).toggleClass('active');
+        });
+
+    });
+}); {% endcomment %}
+
+{% comment %} 
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =======================
+       SWIPER INIT
+    ======================= */
+    var Swipes = new Swiper('.video_loop_slider', {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1,
+
+        breakpoints: {
+            992: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+            575: {
+                slidesPerView: 2.5,
+                spaceBetween: 15,
+            },
+            420: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            }
+        },
+
+        navigation: {
+            nextEl: '.video_swiper_btn.swiper-button-next',
+            prevEl: '.video_swiper_btn.swiper-button-prev',
+        },
+
+        pagination: {
+            el: '.video_loop_swiper_dot .swiper-pagination',
+            clickable: true,
+        },
+
+        on: {
+            init: function () {
+                handleMobileActiveVideo(this);
+            },
+            slideChange: function () {
+                handleMobileActiveVideo(this);
+            }
+        }
+    });
+
+    /* =======================
+       MOBILE ACTIVE SLIDE VIDEO
+    ======================= */
+    function handleMobileActiveVideo(swiper) {
+
+        if (window.innerWidth <= 575) {
+
+            // Pause & mute ALL videos
+            document.querySelectorAll('.video_loop_col video').forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+                video.muted = true;
+            });
+
+            // Remove sound button active state
+            document.querySelectorAll('.video_sound_button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Play ONLY active slide video
+            const activeSlide = swiper.slides[swiper.activeIndex];
+            const activeVideo = activeSlide.querySelector('video');
+
+            if (activeVideo) {
+                activeVideo.muted = true; // required for autoplay
+                activeVideo.play().catch(() => {});
+            }
+        }
+    }
+
+    /* =======================
+       iOS INLINE VIDEO FIX
+    ======================= */
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        document.querySelectorAll('video').forEach(video => {
+            video.setAttribute('playsinline', '');
+        });
+    }
+
+    /* =======================
+       JQUERY CONTROLS
+    ======================= */
+    $(document).ready(function () {
+
+        /* ---- SOUND TOGGLE ---- */
+        $('.video_loop_col .video_sound_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.video_loop_col').find('video').get(0);
+
+            // Mute all other videos
+            $('.video_loop_col video').each(function () {
+                this.muted = true;
+                $(this).closest('.video_loop_col')
+                       .find('.video_sound_button')
+                       .removeClass('active');
+            });
+
+            video.muted = false;
+            $btn.addClass('active');
+        });
+
+        /* ---- PLAY / PAUSE ---- */
+        $('.video_loop_col .video_play_push_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const video = $(this).closest('.video_loop_col').find('video').get(0);
+            $(this).toggleClass('active');
+
+            video.paused ? video.play() : video.pause();
+        });
+
+        /* ---- OPEN POPUP ---- */
+        $('.video_loop_col').on('click', function (e) {
+            if ($(e.target).closest('.video_sound_button, .video_play_push_button').length) return;
+
+            const index = $(this).data('index');
+
+            $('.video_loop_popup_block').hide();
+
+            const $popup = $('.video_loop_popup_block[data-index="' + index + '"]');
+            $popup.css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 200);
+
+            // Mute slider videos
+            $('.video_loop_col video').each(function () {
+                this.muted = true;
+                this.pause();
+            });
+        });
+
+        /* ---- CLOSE POPUP ---- */
+        $('.video_loop_popup_block, .video_popup_close').on('click', function (e) {
+            if ($(e.target).closest('.popup_video_block, .popup_product_block').length) return;
+
+            const $popup = $(this).closest('.video_loop_popup_block');
+            const video = $popup.find('video').get(0);
+
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+                video.muted = true;
+            }
+
+            $popup.hide();
+        });
+
+        /* ---- POPUP PLAY / PAUSE ---- */
+        $('.video_loop_popup_block .video_play_push_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const video = $(this).closest('.popup_video_block').find('video').get(0);
+            $(this).toggleClass('active');
+
+            video.paused ? video.play() : video.pause();
+        });
+
+        /* ---- POPUP SOUND ---- */
+        $('.video_loop_popup_block .video_sound_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const video = $(this).closest('.popup_video_block').find('video').get(0);
+
+            $('.video_loop_popup_block video').each(function () {
+                if (this !== video) this.muted = true;
+            });
+
+            video.muted = !video.muted;
+            $(this).toggleClass('active');
+        });
+
+    });
+
+}); {% endcomment %}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =======================
+       SWIPER INIT
+    ======================= */
+    var Swipes = new Swiper('.video_loop_slider', {
+        loop: true,
+        spaceBetween: 10,
+        slidesPerView: 1,
+
+        breakpoints: {
+            992: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+            },
+            575: {
+                slidesPerView: 2.5,
+                spaceBetween: 15,
+            },
+            420: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            }
+        },
+
+        navigation: {
+            nextEl: '.video_swiper_btn.swiper-button-next',
+            prevEl: '.video_swiper_btn.swiper-button-prev',
+        },
+
+        pagination: {
+            el: '.video_loop_swiper_dot .swiper-pagination',
+            clickable: true,
+        },
+
+        on: {
+            init: function () {
+                handleMobileActiveVideo(this);
+            },
+            slideChange: function () {
+                handleMobileActiveVideo(this);
+            }
+        }
+    });
+
+    /* =======================
+       MOBILE ACTIVE SLIDE VIDEO
+    ======================= */
+    function handleMobileActiveVideo(swiper) {
+        if (window.innerWidth <= 575) {
+
+            document.querySelectorAll('.video_loop_col video').forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+                video.muted = true;
+            });
+
+            document.querySelectorAll('.video_loop_col .video_sound_button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // FIX 1: Badhaj slider videos na play btn ne "play_on" state ma rakho
+            document.querySelectorAll('.video_loop_col .video_play_push_button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeSlide = swiper.slides[swiper.activeIndex];
+            const activeVideo = activeSlide ? activeSlide.querySelector('video') : null;
+
+            if (activeVideo) {
+                activeVideo.muted = true;
+                activeVideo.play().then(() => {
+                    // FIX 1: Video play thay tyare pan play icon j dekhadvanu (autoplay = no user pause)
+                    const $btn = $(activeSlide).find('.video_play_push_button');
+                    $btn.removeClass('active');
+                }).catch(() => {});
+            }
+        }
+    }
+
+    /* =======================
+       UTILITY: Slider video play karo + btn state set karo
+    ======================= */
+    function resumeSliderVideos() {
+        if (window.innerWidth <= 575) {
+            handleMobileActiveVideo(Swipes);
+        } else {
+            document.querySelectorAll('.video_loop_col video').forEach(function (v) {
+                v.muted = true;
+                v.play().then(() => {
+                    // FIX 1: Autoplay thay che to pause icon (active) dekhadvanu
+                    const $btn = $(v).closest('.video_loop_col').find('.video_play_push_button');
+                    $btn.addClass('active');
+                }).catch(() => {});
+            });
+        }
+    }
+
+    /* =======================
+       iOS INLINE VIDEO FIX
+    ======================= */
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+        document.querySelectorAll('video').forEach(video => {
+            video.setAttribute('playsinline', '');
+        });
+    }
+
+    /* =======================
+       JQUERY CONTROLS
+    ======================= */
+    $(document).ready(function () {
+
+        // FIX 1: Page load thay tyare slider videos autoplay che to pause icon dekhadvanu
+        document.querySelectorAll('.video_loop_col video').forEach(function (v) {
+            v.addEventListener('play', function () {
+                const $btn = $(v).closest('.video_loop_col').find('.video_play_push_button');
+                $btn.addClass('active');
+            });
+            v.addEventListener('pause', function () {
+                const $btn = $(v).closest('.video_loop_col').find('.video_play_push_button');
+                $btn.removeClass('active');
+            });
+        });
+
+        // FIX 3: Popup video autoplay che to pause icon dekhadvanu
+        document.querySelectorAll('.video_loop_popup_block video').forEach(function (v) {
+            v.addEventListener('play', function () {
+                const $btn = $(v).closest('.popup_video_block').find('.video_play_push_button');
+                $btn.addClass('active');
+            });
+            v.addEventListener('pause', function () {
+                const $btn = $(v).closest('.popup_video_block').find('.video_play_push_button');
+                $btn.removeClass('active');
+            });
+        });
+
+        /* ---- SOUND TOGGLE (FIX 2) ---- */
+        $('.video_loop_col .video_sound_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.video_loop_col').find('video').get(0);
+
+            if (!video.muted) {
+                // Sound on che to off karo
+                video.muted = true;
+                $btn.removeClass('active');
+            } else {
+                // Sound off che to on karo — pehla badhana mute karo
+                $('.video_loop_col video').each(function () {
+                    this.muted = true;
+                    $(this).closest('.video_loop_col')
+                           .find('.video_sound_button')
+                           .removeClass('active');
+                });
+                video.muted = false;
+                $btn.addClass('active');
+            }
+        });
+
+        /* ---- PLAY / PAUSE ---- */
+        $('.video_loop_col .video_play_push_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.video_loop_col').find('video').get(0);
+
+            if (video.paused) {
+                video.play();
+                $btn.addClass('active');
+            } else {
+                video.pause();
+                $btn.removeClass('active');
+            }
+        });
+
+        /* ---- OPEN POPUP ---- */
+        $('.video_loop_col').on('click', function (e) {
+            if ($(e.target).closest('.video_sound_button, .video_play_push_button').length) return;
+
+            const index = $(this).data('index');
+
+            $('.video_loop_popup_block').hide();
+
+            const $popup = $('.video_loop_popup_block[data-index="' + index + '"]');
+            $popup.css({ display: 'flex', opacity: 0 }).animate({ opacity: 1 }, 200);
+
+            // Slider videos pause karo
+            $('.video_loop_col video').each(function () {
+                this.muted = true;
+                this.pause();
+            });
+
+            // FIX 3 + FIX 4: Popup video reset kari ne autoplay karo
+            const popupVideo = $popup.find('video').get(0);
+            if (popupVideo) {
+                popupVideo.currentTime = 0;
+                popupVideo.muted = true;
+                popupVideo.play().catch(() => {});
+            }
+        });
+
+        /* ---- CLOSE POPUP ---- */
+        $('.video_loop_popup_block, .video_popup_close').on('click', function (e) {
+            if ($(e.target).closest('.popup_video_block, .popup_product_block').length) return;
+
+            const $popup = $(this).closest('.video_loop_popup_block');
+            const popupVideo = $popup.find('video').get(0);
+
+            // FIX 3: Popup video pause + reset karo
+            if (popupVideo) {
+                popupVideo.pause();
+                popupVideo.currentTime = 0;
+                popupVideo.muted = true;
+
+                // Popup play btn reset karo
+                $popup.find('.video_play_push_button').removeClass('active');
+                $popup.find('.video_sound_button').removeClass('active');
+            }
+
+            $popup.hide();
+
+            // Slider videos resume karo
+            resumeSliderVideos();
+        });
+
+        /* ---- POPUP PLAY / PAUSE ---- */
+        $('.video_loop_popup_block .video_play_push_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.popup_video_block').find('video').get(0);
+
+            if (video.paused) {
+                video.play();
+                $btn.addClass('active');
+            } else {
+                video.pause();
+                $btn.removeClass('active');
+            }
+        });
+
+        /* ---- POPUP SOUND ---- */
+        $('.video_loop_popup_block .video_sound_button').on('click', function (e) {
+            e.stopPropagation();
+
+            const $btn = $(this);
+            const video = $btn.closest('.popup_video_block').find('video').get(0);
+
+            if (!video.muted) {
+                video.muted = true;
+                $btn.removeClass('active');
+            } else {
+                video.muted = false;
+                $btn.addClass('active');
+            }
+        });
+
+    });
+
+});
+
+
+
+
+</script>                 
+
+
+<style>
+  /* .video_loop .page-width{max-width:1100px;} */
+  .video_loop_icon svg path {fill: transparent;}
+  .video_loop_icon svg {height: 30px;width: 30px;}
+
+  .video_loop .video_loop_title{margin-bottom:48px;}
+  
+  .video_loop .video_loop_title span{text-align:center;margin: 16px 0 0;font-size: 20px;line-height: 1.2;color: #000;display: block;width: 100%;}
+  
+  .video_loop_slider {overflow: hidden;}
+  
+  .video_loop_col {position: relative;}
+  
+  .video_loop_icon {position: absolute;top: 10px;left: 10px;cursor: pointer;z-index: 1;}
+  .video_loop_icon span {display: flex;}
+
+  .video_sound_button, .video_play_push_button{display: flex;position: absolute;top: 1.5rem;left: 1.5rem;z-index: 30;background-color: inherit;border: none;cursor: pointer;}
+  
+  .video_play_push_button{left: 6rem;}
+  
+  .video_sound_button svg,
+  .video_play_push_button svg{width: 25px;height: 25px;}
+  
+  .video_sound_button.active svg.sound_off,
+  .video_play_push_button.active svg.play_on{display:none !important;}
+  .video_sound_button.active svg.sound_on,
+  .video_play_push_button.active svg.push_on{display:block !important;}
+  
+  .video_sound_button svg, .video_play_push_button svg{border: 2px solid #fff;padding: 5px;border-radius: 50px;}
+
+  
+  .video_loop_inner {display: flex;}
+  
+  .video_play_push_button svg.play_on{padding:5px;}
+  .video_loop_row > * {height: auto;}
+  
+ .video_loop_row > * .video_loop_inner {height: 100%;} 
+ .video_loop_row > * .video_loop_inner video {height: 100%;object-fit: cover;cursor: pointer;}
+ 
+ .video_loop_title .main-title {font-size: 32px;text-align: center; line-height: 1.4;margin-top:0;}
+ .video_loop_V-title {position: absolute;bottom: 0;left: 20px;}
+ 
+ .video_loop .product__body-wrap {padding: 0 15px !important;position:relative;}
+
+ 
+ .video_loop .cus_button-wrp{text-align:center;padding:30px 0 0;}
+
+.video_loop_popup_block{display: none;position: fixed;top: 50%;left: 50%;transform: translate(-50%, -50%);z-index: 99;padding: 10px;background-color: rgba(0, 0, 0, 0.5);width: 100%;height: 100%;cursor: pointer;overflow: scroll;align-items: center;}
+.video_loop_popup_block .page-width{max-width: 670px;}
+
+.video_loop_popup_block .video_loop_wrp{display: flex;flex-wrap: wrap;gap: 20px;align-items: center;background: #fff;padding: 40px;position: relative;}
+.video_loop_popup_block .popup_video_block{width: calc(52% - 10px);position: relative;}
+
+.video_loop_popup_block .popup_product_block{width: calc(48% - 10px);padding: 16px;}
+.video_loop_popup_block .video_product_img img{width: 100%;vertical-align: middle;}
+.video_loop_popup_block .video_product_sub_text p{line-height: normal;margin: 0;margin-top:5px;font-size: 8px;font-family: var(--argentum);color: #9D9D9D;}
+
+.video_loop_popup_block .video_product_title{margin: 0;font-size: 18px;line-height: 27px;font-weight: 700;}
+.video_loop_popup_block .video_product_price{font-size: 24px;color: #CA003D;font-weight: 700;line-height: normal;}
+
+.video_loop_popup_block .video_product_button{margin-top: 5px;}
+.video_loop_popup_block .video_product_button .common_btn{min-width: 100%;background: transparent;text-transform: uppercase;}
+
+.video_loop_popup_block .review_block .oke-sr-count{font-family: var(--argentum);font-size: 10px;font-weight: 400;}
+
+.video_loop_popup_block .video_popup_close{position: absolute;top: 0;right: 0;display: flex;padding: 15px;}
+.video_loop_popup_block .video_play_push_button{left: 45px;}
+
+.video_swiper_btn{display: none;width: 40px;height: 40px;top: 60%;padding: 5px;border-radius: 50px;background: #ca003d;}
+.video_swiper_btn svg path{fill: #fff;}
+.video_swiper_btn:after{content: unset;}
+
+.video_swiper_btn.swiper-button-next{right: 20px;}
+.video_swiper_btn.swiper-button-prev{left: 20px;}
+
+.video_loop_swiper_dot{position:relative;} 
+
+.video_loop_swiper_dot .swiper-pagination-bullet{border: 1px solid #BDBDBD;opacity: 1;background:unset;}
+.video_loop_swiper_dot .swiper-pagination-bullet-active{background:#BDBDBD;border:unset;}
+
+
+
+
+
+  @media(max-width:1440px) {.video_loop_V-title h3{font-size:20px;}
+
+  @media(max-width:991px) {
+
+    .video_swiper_btn{display: block;}
+    .video_loop_V-title h3{font-size:16px;}
+    .video_loop_row.swiper-wrapper{padding-bottom: 50px;}
+  }
+
+  @media (max-width: 767px) {
+    .video_loop .swiper-button-prev,
+    .video_loop .swiper-button-next {display: flex;opacity: 1;z-index: 1;}
+
+
+    .video_loop_popup_block .page-width{max-width: 320px;}
+
+    .video_loop_popup_block .video_loop_wrp{gap: 0;overflow: scroll;padding: 0;}
+    .video_loop_popup_block .video_popup_close{z-index: 1;}
+    .video_loop_popup_block .video_popup_close svg line{stroke: #fff;}
+    .video_loop_popup_block .popup_video_block{width: 100%;}
+
+    .video_loop_popup_block .popup_product_block{width: 100%;display: flex;flex-wrap: wrap;padding: 8px;align-items: center; gap: 10px;}
+
+    .video_loop_popup_block .video_product_img{width: calc(35% - 5px);}
+    .video_loop_popup_block .video_popup_content_row .video_product_sub_text,
+    .video_loop_popup_block .review_block{display: none;}
+
+    .video_loop_popup_block .video_popup_content_row{width: calc(65% - 5px);}
+
+    .video_loop_popup_block .video_product_title{font-size: 16px;line-height: normal;}
+    .video_loop_popup_block .video_product_price{font-size: 18px;}
+
+    .video_loop_popup_block .video_product_button .common_btn{padding: 12px;font-weight: 300;}
+    .video_loop_popup_block button {
+          min-height: 3rem;
+    }
+
+
+  }
+
+  @media (max-width: 575px) {
+    .video_loop .video_loop_title span{max-width: 100%;margin: 4px auto 0;width: 100%;}
+    .video_loop .video_loop_title {margin-bottom: 16px;}
+    
+  } 
+  
+</style>

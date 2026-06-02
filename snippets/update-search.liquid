@@ -1,0 +1,152 @@
+ <details-modal class="header__search no-js-hidden">
+    <details class="header__details">
+        <summary class="header__icon header__icon--search header__icon--summary focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+            <span>
+              <svg class="modal__toggle-open icon icon-search" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6.8" cy="6.79976" r="6.3" stroke="black"/>
+                <path d="M11.5999 11.2002L15.9999 16.0002" stroke="black"/>
+              </svg>
+            </span>
+          <span class="header__icon-name search_menu_title" title="{{- 'general.search.search' | t -}}">{{- 'general.search.search' | t -}}</span>
+                  
+            <div class="search_input-wrp">
+              {%- if settings.predictive_search_enabled -%}
+                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+            {%- endif -%}
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                  <div class="search__form-inner search-modal__form-inner">
+                    {%- if section.settings.show_collection_card == blank and section.settings.show_items == blank and section.settings.show_articles == blank -%}
+                      <div class="field__without-items">
+                        <div class="field">
+                          <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Start your search" {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%} >
+                          <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                          <input type="hidden" name="options[prefix]" value="last">
+                        </div>
+                        {%- if settings.predictive_search_enabled -%}
+                          <div class="predictive-search predictive-search--header dsdsds1" tabindex="-1" data-predictive-search>
+                            <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset modal-close-button" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                            <div class="predictive-search__loading-state">
+                              {% render 'icon-spinner' %}
+                            </div>
+                          </div>
+                          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                        {%- endif -%}
+                      </div>
+                    {%- else -%}
+                      <div class="field">
+                        <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" {% comment %} placeholder="{{ 'general.search.placeholder' | t }}"{% endcomment %} {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%} >
+                        <label class="field__label" for="Search-In-Modal">{{ 'general.search.placeholder' | t }}</label>
+                        <input type="hidden" name="options[prefix]" value="last">
+                        
+                        <button class="search__button button button--arrow button--primary-size button--secondary" aria-label="{{ 'general.search.search' | t }}">
+                          <span> {{ 'general.search.search' | t }} </span> {% render 'icon-button-arrow' %}</button>
+  
+                        {%- if settings.predictive_search_enabled -%}
+                          <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                            <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset modal-close-button" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                            <div class="predictive-search__loading-state">
+                              {% render 'icon-spinner' %}
+                            </div>
+                          </div>
+                          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                        {%- endif -%}
+                      </div>
+                  {%- endif -%}
+                  </div>
+                </form>
+              {%- if settings.predictive_search_enabled -%}
+              </predictive-search>
+              {%- endif -%}
+            </div>      
+
+        </summary>
+                  
+               {% comment %}
+        <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
+            <div class="search-modal__item container--header">
+                <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset modal-close-button" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                <div class="search-modal__content container" tabindex="-1">
+                  {%- if settings.predictive_search_enabled -%}
+                    <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
+                  {%- endif -%}
+                      <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
+                        <div class="search__form-inner search-modal__form-inner">
+                          {%- if section.settings.show_collection_card == blank and section.settings.show_items == blank and section.settings.show_articles == blank -%}
+                            <div class="field__without-items">
+                              <div class="field">
+                                <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%} >
+                                <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
+                                <input type="hidden" name="options[prefix]" value="last">
+                              </div>
+                              {%- if settings.predictive_search_enabled -%}
+                                <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                                  <div class="predictive-search__loading-state">
+                                    {% render 'icon-spinner' %}
+                                  </div>
+                                </div>
+                                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                              {%- endif -%}
+                            </div>
+                          {%- else -%}
+                            <div class="field">
+                              <input class="search__input field__input" id="Search-In-Modal" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" {%- if settings.predictive_search_enabled -%} role="combobox" aria-expanded="false" aria-owns="predictive-search-results-list" aria-controls="predictive-search-results-list" aria-haspopup="listbox" aria-autocomplete="list" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" {%- endif -%} >
+                              <label class="field__label" for="Search-In-Modal">{{ 'general.search.placeholder' | t }}</label>
+                              <input type="hidden" name="options[prefix]" value="last">
+                              
+                              <button class="search__button button button--arrow button--primary-size button--secondary" aria-label="{{ 'general.search.search' | t }}">
+                                <span> {{ 'general.search.search' | t }} </span> {% render 'icon-button-arrow' %}</button>
+
+                              {%- if settings.predictive_search_enabled -%}
+                                <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
+                                  <div class="predictive-search__loading-state">
+                                    {% render 'icon-spinner' %}
+                                  </div>
+                                </div>
+                                <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
+                              {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                        </div>
+                      </form>
+                    {%- if settings.predictive_search_enabled -%}
+                    </predictive-search>
+                    {%- endif -%}
+                    
+                    {%- if section.settings.show_collection_card != blank -%}
+                        {%- if section.settings.collection_list != blank -%}
+                            <div class="search__categories">
+                                <div class="search__subtitle subtitle">{{ 'general.search.categories' | t }}</div>
+                                <div class="search__categories-wrapper">
+                                    <ul class="search__categories-list" role="list">
+                                        {%- for collection in section.settings.collection_list -%}
+                                            <li class="search__categories-item">
+                                                <a class="search__categories-link h4" {% if collection.all_products_count > 0 %} href="{{ collection.url }}"{% endif %}>{{ collection.title }}</a>
+                                                {% render 'icon-star' %}
+                                            </li>
+                                        {%- endfor -%}
+                                    </ul>
+                                </div>
+                            </div>
+                        {%- endif -%}
+                    {%- endif -%}
+                    {%- if section.settings.show_articles != blank -%}
+                        {%- if section.settings.blog.articles != blank -%}
+                            <div class="search__articles">
+                                <div class="search__subtitle subtitle">{{ 'general.search.popular_articles' | t }}</div>
+                                <div class="search__articles-list">
+                                    {%- for article in section.settings.blog.articles limit: 3 -%}
+                                        <div class="search__article">
+                                            {% render 'article-card-small', blog: section.settings.blog, article: article, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author %}
+                                        </div>
+                                    {%- endfor -%}
+                                </div>
+                            </div>
+                        {%- endif -%}
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+         {% endcomment %}  
+    </details>
+</details-modal>
+

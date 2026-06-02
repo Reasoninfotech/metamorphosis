@@ -1,0 +1,162 @@
+.product-plumper-slider-section .plumper-slider_container{max-width:1440px;margin:0 auto;}
+.product-plumper-slider-section .plumper-slider-block{display: flex;flex-wrap: wrap;}
+
+.product-plumper-slider-section .plumper-slider-block figure{width:50%;}
+.product-plumper-slider-section .plumper-slider-block figure img{width:100%;vertical-align:middle;height:100%;}
+
+/* .product-plumper-slider-section .main_title{font-size: 36px;} */
+.product-plumper-slider-section .plumper-slider-block .plumper_text_block{width:calc(50% - 80px);padding-right:80px;padding:96px 0px;}
+.product-plumper-slider-section .plumper-slider-block .text_block_wrp{padding:0px 20px;margin: 0 auto;text-align: center;display:flex;flex-direction:column;height: calc(100% - 100px);justify-content: space-between;}
+
+.product-plumper-slider-section .plumper-slider-block .plumper_text_wrp{max-width: 585px;margin: 0 auto;}
+.product-plumper-slider-section .plumper-slider-block .main_title{margin-bottom:16px;}
+/* .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .plumper-slider-block .main_title{color:#CA003D;} */
+.product-plumper-slider-section .plumper-slider-block .plumper_text_wrp .main-title{margin-bottom:16px;}
+.product-plumper-slider-section .plumper-slider-block .plumper_text_wrp span{display:inline-block;font-size: 20px;line-height: normal;}
+
+.product-plumper-slider-section .plumper-slider-block .pulmber_other_text{max-width: 290px;margin: 0 auto;}
+
+.product-plumper-slider-section .plumper-slider-block .pulmber_other_text li,
+.product-plumper-slider-section .plumper-slider-block .pulmber_other_text p{margin:0;line-height:normal;font-size:20px;color:#000;}
+
+.product-plumper-slider-section .plumper-slider-block .pulmber_other_text ul{margin-bottom: 0;}
+
+.product-plumper-slider-section .swiper-pagination{position: absolute;bottom: 96px;text-align: unset;left: calc(75% - 261.5px);width: auto;display: flex;min-width:443px;justify-content:center;}
+
+.product-plumper-slider-section .swiper-pagination-bullet{opacity:1;width: 95px;height: 95px;background: transparent;border: 1px solid #000;display: flex;justify-content: center;font-size: 40px;line-height:normal;margin:0!important;margin-right:21Px!important;padding:15px;}
+.product-plumper-slider-section .swiper-pagination-bullet:last-child{margin-right:0Px!important;}
+.product-plumper-slider-section .swiper-pagination-bullet-active{background: #F5ACB8;border:unset;}
+
+/* product-silicone-patch-collection */
+.template-product-silicone-patch-collection .product-plumper-slider-section .plumper-slider-block .content_title {font-weight: 500;font-size: 22px;line-height: 22px;text-align: center;text-transform: uppercase;color: #000000;}
+
+/* .product-plumper-slider-section .plumper-slider .swiper-wrapper{
+  align-items: flex-start;
+} */
+
+@media screen and (max-width: 1400px) {
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_block{width:calc(50% - 40px);padding-right:40px;padding:50px 0px;}
+  .product-plumper-slider-section .swiper-pagination{position: absolute;bottom: 50px;left: calc(75% - 241.5px);}
+}
+
+@media screen and (max-width: 1200px) {
+  .product-plumper-slider-section .swiper-pagination-bullet{height:63px;width:63px;margin: 0 16px 0 0 !important;font-size: 24px;}
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_block{width:50%;padding-right:0px;padding:50px 0px;}
+  .product-plumper-slider-section .swiper-pagination{position: absolute;bottom: 50px;left: calc(75% - 150px);}
+  .product-plumper-slider-section .plumper-slider-block .text_block_wrp{height: calc(100% - 63px);}
+  .product-plumper-slider-section .swiper-pagination{min-width:300px;}
+}
+
+@media screen and (max-width: 991px) {
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_block{padding:20px 0px;}
+  .product-plumper-slider-section .swiper-pagination{bottom: 20px;}
+  .product-plumper-slider-section .plumper-slider-block .main_title{font-size:26px;}
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp span,
+  .product-plumper-slider-section .plumper-slider-block .pulmber_other_text p{font-size:18px;}
+
+  .product-plumper-slider-section .swiper-pagination{left: calc(75% - 130px);}
+  .product-plumper-slider-section .swiper-pagination-bullet{height: 53px;width: 53px;align-items:end;}
+  .product-plumper-slider-section .swiper-pagination{min-width:260px;}
+
+   .product_hydrogel-pink-lip .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp span{max-width: 260px;}
+  
+}
+
+@media screen and (max-width: 767px) {
+  .product-plumper-slider-section .plumper-slider-block{flex-direction:column-reverse;height:100%;justify-content:space-between;}
+  .product-plumper-slider-section .plumper-slider-block figure,
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_block{width:100%;}
+
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_block{padding: 23px 0;padding-bottom:32px;}
+
+  .product-plumper-slider-section .plumper-slider-block .main_title{margin-bottom: 8px;}
+
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp,
+  .product-plumper-slider-section .plumper-slider-block .pulmber_other_text{margin: 0 auto 56px;max-width:327px;}
+  .product-plumper-slider-section .plumper-slider-block .pulmber_dots{height:53px;}
+
+  .product-plumper-slider-section .plumper-slider-block figure img{max-height: 500px;object-fit: cover;}
+
+  .product-plumper-slider-section .swiper-pagination{bottom: 59%;left: calc(50% - 130px);}
+  .product-plumper-slider-section .swiper-slide{height:auto;}
+  .product-plumper-slider-section .plumper-slider-block .text_block_wrp{height: calc(100% - 53px);}
+
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp, 
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .plumper-slider-block .pulmber_other_text{
+    max-width: 360px; 
+  }
+.product_metamorphosis-lushlips-transformation .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp{
+  /* max-width: 410px;  */
+}
+
+  .product_hydrogel-face-star .product-plumper-slider-section .swiper-pagination{bottom: 59%;}
+
+
+  /* .product_hydrogel-pink-lip .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp span{max-width: 250px;} */
+  
+  
+}
+
+
+@media screen and (max-width: 575px) {
+ .product-plumper-slider-section .plumper-slider-block .plumper_text_block{padding:23px 0;}
+ .product-plumper-slider-section .swiper-pagination{bottom: 62%;}
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .swiper-pagination{bottom: 59%;}
+
+  .product_hydrogel-face-star .product-plumper-slider-section .swiper-pagination{bottom:57%;}
+
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 61.5%;}
+
+  .product_hydrogel-pink-lip .product-plumper-slider-section .swiper-pagination {bottom: 59%;}
+}
+
+@media screen and (max-width: 499px) {
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .swiper-pagination{bottom: 57%;}
+} 
+
+@media screen and (max-width: 468px) {
+  .product-plumper-slider-section .swiper-pagination{bottom: 57%;}
+  .product_hydrogel-face-star .product-plumper-slider-section .swiper-pagination{bottom:55%;}
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 60.5%;}
+} 
+
+@media screen and (max-width: 466px) {
+    .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .swiper-pagination{bottom: 56%;}
+}
+
+@media screen and (max-width: 444px) {
+  .product_metamorphosis-magic-moon-eye-evolution .product-plumper-slider-section .swiper-pagination{bottom: 57%;}
+
+  .product_hydrogel-pink-lip .product-plumper-slider-section .swiper-pagination {bottom: 57%;}
+}
+
+@media screen and (max-width: 423px) {
+ .product-plumper-slider-section .swiper-pagination{bottom: 56%;}
+  .product_metamorphosis-magic-moon-eye-evolution .product-plumper-slider-section .swiper-pagination{bottom: 55%;}
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .swiper-pagination{bottom: 52%;}
+  .product_hydrogel-face-star .product-plumper-slider-section .swiper-pagination{bottom:53%;}
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 57.5%;}
+  .product_hydrogel-pink-lip .product-plumper-slider-section .swiper-pagination {bottom: 55.5%;}
+}
+
+@media screen and (max-width: 389px) {
+  .product-plumper-slider-section .plumper-slider-block .plumper_text_wrp, .product-plumper-slider-section .plumper-slider-block .pulmber_other_text{margin: 0 auto 45px;}
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .plumper-slider-block .main_title{font-size:25px;}
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom: 58.5%;}
+}
+
+@media screen and (max-width: 367px) {
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom:56.5%;}
+  .product_metamorphosis-lushlips-transformation .product-plumper-slider-section .swiper-pagination{bottom: 48%;}
+}
+
+@media screen and (max-width: 360px) {
+ .product-plumper-slider-section .swiper-pagination{bottom:calc(56% - 32px);}
+ .product_metamorphosis-magic-moon-eye-evolution .product-plumper-slider-section .swiper-pagination{bottom:54%;}
+  .product_hydrogel-eye-star .product-plumper-slider-section .swiper-pagination{bottom:53.5%;}
+  .product_hydrogel-pink-lip .product-plumper-slider-section .swiper-pagination {bottom: 49.5%;}
+}
+
+
+
+

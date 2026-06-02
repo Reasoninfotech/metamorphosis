@@ -1,0 +1,14 @@
+.about-txt-banner-section{background-repeat: no-repeat;background-size: cover;}
+
+.about-txt-banner-section .about_text_row{text-align: center;color: #fff;}
+
+.about-txt-banner-section .about_row_content p{margin: 0;font-size: 30px;line-height: normal;margin-bottom: 8px;}
+.about-txt-banner-section .about_sub_text{font-size: 14px;line-height: normal;font-family:var(--argentum);font-weight:300;}
+
+@media screen and (max-width:768px){
+  .about-txt-banner-section .about_row_content p{font-size:20px;}
+}
+
+@media screen and (max-width: 575px){
+  .about-txt-banner-section .about_sub_text{font-size:10px;}
+}

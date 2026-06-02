@@ -1,0 +1,536 @@
+<section class="how_to_Unlock {{ section.settings.custom_class }}" style="background-image: url({{ section.settings.background_img | img_url: "master" }});">
+    <div class="page-width">
+    <div class="how_to_Unlock_werp">
+
+        <!-- LEFT TABS -->
+        <div class="how_to_Unlock_block">
+            {% if section.settings.sub_text != blank %}
+                <h3>{{ section.settings.sub_text }}</h3>
+            {% endif %}
+            
+            {% if section.settings.heading != blank %}
+                <h4>{{ section.settings.heading }}</h4>
+            {% endif %}
+
+            <div class="left_tab_buttons">
+                {% assign index = 0 %}
+                {% for block in section.blocks %}
+                    {% if block.type == 'left_item' %}
+                        <button class="left_tab_button" data-index="{{ index }}">
+                            <h5>{{ block.settings.item_title }}</h5>
+                            {{ block.settings.item_sub_text }}
+                        </button>
+                        {% assign index = index | plus: 1 %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- RIGHT TAB CONTENT -->
+        <div class="how_to_Unlock_tab">
+            {% assign index = 0 %}
+            {% for block in section.blocks %}
+                {% if block.type == 'right_item' %}
+                    <div class="how_to_Unlock_mobile_item_rwap">
+                      <div class="how_to_Unlock_mobile_item">
+                                            <h5>{{ block.settings.item_title }}</h5>
+                                                {{ block.settings.item_sub_text }}
+                                        </div>
+                    <div class="right_tab_content" data-index="{{ index }}">
+                      
+
+                            {%- assign titles = "1,2,3,4" | split: "," -%}
+                            {%- for i in titles -%}
+                                {%- assign title_key = "tab_title_" | append: i -%}
+                                {%- assign text_key = "tab_sub_text_" | append: i -%}
+                                {% if block.settings[title_key] != blank %}
+                                    <div class="how_to_Unlock_tab_block">
+                                    <h5>{{ block.settings[title_key] }}</h5>
+                                    <p>{{ block.settings[text_key] }}</p>
+                                    </div>
+                                {% endif %}
+                            {%- endfor -%}
+
+                        
+                    </div>
+                    </div>
+                    {% assign index = index | plus: 1 %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+</section>
+
+<style>
+
+.how_to_Unlock {
+	 background-position: center;
+	 background-repeat: no-repeat;
+	 background-size: cover;
+}
+ .how_to_Unlock .page-width {
+	 max-width: 1440px;
+	 padding: 0 15px;
+}
+ .how_to_Unlock .how_to_Unlock_werp {
+	 display: flex;
+	 gap: 40px;
+	 flex-wrap: wrap;
+	 padding: 70px 0;
+	 align-items: center;
+}
+
+@media screen and (max-width: 1440px) {
+   .how_to_Unlock .page-width {
+     max-width: 1330px;
+   }
+
+}
+
+
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp {
+		 flex-direction: column;
+		 padding: 56px 0;
+		 gap: 0;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block {
+	 width: calc(60% - 20px);
+	 max-width: 740px;
+	 margin: 0 auto 0 0;
+}
+ @media screen and (max-width: 1200px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block {
+		 width: calc(50% - 20px);
+	}
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block {
+		 width: 100%;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h3 {
+	 font-weight: 300;
+	 font-size: 18px;
+	 line-height: 100%;
+	 vertical-align: middle;
+	 text-transform: uppercase;
+	 margin: 0;
+	 margin-bottom: 10px;
+	 color: #fff;
+	 font-family: var(--argentum);
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4 {
+	 color: #fff;
+	 font-weight: 400;
+	 font-size: 52px;
+	 line-height: 100%;
+	 vertical-align: middle;
+	 text-transform: capitalize;
+	 margin: 0;
+	 margin-bottom: 32px;
+	 text-transform: uppercase;
+}
+
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4 br{
+ display: none;
+}
+
+ @media screen and (max-width: 991px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4 {
+		 font-size: 38px;
+	}
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4 {
+		 margin: 0 0 32px 0;
+		 font-size: 28px;
+		 max-width: 300px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons {
+	 display: flex;
+	 flex-direction: column;
+	 gap: 24px;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button {
+	 display: flex;
+	 flex-direction: column;
+	 gap: 8px;
+	 margin: 0;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button h5 {
+	 color: #828282;
+	 font-weight: 700;
+	 font-size: 24px;
+	 line-height: 100%;
+	 margin: 0;
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button h5 {
+		 margin-bottom: 8px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button p {
+	 color: #828282;
+	 font-weight: 400;
+	 font-size: 20px;
+	 line-height: 100%;
+	 margin: 0;
+	 font-family: var(--font-heading-family) !important;
+	 max-width: 522px;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button p strong {
+	 font-weight: 700;
+}
+ @media screen and (max-width: 991px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button p {
+		 font-size: 18px;
+	}
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block .left_tab_buttons .left_tab_button {
+		 display: none;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab {
+	 width: calc(40% - 20px);
+}
+ @media screen and (max-width: 1200px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab {
+		 width: calc(50% - 20px);
+	}
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab {
+		 width: 100%;
+		 display: flex;
+		 flex-direction: column;
+		 gap: 56px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item {
+	 display: none;
+}
+ @media screen and (max-width: 775px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item {
+		 display: block;
+		 margin-bottom: 32px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item h5 {
+	 color: #fff;
+	 font-weight: 700;
+	 font-size: 24px;
+	 line-height: 100%;
+	 margin: 0;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item p {
+	 color: #fff;
+	 font-weight: 400;
+	 font-size: 20px;
+	 line-height: 100%;
+	 margin: 0;
+	 font-family: var(--font-heading-family) !important;
+	 max-width: 522px;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item p strong {
+	 font-weight: 700;
+}
+ @media screen and (max-width: 991px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item p {
+		 font-size: 18px;
+		 line-height: 22px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content {
+	 flex-direction: column;
+	 gap: 56px;
+}
+ @media screen and (max-width: 991px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content {
+		 gap: 30px;
+		 justify-content: center;
+		 min-height: 100%;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block {
+	 padding: 0;
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block h5 {
+	 color: #fff;
+	 font-weight: 700;
+	 font-size: 20px;
+	 line-height: 100%;
+	 margin: 0;
+}
+ @media screen and (max-width: 400px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block h5 {
+		 font-size: 19px;
+	}
+}
+ .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block p {
+	 color: #fff;
+	 font-weight: 300;
+	 font-size: 20px;
+	 line-height: 24px;
+	 margin: 0;
+}
+ @media screen and (max-width: 400px) {
+	 .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block p {
+		 font-size: 17px;
+		 line-height: 21px;
+	}
+}
+ 
+
+.left_tab_button {
+    display: block;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 20px;
+    padding: 0;
+}
+.left_tab_button p{
+    line-height: 24px !important;
+}
+.right_tab_content { display: none ; }
+.right_tab_content.active { display: flex; }
+.left_tab_button.active h5,
+.left_tab_button.active p {color: #FFFFFF !important;}
+.how_to_Unlock_tab_block {
+    position: relative;
+    padding-left: 20px;
+}
+
+.how_to_Unlock_tab_block::before {
+    content: "";
+    position: absolute;
+    left: -48px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+.right_tab_content {
+    position: relative;
+    padding-left: 65px;
+}
+
+
+/* Vertical line */
+.right_tab_content::before {content: "";position: absolute;left: 21px;top: 15px;width: 1px;height: 90%;background: rgb(189 189 189);}
+
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block:nth-child(1) p {
+    max-width:260px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block:nth-child(2) p {
+    max-width:315px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block:nth-child(3) p {
+    max-width: 270px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content  .how_to_Unlock_tab_block:nth-child(4) p {
+      max-width: 320px;
+}
+
+
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"] .how_to_Unlock_tab_block:nth-child(1) p {
+    max-width: 285px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"] .how_to_Unlock_tab_block:nth-child(2) p {
+    max-width: 200px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"] .how_to_Unlock_tab_block:nth-child(3) p {
+    max-width: 245px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"]  .how_to_Unlock_tab_block:nth-child(4) p {
+    max-width: 230px;
+} 
+@media screen and (max-width: 775px) {
+    {% comment %} .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block:nth-child(2) h5 {
+      max-width: 185px;
+} {% endcomment %}
+{% comment %} .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block:nth-child(4) p {
+    max-width: 225px;
+}
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"] .how_to_Unlock_tab_block:nth-child(1) p {
+    max-width: 265px;
+} {% endcomment %}
+{% comment %} .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content[data-index="1"] .how_to_Unlock_tab_block:nth-child(3) h5 {
+        max-width: 175px;
+} {% endcomment %}
+
+
+}
+
+ @media screen and (max-width: 991px) {
+    .right_tab_content {
+        padding-left: 40px;
+    }
+    .how_to_Unlock_tab_block::before {
+    left: -23px;
+
+}
+.right_tab_content::before {
+    {% comment %} top: 50px;
+    height: calc(100% - 80px);
+    bottom: 0; {% endcomment %}
+
+    height: 84%;
+
+    
+}
+}
+ @media screen and (max-width: 840px) {
+    {% comment %} .right_tab_content::before {
+        height: calc(100% - 92px);
+    } {% endcomment %}
+        {% comment %} .how_to_Unlock_tab .how_to_Unlock_mobile_item_rwap:nth-child(2) .right_tab_content::before {
+    height: calc(100% - 65px);
+} {% endcomment %}
+}
+ @media screen and (max-width: 775px) {
+    {% comment %} .right_tab_content::before {
+        height: calc(100% - 66px);
+        left: 5px;
+    } {% endcomment %}
+    {% comment %} .how_to_Unlock_tab .how_to_Unlock_mobile_item_rwap:nth-child(1) .right_tab_content::before {
+    height: calc(100% - 92px) !important;
+} {% endcomment %}
+     .how_to_Unlock_tab_block::before {
+        left: -38px;
+    }
+    .right_tab_content {
+    display: flex;
+}
+        {% comment %} .how_to_Unlock_tab .how_to_Unlock_mobile_item_rwap:nth-child(2) .right_tab_content::before {
+    height: calc(100% - 80px);
+} {% endcomment %}
+
+.right_tab_content::before{height: 85%;left: 5px;}
+
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h3,
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4,
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item h5,
+.how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block h5{letter-spacing: 0.1px;}
+
+}
+
+
+@media (max-width: 575px){
+
+    
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h3{font-size: 12px;}
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item h5{margin-bottom: 3px;font-size: 20px;}
+    
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item p{letter-spacing: 0.1px;}
+    
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab{gap: 40px;}
+
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4,
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .how_to_Unlock_mobile_item{margin-bottom:16px;}
+
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_tab .right_tab_content .how_to_Unlock_tab_block h5{font-size: 18px;}
+
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4{font-size: 22px;max-width: 100%;}
+
+    .how_to_Unlock .how_to_Unlock_werp .how_to_Unlock_block h4 br{display: block;}
+
+}
+
+ @media screen and (max-width: 400px) {
+    {% comment %} .right_tab_content::before {
+        height: calc(100% - 52px);
+    }
+    .how_to_Unlock_tab .how_to_Unlock_mobile_item_rwap:nth-child(1) .right_tab_content::before {
+        height: calc(100% - 78px) !important;
+        top: 42px;
+    } {% endcomment %}
+        {% comment %} .how_to_Unlock_tab .how_to_Unlock_mobile_item_rwap:nth-child(2) .right_tab_content::before {
+        height: calc(100% - 57px);
+        top: 30px;
+    } {% endcomment %}
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".left_tab_button");
+    const contents = document.querySelectorAll(".right_tab_content");
+
+    if (buttons.length && contents.length) {
+        contents[0].classList.add("active");
+        buttons[0].classList.add("active"); // first button active
+
+        buttons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                const index = btn.dataset.index;
+
+                // remove active from all buttons
+                buttons.forEach((b) => b.classList.remove("active"));
+                // add active to clicked button
+                btn.classList.add("active");
+
+                // manage right content
+                contents.forEach((c) => c.classList.remove("active"));
+                document
+                    .querySelector(`.right_tab_content[data-index="${index}"]`)
+                    .classList.add("active");
+            });
+        });
+    }
+});
+</script>
+
+{% schema %}
+{
+  "name": "How to Unlock",
+  "settings": [
+    { "type": "text", "id": "custom_class", "label": "Custom class" },
+    { "type": "image_picker", "id": "background_img", "label": "Background image" },
+    { "type": "text", "id": "sub_text", "label": "Sub text" },
+    { "type": "html", "id": "heading", "label": "Heading" }
+  ],
+
+  "blocks": [
+    {
+      "type": "left_item",
+      "name": "Left Item",
+      "settings": [
+        { "type": "text", "id": "item_title", "label": "Desktop Item Title" },
+        { "type": "richtext", "id": "item_sub_text", "label": "DesktopItem Sub Text" }
+      ]
+    },
+    {
+      "type": "right_item",
+      "name": "Right Tab Item",
+      "settings": [
+          { "type": "text", "id": "item_title", "label": "Mobile Item Title" },
+        { "type": "richtext", "id": "item_sub_text", "label": "Mobile Item Sub Text" },
+
+        { "type": "text", "id": "tab_title_1", "label": "Tab Title 1" },
+        { "type": "textarea", "id": "tab_sub_text_1", "label": "Tab Sub Text 1" },
+
+        { "type": "text", "id": "tab_title_2", "label": "Tab Title 2" },
+        { "type": "textarea", "id": "tab_sub_text_2", "label": "Tab Sub Text 2" },
+
+        { "type": "text", "id": "tab_title_3", "label": "Tab Title 3" },
+        { "type": "textarea", "id": "tab_sub_text_3", "label": "Tab Sub Text 3" },
+
+        { "type": "text", "id": "tab_title_4", "label": "Tab Title 4" },
+        { "type": "textarea", "id": "tab_sub_text_4", "label": "Tab Sub Text 4" }
+      ]
+    }
+  ],
+
+  "presets": [
+    { "name": "How to Unlock" }
+  ]
+}
+{% endschema %}

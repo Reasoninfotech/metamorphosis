@@ -1,0 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-login",
+      "settings": {
+        "subtitle": "",
+        "image": "shopify://shop_images/collage-17_1_1049x_2x_c275d0a6-8a27-4c28-baf4-3b801e9dacae.webp"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "<p>Enter our world of wonders</p>",
+        "heading_animation": true,
+        "sub_title": "",
+        "newsletter_text": "<p>✨Have a question, suggestion, or inquiry? We're all ears! ✨</p><p>Drop a message and start a conversation.</p><p>Your thoughts are important to us, </p><p>and we promise to respond with the same enthusiasm!!</p>",
+        "button_style": "primary",
+        "border_top": false
+      }
+    },
+    "image-collage": {
+      "type": "image-collage",
+      "disabled": true,
+      "settings": {
+        "sub_title": "Subheading",
+        "title": "<p> <em> Heading for </em> Image collage</p>",
+        "name_account": "For instance account name",
+        "desc_account": "For instance account followers",
+        "button_label": "Explore",
+        "button_link": "",
+        "button_style": "secondary"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "newsletter",
+    "image-collage"
+  ]
+}

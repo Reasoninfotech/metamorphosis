@@ -1,0 +1,715 @@
+{% style %}
+ @keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.5, 1.5);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+.img-with-tooltip .main_title{margin-bottom: 48px;}  
+
+.img-with-tooltip .img_with_text_block figure{overflow: hidden;position: relative;}
+.img-with-tooltip .img_with_text_block figure img{width: 100%;vertical-align: middle;object-fit: cover;}
+.img-with-tooltip .img_with_text_block figure .mobile-img{display:none;}
+
+.img-with-tooltip .img_with_text_block .tooltip .hot-dot-wrp{position: absolute;left: 0;top: 0;padding: 5px;cursor: pointer;width: fit-content;background: transparent;color: #000;border-radius: 50px;display: block;box-shadow: 0 0 10px #fff;animation: zoom-in-zoom-out 5s ease-out infinite;}
+.img-with-tooltip .img_with_text_block .tooltip .hot-dot-wrp .hotspot__dot{display: block;width: 18px;height: 18px;border-radius: 50px;border:1px solid #fff;}
+.img-with-tooltip .img_with_text_block .tooltip .hot-dot-wrp.active .hotspot__dot{background: #fff;border: unset;}
+
+.img-with-tooltip .img_with_text_block .hot-colse{position: absolute;background: #fff;padding: 5px;cursor: pointer;width: fit-content;background: #fff;color: #000;display:flex;right: 0;top: 0;}
+
+.img-with-tooltip .tooltip-pro-frist{position: absolute;left: 0;top: 0;display: none;background: #fff;padding: 24px;transform: translateX(13%);width: 80%;z-index: 1;flex-direction: column;max-width: 250px;gap:16px;}
+
+  .img-with-tooltip .tooltip-pro-frist .product-img img {
+    max-height: 200px;
+    object-fit: contain;
+}
+  
+.img-with-tooltip .pro_title{display: flex;flex-direction: column;text-align: center;}
+.img-with-tooltip .pro_title a{text-decoration: none;font-weight: 700;line-height: normal;font-size: 20px;max-width: 200px;margin: 0 auto;}
+.img-with-tooltip .pro_title .price-money{color: #CA003D;font-weight: 700;font-size: 24px;line-height: normal;}
+
+.img-with-tooltip .product-form__buttons{text-align:center;}
+.img-with-tooltip .cus_add_to_cart .common_btn{min-width: 80%;background: transparent;}
+  
+.img-with-tooltip figcaption{max-width: 970px;margin: 48px auto 0;text-align: center;}
+.img-with-tooltip figcaption p{margin:0;font-size: 20px;line-height: normal;color:#000;}
+
+.img-with-tooltip .img-tooltip_btn_wrp{margin-top: 48px;text-align: center;}
+
+
+@media screen and (max-width:1199px){
+  .img-with-tooltip .pro_title a{font-size:18px;}
+}  
+
+@media screen and (max-width:991px){
+  .img-with-tooltip .img_with_text_block figure .des_img{display:none;}
+  .img-with-tooltip .img_with_text_block figure .mobile-img{display:block;}
+
+  .img-with-tooltip .tooltip.ttip_1 .hot-dot-wrp{top: {{ section.settings.mobile-top-postion }}%!important;left: {{ section.settings.mobile-left-postion }}%!important;}
+  .img-with-tooltip .tooltip.ttip_2 .hot-dot-wrp{top: {{ section.settings.mobile-top-postion2 }}%!important;left: {{ section.settings.mobile-left-postion2 }}%!important;}
+  .img-with-tooltip .tooltip.ttip_3 .hot-dot-wrp{top: {{ section.settings.mobile-top-postion3 }}%!important;left: {{ section.settings.mobile-left-postion3 }}%!important;}
+
+  .img-with-tooltip .tooltip.ttip_1 .tooltip-pro-frist,
+  .img-with-tooltip .tooltip.ttip_2 .tooltip-pro-frist,
+  .img-with-tooltip .tooltip.ttip_3 .tooltip-pro-frist{top:50%!important;left:50%!important;transform: translate(-50%, -50%);}
+
+}  
+
+@media screen and (max-width:768px){
+  .img-with-tooltip .pro_title a{font-size:16px;max-width: 100%;}
+  .img-with-tooltip .cus_add_to_cart .common_btn{min-width:100%;padding:10px;}
+  .img-with-tooltip .pro_title .price-money{fomnt-size:20px;}
+}
+
+@media screen and (max-width:575px){
+  .img-with-tooltip .main_title{margin-bottom: 32px;}
+  .img-with-tooltip .tooltip-pro-frist{gap:10px;}
+  .img-with-tooltip figcaption{margin: 32px auto 0;}
+  .img-with-tooltip .img-tooltip_btn_wrp{margin-top: 32px;}
+  .img-with-tooltip .img-tooltip_btn_wrp .common_btn{min-width: 280px;}
+ .img-with-tooltip .tooltip-pro-frist {
+    padding: 24px;
+} 
+}
+
+@media screen and (max-width:400px){
+  .img-with-tooltip .tooltip-pro-frist {
+    padding: 10px;
+} 
+}  
+  
+{% endstyle %}
+
+
+<section class="section_{{ section.id }} img-with-tooltip pb_90">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+     <h2 class="main_title">{{ section.settings.title }}</h2>
+    {% endif %}
+    <div class="img_with_text_block">
+     {% if section.settings.img != blank or section.settings.mobile-img != blank %} 
+      <figure>
+        <img class="des_img" src="{{ section.settings.img | img_url : "master" }}" alt="{{  section.settings.img.alt }}" loading="lazy">
+        <img class="mobile-img" src="{{ section.settings.mobile-img | img_url : "master" }}" alt="{{ section.settings.mobile-img.alt }}" loading="lazy">
+
+           <div class="tooltip ttip_1">
+                  <a class="hot-dot-wrp" style="left:{{ section.settings.left-postion }}%; top: {{ section.settings.top-postion }}%;" >
+                    <span class="hotspot__dot"></span>
+                  </a>
+              
+                  {% assign poduct_frist = section.settings.product %}
+                  {% if poduct_frist.featured_media != blank %}
+                    <div class="tooltip-pro-frist" style="left:{{ section.settings.left-postion }}%;top:{{section.settings.top-postion }}%;">
+                     {% comment %}
+                     <a class="hot-colse">
+                        <svg class="icon icon--close" aria-hidden="true" focusable="false" role="presentation" width="24" height="24" viewBox="0 0 24 24" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M19.385 18.94a.5.5 0 1 1-.707.706L12 12.97l-6.678 6.677a.5.5 0 1 1-.707-.707l6.678-6.677-6.908-6.908a.5.5 0 0 1 .707-.708L12 11.555l6.908-6.909a.5.5 0 1 1 .707.708l-6.908 6.908 6.678 6.677Z" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}"></path>
+                        </svg>
+                      </a>
+                    {% endcomment %} 
+                      {% if poduct_frist.featured_media != blank %}
+                        <a href="{{ poduct_frist.url }}">
+                        <div class="product-img">
+                          {% if section.settings.tooltip_img_1 != blank %}
+                            <img class="product-call" src="{{ section.settings.tooltip_img_1 | img_url:"210x" }}" loading="lazy">
+                          {% else %}
+                            <img class="product-call" src="{{ poduct_frist.featured_media | img_url:"210x" }}" loading="lazy">
+                          {% endif %}
+                        </div>
+                        </a>
+                      {% endif %}
+                      {% if poduct_frist.url != blank or poduct_frist.title != blank %}
+                        <div class="pro_title">
+                          <a href="{{ poduct_frist.url }}">
+                            {% if poduct_frist.metafields.Product.list_title %}
+                            {{ poduct_frist.metafields.Product.list_title }}
+                            {% else %}
+                            {{- poduct_frist.title -}}
+                            {% endif %}
+                          </a>
+                          <span class="price-money">{{ poduct_frist.price | money }}</span>
+                        </div>
+                      {% endif %}
+                      <div class="cus_add_to_cart">
+                    {%- liquid
+                    assign gift_card_recipient_feature_active = false
+                    if  product.gift_card?
+                      assign gift_card_recipient_feature_active = true
+                    endif
+
+                    assign show_dynamic_checkout = false
+                    if gift_card_recipient_feature_active == false
+                      assign show_dynamic_checkout = true
+                    endif
+                  -%}
+
+                  <product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        role="presentation"
+                        class="icon icon-error"
+                        viewBox="0 0 13 13"
+                      >
+                        <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/></circle>
+                        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/></circle>
+                        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></path>
+                        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>
+                      </svg>
+                      <span class="product-form__error-message"></span>
+                    </div>
+                    {%- assign product_form_id = 'product-form-' | append: section.id -%}      
+                    {%- form 'product', poduct_frist, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ poduct_frist.selected_or_first_available_variant.id }}" disabled>
+
+                      <div class="product-form__buttons" style="margin:0;">
+                        <button
+                          id="ProductSubmitButton-{{ section.id }}"
+                          type="submit"
+                          name="add"
+                          class="product-form__submit common_btn"
+                            {% if poduct_frist.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}
+                          
+                          {% if poduct_frist.selected_or_first_available_variant.available == false %}
+                            disabled
+                          {% endif %}
+                        >
+                          {%- if poduct_frist.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </button>
+                      </div>
+                    {%- endform -%}
+                  </product-form>
+
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+
+               <div class="tooltip ttip_2">
+                  <a class="hot-dot-wrp" style="left:{{ section.settings.left-postion2 }}%; top: {{ section.settings.top-postion2 }}%;">
+                    <span class="hotspot__dot"></span>
+                  </a>
+                  {% assign poduct_second = section.settings.product_two %}
+                  {% if poduct_second.featured_media != blank %}
+                    <div class="tooltip-pro-frist" style="left:{{ section.settings.left-postion2 }}%;top:{{section.settings.top-postion2 }}%;">
+                      {% comment %}
+                      <a class="hot-colse">
+                        <svg class="icon icon--close" aria-hidden="true" focusable="false" role="presentation" width="24" height="24" viewBox="0 0 24 24" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M19.385 18.94a.5.5 0 1 1-.707.706L12 12.97l-6.678 6.677a.5.5 0 1 1-.707-.707l6.678-6.677-6.908-6.908a.5.5 0 0 1 .707-.708L12 11.555l6.908-6.909a.5.5 0 1 1 .707.708l-6.908 6.908 6.678 6.677Z" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}"></path>
+                        </svg>
+                      </a>
+                    {% endcomment %}
+                      {% if poduct_second.featured_media != blank %}
+                        <a href="{{ poduct_second.url }}">
+                        <div class="product-img">
+                          {% if section.settings.tooltip_img_2 != blank %}
+                            <img class="product-call" src="{{ section.settings.tooltip_img_2 | img_url:"210x" }}" loading="lazy" alt="">
+                          {% else %}
+                            <img class="product-call" src="{{ poduct_second.featured_media | img_url:"210x" }}" loading="lazy" alt="">
+                          {% endif %}
+                        </div>
+                        </a> 
+                      {% endif %}
+                      {% if poduct_second.url != blank or poduct_second.title != blank %}
+                        <div class="pro_title">
+                          <a href="{{ poduct_second.url }}">
+                            {% if poduct_second.metafields.Product.list_title != blank %} 
+                              {{ poduct_second.metafields.Product.list_title }}
+                            {% else %}
+                            {{- poduct_second.title -}}
+                            {% endif %}
+                          </a>
+                          <span class="price-money">{{ poduct_second.price | money }}</span>
+                        </div>
+                      {% endif %}
+                         <div class="cus_add_to_cart">
+                    {%- liquid
+                    assign gift_card_recipient_feature_active = false
+                    if  product.gift_card?
+                      assign gift_card_recipient_feature_active = true
+                    endif
+
+                    assign show_dynamic_checkout = false
+                    if gift_card_recipient_feature_active == false
+                      assign show_dynamic_checkout = true
+                    endif
+                  -%}
+
+                  <product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+                    <div class="product-form__error-message-wrapper" role="alert" hidden>
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        role="presentation"
+                        class="icon icon-error"
+                        viewBox="0 0 13 13"
+                      >
+                        <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/></circle>
+                        <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/></circle>
+                        <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></path>
+                        <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>
+                      </svg>
+                      <span class="product-form__error-message"></span>
+                    </div>
+                    {%- assign product_form_id = 'product-form-' | append: section.id -%}      
+                    {%- form 'product', poduct_second, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                      <input type="hidden" name="id" value="{{ poduct_second.selected_or_first_available_variant.id }}" disabled>
+
+                      <div class="product-form__buttons" style="margin:0;">
+                        <button
+                          id="ProductSubmitButton-{{ section.id }}"
+                          type="submit"
+                          name="add"
+                          class="product-form__submit common_btn"
+                            {% if poduct_second.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}
+                          
+                          {% if poduct_second.selected_or_first_available_variant.available == false %}
+                            disabled
+                          {% endif %}
+                        >
+                          {%- if poduct_second.selected_or_first_available_variant.available -%}
+                            {{ 'products.product.add_to_cart' | t }}
+                          {%- else -%}
+                            {{ 'products.product.sold_out' | t }}
+                          {%- endif -%}
+                        </button>
+                      </div>
+                    {%- endform -%}
+                  </product-form>
+
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+
+               <div class="tooltip ttip_3">
+                  <a class="hot-dot-wrp" style="left:{{ section.settings.left-postion3 }}%; top: {{ section.settings.top-postion3 }}%;">
+                    <span class="hotspot__dot"></span>
+                  </a>
+                 {% assign product_third = section.settings.product_three %}
+                  {% if product_third.featured_media != blank %}
+                    <div class="tooltip-pro-frist" style="left:{{ section.settings.left-postion3 }}%;top:{{section.settings.top-postion2 }}%;">
+                      {% comment %}
+                      <a class="hot-colse">
+                        <svg class="icon icon--close" aria-hidden="true" focusable="false" role="presentation" width="24" height="24" viewBox="0 0 24 24" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}">
+                          <path fill-rule="evenodd" clip-rule="evenodd" d="M19.385 18.94a.5.5 0 1 1-.707.706L12 12.97l-6.678 6.677a.5.5 0 1 1-.707-.707l6.678-6.677-6.908-6.908a.5.5 0 0 1 .707-.708L12 11.555l6.908-6.909a.5.5 0 1 1 .707.708l-6.908 6.908 6.678 6.677Z" bis_size="{&quot;x&quot;:0,&quot;y&quot;:700,&quot;w&quot;:0,&quot;h&quot;:0,&quot;abs_x&quot;:0,&quot;abs_y&quot;:761}"></path>
+                        </svg>
+                      </a>
+                      {% endcomment %}
+                      {% if product_third.featured_media != blank %}
+                        <a href="{{ product_third.url }}">
+                          <div class="product-img">
+                            {% if section.settings.tooltip_img_3 != blank %}
+                              <img class="product-call" src="{{ section.settings.tooltip_img_3 | img_url:"210x" }}" loading="lazy" alt="">
+                            {% else %}
+                              <img class="product-call" src="{{ product_third.featured_media | img_url:"210x" }}" loading="lazy" alt="">
+                            {% endif %}
+                          </div>
+                        </a>
+                      {% endif %}
+                      {% if product_third.url != blank or product_third.title != blank %}
+                        <div class="pro_title">
+                          <a href="{{ product_third.url }}">
+                            {% if product_third.metafields.Product.list_title != blank %}
+                            {{ product_third.metafields.Product.list_title }}
+                            {% else %}
+                            {{- product_third.title -}}
+                            {% endif %}
+                          </a>
+                          <span class="price-money">{{ product_third.price | money }}</span>
+                        </div>
+                      {% endif %}
+                         <div class="cus_add_to_cart">
+                    {%- liquid
+                    assign gift_card_recipient_feature_active = false
+                    if  product.gift_card?
+                      assign gift_card_recipient_feature_active = true
+                    endif
+
+                    assign show_dynamic_checkout = false
+                    if gift_card_recipient_feature_active == false
+                      assign show_dynamic_checkout = true
+                    endif
+                  -%}
+
+                        <product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+                          <div class="product-form__error-message-wrapper" role="alert" hidden>
+                            <svg
+                              aria-hidden="true"
+                              focusable="false"
+                              role="presentation"
+                              class="icon icon-error"
+                              viewBox="0 0 13 13"
+                            >
+                              <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/></circle>
+                              <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/></circle>
+                              <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></path>
+                              <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>
+                            </svg>
+                            <span class="product-form__error-message"></span>
+                          </div>
+                          {%- assign product_form_id = 'product-form-' | append: section.id -%}      
+                          {%- form 'product', product_third, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                            <input type="hidden" name="id" value="{{ product_third.selected_or_first_available_variant.id }}" disabled>
+      
+                            <div class="product-form__buttons" style="margin:0;">
+                              <button
+                                id="ProductSubmitButton-{{ section.id }}"
+                                type="submit"
+                                name="add"
+                                class="product-form__submit common_btn"
+                                  {% if product_third.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}
+                                
+                                {% if product_third.selected_or_first_available_variant.available == false %}
+                                  disabled
+                                {% endif %}
+                              >
+                                {%- if product_third.selected_or_first_available_variant.available -%}
+                                  {{ 'products.product.add_to_cart' | t }}
+                                {%- else -%}
+                                  {{ 'products.product.sold_out' | t }}
+                                {%- endif -%}
+                              </button>
+                            </div>
+                          {%- endform -%}
+                        </product-form>
+
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+        
+      </figure>
+     {% endif %} 
+      {% if section.settings.content != blank %}
+         <figcaption>{{ section.settings.content }}</figcaption>
+      {% endif %}
+      {% if section.settings.url != blank or section.settings.btn != blank %}
+      <div class="img-tooltip_btn_wrp">
+         <a href="{{ section.settings.url }}" class="common_btn">{{ section.settings.btn }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+
+<script>
+// document.addEventListener("DOMContentLoaded", function () {
+//   document.querySelectorAll(".hot-dot-wrp").forEach(function (hotDot) {
+//     hotDot.addEventListener("click", function () {
+//       document.querySelectorAll(".hot-dot-wrp").forEach(function (dot) {
+//         dot.classList.remove("active");
+//       });
+//       this.classList.add("active");
+//       document.querySelectorAll(".tooltip-pro-frist").forEach(function (tooltip) {
+//         tooltip.style.display = "none";
+//       });
+//       const siblingTooltip = this.parentElement.querySelector(".tooltip-pro-frist");
+//       if (siblingTooltip) {
+//         siblingTooltip.style.display = "flex";
+//       }
+//     });
+//   });
+
+//   document.querySelectorAll(".hot-colse").forEach(function (hotClose) {
+//     hotClose.addEventListener("click", function () {
+//       const tooltip = this.closest(".tooltip");
+//       if (tooltip) {
+//         const hotDot = tooltip.querySelector(".hot-dot-wrp");
+//         if (hotDot) {
+//           hotDot.classList.remove("active");
+//         }
+//         const parentTooltip = this.parentElement;
+//         if (parentTooltip && parentTooltip.classList.contains("tooltip-pro-frist")) {
+//           parentTooltip.style.display = "none";
+//         }
+//       }
+//     });
+//   });
+// });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   document.querySelectorAll(".hot-dot-wrp").forEach(function (hotDot) {
+//   hotDot.addEventListener("click", function () {
+//     const isActive = this.classList.contains("active");
+    
+//     // Remove active class and hide all tooltips
+//     document.querySelectorAll(".hot-dot-wrp").forEach(function (dot) {
+//       dot.classList.remove("active");
+//     });
+//     document.querySelectorAll(".tooltip-pro-frist").forEach(function (tooltip) {
+//       tooltip.style.display = "none";
+//     });
+
+//     // If the clicked dot was not active, activate it and show tooltip
+//     if (!isActive) {
+//       this.classList.add("active");
+//       const siblingTooltip = this.parentElement.querySelector(".tooltip-pro-frist");
+//       if (siblingTooltip) {
+//         siblingTooltip.style.display = "flex";
+//       }
+//     }
+//   });
+// });
+//  });
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".hot-dot-wrp").forEach(function (hotDot) {
+    hotDot.addEventListener("click", function (event) {
+        event.stopPropagation(); // Prevent body click event from triggering
+
+        const siblingTooltip = this.parentElement.querySelector(".tooltip-pro-frist");
+        const isActive = this.classList.contains("active");
+
+        // Remove active class and hide tooltips for all
+        document.querySelectorAll(".hot-dot-wrp").forEach(dot => dot.classList.remove("active"));
+        document.querySelectorAll(".tooltip-pro-frist").forEach(tooltip => tooltip.style.display = "none");
+
+        // Toggle only for the clicked one
+        if (!isActive) {
+            this.classList.add("active");
+            siblingTooltip.style.display = "flex";
+        }
+    });
+});
+
+// Click anywhere on the body to remove active state and hide tooltips
+document.body.addEventListener("click", function () {
+    document.querySelectorAll(".hot-dot-wrp").forEach(dot => dot.classList.remove("active"));
+    document.querySelectorAll(".tooltip-pro-frist").forEach(tooltip => tooltip.style.display = "none");
+});
+});
+
+  
+</script>
+
+
+{% schema %}
+{
+    "name": "Image with tooltip",
+	"class":"shopify-section--img_slider_ttip",
+    "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Section Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "img",
+          "label": "Desktop Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile-img",
+          "label": "Mobile Image"
+        },
+        {
+          "type": "header",
+          "content": "Tooltip 1 Desktop Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "tooltip_img_1",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Tooltip1 Product"
+        },
+        {
+          "type": "range",
+          "id": "top-postion",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "left-postion",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Tooltip 1 Mobile Settings"
+        },
+        {
+          "type": "range",
+          "id": "mobile-top-postion",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "mobile-left-postion",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Tooltip 2 Desktop Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "tooltip_img_2",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product_two",
+          "label": "Tooltip2 Product"
+        },
+        {
+          "type": "range",
+          "id": "top-postion2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "left-postion2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+         "type": "header",
+          "content": "Tooltip 2 Mobile Settings"
+        },
+        {
+          "type": "range",
+          "id": "mobile-top-postion2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "mobile-left-postion2",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "Tooltip 3 Desktop Settings"
+        },
+        {
+          "type": "image_picker",
+          "id": "tooltip_img_3",
+          "label": "Image"
+        },
+        {
+          "type": "product",
+          "id": "product_three",
+          "label": "Tooltip3 Product"
+        },
+        {
+          "type": "range",
+          "id": "top-postion3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "left-postion3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+         "type": "header",
+          "content": "Tooltip 3 Mobile Settings"
+        },
+        {
+          "type": "range",
+          "id": "mobile-top-postion3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Top Postion",
+          "default": 1
+        },
+        {
+          "type": "range",
+          "id": "mobile-left-postion3",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Left Postion",
+          "default": 1
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type":"text",
+          "id":"btn",
+          "label":"Button Label"
+        },
+        {
+          "type":"url",
+          "id":"url",
+          "label":"Url to Navigate"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Image with tooltip"
+        }
+    ]
+}
+{% endschema %}

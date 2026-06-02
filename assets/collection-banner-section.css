@@ -1,0 +1,109 @@
+.collection-banner-section .collection-mobile-banner{display:none;}
+
+.collection-banner-section .collection-banner-wrp{position:relative;}
+
+.collection_text_block_wrp{max-width: 750px;}
+
+.collection_text_block_wrp .main_title{font-size: 60px;line-height: 55px;font-weight: 500;color:#fff;}
+
+.collection-banner-section figure img{width: 100%;object-fit: cover;vertical-align: middle;min-height: 400px;object-position: top;}
+
+.collection-banner-section .collection-subtext{text-align: center;font-size: 30px;line-height: 30px;text-transform: uppercase;display: block;max-width: 100%;margin: 0 auto; padding-bottom: 16px;font-weight: 300;letter-spacing: 0;text-transform: unset;}
+.collection-banner-section .collection-text-block{position: absolute;top: 54.5%;left: 3.5;transform: translateY(-50%);text-align: center;width: 100%;}
+.collection-banner-section .collection-text-block .page-width{max-width: 1500px;}
+.collection-banner-section .collection_content{max-width: 605px;margin: 0 auto;}
+
+.collection-banner-section .collection_content p{font-family: var(--argentum);margin-bottom: 0;margin-top:16px;font-size: 22px;line-height: normal;font-weight:300; text-transform: uppercase;}
+
+ .collection-banner-section .star-rating{display: flex;
+  /* flex-wrap: wrap; */
+  align-items: center;gap: 8px;justify-content: center;margin-bottom: 14px;}
+ .collection-banner-section .star-rating .star_rating_block{display: flex;gap: 5px;flex-shrink: 0;}
+ .collection-banner-section .star-rating .star_rating_block svg{width: 16px;height: 16px;}
+ .collection-banner-section .star-rating span{line-height: normal;font-size: 14px;font-family: var(--argentum);font-weight: 300;letter-spacing:0;text-transform: uppercase;}
+
+
+ @media (max-width: 1599px){
+  .collection-banner-section .collection-text-block{top: 50%;}
+ }
+
+/* @media (max-width: 1399px){ 
+  .collection-banner-section .collection-text-block{left: 3.5%;}
+ } */
+
+ 
+@media (max-width: 1199px){
+  .collection_text_block_wrp .main_title{font-size: 55px;line-height: 55px;}
+  .collection-banner-section .collection-subtext{
+    /* max-width: 550px; */
+    /* font-size: 24px; */
+  }
+  .collection-banner-section figure img{min-height: 350px;}
+
+  .collection-banner-section .collection-text-block{left: 0;}
+}
+
+@media (max-width: 991px){
+  .collection-banner-section .collection-subtext{font-size: 20px;}
+}
+
+@media screen and (max-width:767px){
+.collection-banner-section .collection-desktop-banner{display:none;}
+.collection-banner-section .collection-mobile-banner{display: block;}
+
+.collection-banner-section .collection-text-block{padding:0 15px;padding: 0 15px;bottom: 30px;top: unset;transform: unset;}
+
+.collection_text_block_wrp .main_title {font-size: 45px;line-height: 45px;color: #fff;max-width: 520px;
+        margin: 0 auto;}
+.collection-banner-section .collection_content p{font-size:16px;color: #fff;}
+
+.collection-banner-section .collection-subtext{max-width: 100%;
+  /* font-size: 24px; */
+}
+
+.collection-banner-section figure img{min-height: 450px;}
+.collection_text_block_wrp{max-width: 100%;}
+
+.collection-banner-section figure img{min-height: auto;}
+
+
+  .collection-banner-section figure {
+  position: relative;
+}
+/* .collection_text_block_wrp .main_title br{display: none;} */
+}
+
+@media (max-width: 575px){
+  
+  .collection_text_block_wrp .main_title{font-size: 34px!important;line-height: 32px;}
+  .collection-banner-section .collection-subtext{font-size: 18px;line-height: 22px;
+    max-width: 100%;
+    /* max-width: 355px; */
+     margin:0 auto;}
+     .collection-banner-section .collection_content p br{display: none;}
+  /* .collection-banner-section .collection-subtext br{display: none;} */
+  .collection-banner-section .collection-text-block .page-width{padding:0;}
+  .collection-banner-section figure img{min-height: 450px;}
+
+  .collection-banner-section .star-rating{margin-bottom: 10px;}
+  .collection-banner-section .star-rating .star_rating_block{gap: 3px;}
+
+  .collection-banner-section .star-rating .star_rating_block svg {width: 12px;height: 12px;}
+  .collection-banner-section .star-rating span{font-size: 10px;}
+}
+@media (max-width: 429px){
+  .collection_text_block_wrp .main_title {
+        font-size: 30px !important;
+        line-height: 32px;
+    }
+    .collection_text_block_wrp .main_title br{display: none;}
+}
+@media (max-width: 374px){
+    .collection_text_block_wrp .main_title {
+        font-size: 28px !important;
+        line-height: 30px;
+    }
+    .collection-banner-section .collection_content p {
+        font-size: 12px;
+    }
+}

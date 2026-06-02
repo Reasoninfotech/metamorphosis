@@ -1,0 +1,176 @@
+<style>
+  
+.sticky-add {display:none; position: fixed;bottom: 0;left: 0;right: 0;z-index: 9999;}
+
+.sticky-add_col img {max-width: 124px;max-height: 90px;border-radius: 8px;display: block;}
+.sticky-add_row {max-width: 100%;margin: auto;display: flex;gap: 8px;padding: 10px 80px;background: #fff;box-shadow: 0 0 4px #00000040;margin: 0 auto;min-height: 82px;align-items: center;}
+
+.sticky-add_text {display: flex;gap: 30px;width: calc(100% - 120px);height: auto;align-items: center;}
+.sticky-add_text_row h4 {font-size: 20px;margin: 0;margin-bottom: 5px;line-height: 1.21;letter-spacing: 0;font-weight:600;}
+.sticky-add_text_row p {font-size: 24px;line-height: 1.2;margin: 0;font-family: var(--argentum);color: #CA003D;font-weight: 300;margin-top: 10px;font-family: var(--font-body-family);}
+
+.sticky-add_btn .common_btn{background: transparent;min-width:280px;}
+.sticky_price_block{display: flex;gap: 10px;align-items: center;}
+
+.sticky_price_block .sticky_compare_price,
+.sticky_price_block .sticky_compare_price s{color: #000;text-decoration-color: #000;font-size: 18px;}
+
+@media screen and (max-width:1399px){
+  .sticky-add_row{padding:10px 30px;}
+  .sticky-add_text{gap:15px;}
+  .sticky-add_col img{max-width:110px;}
+}  
+  
+
+@media(max-width:767px) {
+
+  .sticky-add_row{padding:10px;gap:60px;}
+  
+  /* .sticky-add_text{flex-direction: column;width:calc(35% - 30px);} */
+  /* .sticky-add_text_row{text-align:center;} */
+
+  /* .sticky-add_btn{width:calc(65% - 30px);text-align: center;} */
+
+  .sticky-add_col img {max-width: 90px;}
+  
+  .sticky-add_text_row h4 {font-size: 18px;margin-bottom: 9px;}
+  .sticky-add_text_row p {font-size: 16px;}
+
+  .sticky-add_btn .common_btn{min-width: 200px;}
+}  
+
+@media(max-width:575px) {
+
+  .sticky-add_row{gap:20px}
+
+  .sticky-add_text{width:calc(70% - 10px);}
+  .sticky-add_btn{width:calc(30% - 10px);}
+  
+  .sticky-add_btn .common_btn{min-width:100%;padding: 8px 16px;font-weight: 300;}
+
+  .sticky-add_col img {max-width: 58px;}
+  .sticky-add_text_row h4 {font-size: 14px;margin-bottom: 0;}
+
+  .sticky-add_text_row p{font-size: 16px;margin-top: 5px;}
+
+}
+</style>
+
+<div class="sticky-add">
+  <div class="sticky-add_row">
+    <div class="sticky-add_text">
+      <div class="sticky-add_col">
+        {% if product.metafields.product.sticky_img != blank %}
+          <img src="{{ product.metafields.product.sticky_img }}" loading="lazy" alt="">
+        {% else %}
+          <img src="{{ product.featured_image | img_url:'master' }}" loading="lazy" alt="{{ product.featured_image.alt | escape }}">
+        {% endif %}
+      </div>
+      <div class="sticky-add_text_row">
+        <h4>
+          {% if product.metafields.Product.list_title != blank %}
+            {{ product.metafields.Product.list_title }}
+          {% else %}
+            {{ product.title }}
+          {% endif %}
+        </h4>
+        <div class="sticky_price_block">
+         <p class="sticky_compare_price"> <s>{{ product.compare_at_price | money }}</s></p>
+          <p>{{ product.price | money }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="sticky-add_btn">
+      <button class="common_btn" title="Buy" data-id="{{ product.selected_or_first_available_variant.id }}">BUY NOW{% comment %}- {{ product.price | money_without_trailing_zeros }}{% endcomment %}</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  
+window.addEventListener('load', function() {
+  const stickyAddButton = document.querySelector('.sticky-add_btn');
+  const productSubmitButton = document.querySelector('.product-form__submit');
+
+  if (stickyAddButton && productSubmitButton) {
+    stickyAddButton.addEventListener('click', function() {
+      productSubmitButton.click();
+    });
+  }
+});
+
+if (document.querySelector('.sticky-add')) {
+
+  window.addEventListener('scroll', function () {
+    var btnElement = document.querySelector('.product__info-container .cus_product_form');
+    var footerElement = document.querySelector('footer');
+
+    if (btnElement && footerElement) {
+      var btnPos = btnElement.getBoundingClientRect().top + window.scrollY;
+      var footerPosTop = footerElement.getBoundingClientRect().top + window.scrollY;
+      var footerPosBtm = footerPosTop + footerElement.offsetHeight;
+      var viewportTop = window.scrollY;
+      var viewportBottom = window.innerHeight + window.scrollY;
+
+      var stickyCart = document.querySelector('.sticky-add');
+      if (viewportTop > btnPos && viewportBottom < footerPosTop) {
+        stickyCart.style.display = 'block';
+        stickyCart.style.opacity = '1';
+        stickyCart.style.transition = 'opacity 0.5s';
+      } else {
+        stickyCart.style.opacity = '0.5s';
+        setTimeout(function () {
+          stickyCart.style.display = 'none';
+        }, 500);
+      }
+    }
+  });
+}
+
+  $(document).ready(function(){
+         $('.sticky-add .sticky-add_btn .common_btn').click(function(event){
+         event.preventDefault();
+        let formData = {
+             'items': [{
+             'id': $(this).data('id'),
+             'quantity': 1
+             }]
+            };
+         fetch(window.Shopify.routes.root + 'cart/add.js', {
+             method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+           },
+             body: JSON.stringify(formData)
+            })
+            .then(response => {
+              return response.json();
+           })
+              .then(response => {
+                window.location.href = "/checkout";
+           })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+     });
+
+ });
+  
+
+
+  
+</script>
+
+{% schema %}
+  {
+    "name": "Product Sticky Add",
+    "settings": [],
+    "presets": [
+      {
+        "name":"Product Sticky Add"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,31 @@
+/* .about_banner_section .about_img_text_wrap{background-repeat: no-repeat;background-position: right;background-size: cover;min-height:811px;display: flex;align-items: center;} */
+.about_banner_section .about_img_text_wrap{background-repeat: no-repeat;background-position: right;background-size: cover;min-height:700px;display: flex;align-items: center;}
+.about_banner_section .page-width{width:100%;}
+
+.about_banner_section .main_title{margin:0 auto 24px;text-transform: uppercase; max-width: 415px;}
+
+.about_banner_section .about-text-wrp{max-width: 640px;text-align: center;height: 100%;}
+.about_banner_section .about-text-wrp .about-text-content{max-width: 470px;margin: 0 auto;}
+.about_banner_section .about-text-content p{font-size:20px;line-height:normal;margin:0;margin-bottom:15px;}
+.about_banner_section .about-text-content p:last-child{margin:0;}
+
+.about_banner_section .about-btn-wrp{margin-top: 48px;}
+.about_banner_section .about-btn-wrp .common_btn{min-width:280px;}
+
+@media screen and (max-width:1199px){
+  .about_banner_section .about-text-wrp{max-width: 500px;}
+  .about_banner_section .about-btn-wrp{margin-top:32px;}
+}
+
+@media screen and (max-width:991px){
+ .about_banner_section .about_img_text_wrap{height: 100%;min-height: 100%;padding: 100px 0;}
+
+ .about_banner_section .about-text-wrp{margin: 0 auto;}
+  .about_banner_section .about-text-content p{margin:0;}
+  
+}
+
+@media screen and (max-width:575px){
+  .about_banner_section .about_img_text_wrap{padding:80px 0;}
+  .about_banner_section .about-text-content p{font-size:18px;}
+}
