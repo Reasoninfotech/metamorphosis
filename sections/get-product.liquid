@@ -1,0 +1,377 @@
+{% style %}
+    /* ===== Exosome Image Text Section ===== */
+
+  .exosome_img_text_section,
+  .exosome-section {
+    width: 100%;
+    /* padding: 60px 0 0; */
+  }
+
+  .exosome_img_text_section .exosome_werp,
+  .exosome_img_text_section .exosome-wrapper {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* ---------- Text Area ---------- */
+
+  .exosome_img_text_section .exosome-text,
+  .exosome_img_text_section .exosome-content {
+    width: calc(60% - 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    max-width: 670px;
+    margin: auto;
+    padding: 20px 0;
+    padding-left: 30px;
+  }
+
+  .exosome_img_text_section .exosome-title {
+    text-transform: uppercase;
+  }
+
+  .exosome_img_text_section .exosome-description,
+  .exosome_img_text_section .exosome-text .text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .exosome_img_text_section .exosome-description strong {
+    color: #000000;
+  }
+
+  .exosome_img_text_section .exosome-description p {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    margin: 0;
+  }
+
+  /* ---------- Button ---------- */
+
+  .exosome_img_text_section .exosome-btn-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .exosome_img_text_section .exosome-btn,
+  .exosome_img_text_section .exosome-text .img-text-btn-wrp a {
+    text-transform: uppercase;
+  }
+
+  /* ---------- Image Area ---------- */
+
+  .exosome_img_text_section .exosome-img,
+  .exosome_img_text_section .exosome-image {
+    {% if section.settings.bg_image == true %}
+      width: calc(40% - 20px);
+      {% else %}
+        position: relative;
+        width: 100%;
+      {% endif %}
+  }
+  {% if section.settings.bg_image == false %}
+.exosome_img_text_section .exosome-img .get_product{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 15%;
+        /* width: auto; */
+    max-width: 550px;
+}
+{% endif %}
+  .exosome_img_text_section .exosome-figure img {
+    max-width: 100%;
+    width: 100%;
+    vertical-align: middle;
+    max-height: 550px;
+    object-fit: cover;
+  }
+
+  /* ---------- Responsive ---------- */
+@media(max-width: 1080px){
+    {% if section.settings.bg_image == false %}
+.exosome_img_text_section .exosome-img .get_product{
+    margin-left: 13%;
+}
+{% endif %}
+}
+  @media screen and (max-width: 991px) {
+    .exosome_img_text_section,
+  .exosome-section {
+    padding: 50px 0 0;
+  }
+    .exosome_img_text_section .exosome-text,
+    .exosome_img_text_section .exosome-content {
+      {% if section.settings.bg_image == true %}
+      width: calc(50% - 20px);
+      {% else %}
+        width: 100%;
+      {% endif %}
+      gap: 20px;
+    }
+      {% if section.settings.bg_image == false %}
+.exosome_img_text_section .exosome-img .get_product{
+    margin-left: 8%;
+    gap: 38px;
+}
+{% endif %}
+/* 
+    .exosome_img_text_section .exosome-img,
+    .exosome_img_text_section .exosome-image {
+      width: calc(50% - 20px);
+    } */
+
+    .exosome_img_text_section .exosome-btn {
+      min-width: 260px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .exosome_img_text_section,
+  .exosome-section {
+    padding: 0px 0 0;
+  }
+    .exosome_img_text_section .exosome-wrapper {
+      gap: 10px !important;
+      align-items: stretch;
+    }
+
+    .exosome_img_text_section .exosome-text,
+    .exosome_img_text_section .exosome-content {
+      /* width: 100%; */
+      padding: 40px 15px 0;
+    }
+
+    .exosome_img_text_section .exosome-img,
+    .exosome_img_text_section .exosome-image {
+      /* width: 100%; */
+    }
+
+    .exosome_img_text_section .exosome-description p,
+    .exosome_img_text_section .exosome-title {
+      font-size: 18px !important;
+    }
+  }
+
+  @media screen and (max-width: 575px) {
+    .exosome_img_text_section,
+    .exosome-section {
+      padding: 0;
+    }
+    .exosome_img_text_section .exosome-text, .exosome_img_text_section .exosome-content {
+      position: relative;
+      margin-left: 0;
+      margin-right: -6px;
+      padding: 29px 0 29px 15px;
+
+      {% if product.metafields.custom.get_product_image != blank and section.settings.bg_image == true %}
+      width: calc(50% - -21px);
+        {% else %}
+          width: 100%;
+    {% endif %}
+      gap: 16px;
+  }
+        {% if section.settings.bg_image == false %}
+.exosome_img_text_section .exosome-img .get_product{
+    margin-left: 5%;
+    gap: 16px;
+}
+{% endif %}
+  .exosome_img_text_section .exosome-img, .exosome_img_text_section .exosome-image{
+      height: 100%;
+      overflow: visible;
+      {% if section.settings.bg_image == true %}
+        margin-left: -20px;
+      width: calc(50% - 5px);
+      {% endif %}
+  }
+  .exosome_img_text_section .main_title {
+     font-size: 18px !important;
+     letter-spacing: 0;
+  }
+
+  .exosome_img_text_section .exosome-btn, .exosome_img_text_section .exosome-text .img-text-btn-wrp a{
+      min-width: 100%;
+  }
+
+
+    .exosome_img_text_section .exosome-description {
+      max-width: 375px;
+    }
+
+    .exosome_img_text_section .exosome-btn {
+      {% if section.settings.bg_image == true %}
+      min-width: 250px;
+      {% else %}
+        min-width: 190px;
+        {% endif %}
+    }
+    .exosome_img_text_section .img-text-btn-wrp a {
+      font-size: 12px !important;
+    }
+  }
+  @media screen and (max-width: 429px) {
+    .exosome_img_text_section .main_title{
+      font-size: 13px !important;
+    }
+    .exosome_img_text_section .img-text-btn-wrp a {
+      padding: 10px;
+    }
+  }
+{% endstyle %}
+
+<section class="exosome_img_text_section exosome-section {% if section.settings.padding_top == true %}pt_90{% endif %} {% if section.settings.padding_bottom == true %}pb_90 {% endif %} {{ section.settings.custom_class }}" style="background-color:{{ section.settings.background }};">
+  <div class="exosome_werp exosome-wrapper">
+    {% if section.settings.bg_image == true %}
+      <div class="exosome-text exosome-content">
+        {% if section.settings.tite != blank %}
+          <h2 class="main_title exosome-title">{{ section.settings.tite }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="text exosome-description">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if product %}
+          <div class="img-text-btn-wrp exosome-btn-wrap">
+            {% comment %} <a class="common_btn exosome-btn" href="#home-scroll"
+              >GET
+              {% if product.metafields.custom.custom_product_title != blank %}
+                {{ product.metafields.custom.short_name_of_product | metafield_text }}
+              {% else %}
+                {{ product.title | escape }}
+              {% endif %}
+            </a> {% endcomment %}
+
+            <a
+              href="https://metamorphosisredlighttherapy.com/cart/{{ product.selected_or_first_available_variant.id }}:1"
+              class="common_btn exosome-btn"
+              {% if product.selected_or_first_available_variant.available == false %}
+                disabled
+              {% endif %}
+            >GET
+              {% if product.metafields.custom.custom_product_title != blank %}
+                {{ product.metafields.custom.short_name_of_product | metafield_text }}
+              {% else %}
+                {{ product.title | escape }}
+              {% endif %}
+              </a>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if product.metafields.custom.get_product_image != blank %}
+      <div class="exosome-img exosome-image">
+        <figure class="exosome-figure">
+          <img
+            src="{{ product.metafields.custom.get_product_image | img_url: 'master'}}"
+            alt="{{ product.metafields.custom.get_product_image.alt }}"
+            loading="lazy"
+          >
+        </figure>
+        {% if section.settings.bg_image == false %}
+          <div class="get_product">
+            {% if section.settings.tite != blank %}
+              <h2 class="main_title exosome-title">{{ section.settings.tite }}</h2>
+            {% endif %}
+
+            {% if section.settings.text != blank %}
+              <div class="text exosome-description">
+                {{ section.settings.text }}
+              </div>
+            {% endif %}
+
+            {% if product %}
+              <div class="img-text-btn-wrp exosome-btn-wrap">
+                {% comment %} <a class="common_btn exosome-btn" href="#home-scroll"
+                  >GET
+                  {% if product.metafields.custom.custom_product_title != blank %}
+                    {{ product.metafields.custom.short_name_of_product | metafield_text }}
+                  {% else %}
+                    {{ product.title | escape }}
+                  {% endif %}
+                </a> {% endcomment %}
+                <a
+              href="https://metamorphosisredlighttherapy.com/cart/{{ product.selected_or_first_available_variant.id }}:1"
+              class="common_btn exosome-btn"
+              {% if product.selected_or_first_available_variant.available == false %}
+                disabled
+              {% endif %}
+            >GET
+              {% if product.metafields.custom.custom_product_title != blank %}
+                {{ product.metafields.custom.short_name_of_product | metafield_text }}
+              {% else %}
+                {{ product.title | escape }}
+              {% endif %}
+              </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Get product",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "padding_top",
+      "label": "Padding Top",
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color"
+    },
+    {
+      "type": "html",
+      "id": "tite",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_image",
+      "label": "50%",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Get product"
+    }
+  ]
+}
+{% endschema %}

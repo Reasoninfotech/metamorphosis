@@ -1,0 +1,138 @@
+ {{ 'shop-by-category.css' | asset_url | stylesheet_tag }}
+
+<div class="shop-by-category-section {% if section.settings.padding_top == true %}pt_90{% endif %} {% if section.settings.padding_bottom == true %}pb_90 {% endif %}" style="background:{{ section.settings.back_color }};color:{{  }}"> 
+  <div class="page-width">
+    <div class="shop-by-category-wrp">
+     <div class="shop_title-wrp"> 
+      {% if section.settings.shop_title != blank %}<h2 class="main_title" style="color:{{ section.settings.heading_color }};">{{ section.settings.shop_title }}</h2>{% endif %}
+      {% if section.settings.sub_text != blank %}<div class="sub_text" style="color:{{ section.settings.text_color }};">{{ section.settings.sub_text }}</div>{% endif %}
+     </div>
+       
+      <div class="shop-img-txt-block">
+        {% for block in section.blocks %}
+          {% if block.settings.img_link != blank %}  
+            <div class="image-block-shop">
+              <a href="{{ block.settings.img_link }}">
+                {% if block.settings.image_category != blank %}
+                <figure>
+                  <img src="{{ block.settings.image_category | img_url:"340x"}}" class="shop_img" alt="{{ block.settings.image_category.alt }}" loading="lazy">
+                </figure>
+                {% endif %}  
+                {% if block.settings.title_caption != blank %}<figcaption style="color:{{ block.settings.text_color }};">{{ block.settings.title_caption }}</figcaption>{% endif %}
+              </a>
+            </div>
+         {% endif %} 
+       {% endfor %}
+      </div> 
+
+
+      {% if section.settings.btn_url != blank %}
+      <div class="shop_by_list_button"> 
+        <a href="{{ section.settings.btn_url }}" class="common_btn">{{ section.settings.btn_text }}</a>
+      </div>
+    {% endif %}
+
+      
+    </div>
+  </div>
+</div>
+
+{% javascript %}
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Shop Image Section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": true
+      },
+      {
+        "type": "color",
+        "id": "back_color",
+        "label": "Background",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text Color",
+        "default": "#000"
+      },
+      {
+        "type":"text",
+        "id":"shop_title",
+        "label":"Heading",
+        "default":"Shop By Category"
+      },
+      {
+        "type":"text",
+        "id":"sub_text",
+        "label":"Sub Text",
+        "default":"Shop By Category"
+      },
+      {
+        "type":"text",
+        "id":"btn_text",
+        "label":"Button Text",
+        "default":"SHOP ALL DEVICEs"
+      },
+      {
+        "type":"url",
+        "id":"btn_url",
+        "label":"Button Url"
+      }
+    ],
+      "blocks": [
+    {
+      "type": "image_picker",
+      "name": "Image With Text",
+      "settings": [
+        {
+          "type": "url",
+          "id": "img_link",
+          "label": "Image link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_category",
+          "label": "Image-Banner"
+        },
+        {
+          "type":"text",
+          "id":"title_caption",
+          "label":"Text",
+          "default":"Winter Clothes"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#696969"
+        }
+      ]
+    }
+  ],
+      "presets": [
+    {
+      "name": "Shop Image Section"
+    }
+  ]
+    
+  }
+{% endschema %}

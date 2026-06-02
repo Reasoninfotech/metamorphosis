@@ -1,0 +1,661 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="all">
+<link rel="stylesheet" href="{{ 'component-cart-drawer.css' | asset_url }}" media="all">
+<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="all">
+{%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+<link rel="stylesheet" href="{{ 'country-flag.css' | asset_url }}" media="all">
+{%- endif -%}
+<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}</noscript>
+{%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+<noscript>{{ 'country-flag.css' | asset_url | stylesheet_tag }}</noscript>
+{%- endif -%}
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{{ 'update-menu.css' | asset_url | stylesheet_tag }}
+<div class="update_menu">
+  <div class="update_menu_row">
+    <div class="header--center container container--header  header--has-menu">
+      
+      <div class="update_menu_left">
+        <div class="homeBurgerMenu">
+          <span class="homeBurgerMenuSpan">
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 7C18 7.19891 17.921 7.38968 17.7803 7.53033C17.6397 7.67098 17.4489 7.75 17.25 7.75H0.75C0.551088 7.75 0.360322 7.67098 0.21967 7.53033C0.0790178 7.38968 0 7.19891 0 7C0 6.80109 0.0790178 6.61032 0.21967 6.46967C0.360322 6.32902 0.551088 6.25 0.75 6.25H17.25C17.4489 6.25 17.6397 6.32902 17.7803 6.46967C17.921 6.61032 18 6.80109 18 7ZM0.75 1.75H17.25C17.4489 1.75 17.6397 1.67098 17.7803 1.53033C17.921 1.38968 18 1.19891 18 1C18 0.801088 17.921 0.610322 17.7803 0.46967C17.6397 0.329018 17.4489 0.25 17.25 0.25H0.75C0.551088 0.25 0.360322 0.329018 0.21967 0.46967C0.0790178 0.610322 0 0.801088 0 1C0 1.19891 0.0790178 1.38968 0.21967 1.53033C0.360322 1.67098 0.551088 1.75 0.75 1.75ZM17.25 12.25H0.75C0.551088 12.25 0.360322 12.329 0.21967 12.4697C0.0790178 12.6103 0 12.8011 0 13C0 13.1989 0.0790178 13.3897 0.21967 13.5303C0.360322 13.671 0.551088 13.75 0.75 13.75H17.25C17.4489 13.75 17.6397 13.671 17.7803 13.5303C17.921 13.3897 18 13.1989 18 13C18 12.8011 17.921 12.6103 17.7803 12.4697C17.6397 12.329 17.4489 12.25 17.25 12.25Z" fill="#0F0F0F"/>
+            </svg>
+          </span>
+        </div>
+        <div class="update_menu_left_row">
+          <div class="update_left_menu">
+            
+            <ul class="desktop_custom_menu">
+                {% for link in linklists.desktop-menu.links %}
+                  {% if link.links != blank %}
+                    <li class="has-submenu {{ link.title | handle }}">
+                      <button class="desktop_menu_toggle" type="button">
+                        {{ link.title }}
+                      </button>
+
+                      <ul class="desktop_submenu">
+                        {% for child in link.links %}
+                          <li class="{{ child.title | handle }}">
+                            <a href="{{ child.url }}">{{ child.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li>
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+
+
+            <ul class="update_left_link">
+             {%- for link in section.settings.menu.links -%}
+                {%- if link.links != blank -%}
+                  <li class="{{ link.title | handle }}">
+                    {% if link.links != blank or link.links == '#' %}
+                      <span>{{ link.title }}</span>
+                    {% else %}
+                      <a href="{{ link.links }}">{{ link.title }}</a>
+                    {% endif %}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+
+          </div>
+          <div class="update_left_search">
+            <div class="header__search">
+              {% render 'update-search' %}
+              {% comment %}
+                <div class="header__icon header__icon--search header__icon--summary focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+                  <span>
+                    <svg class="modal__toggle-open icon icon-search" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="6.8" cy="6.79976" r="6.3" stroke="black"/>
+                      <path d="M11.5999 11.2002L15.9999 16.0002" stroke="black"/>
+                    </svg>
+                  </span>
+                <span class="header__icon-name" title="{{- 'general.search.search' | t -}}">{{- 'general.search.search' | t -}}</span>
+              </div>
+              {% endcomment %}
+            </div>
+          </div>
+        </div>
+
+        <div class="menu_left_drawer">
+          <div class="update_menu_shadow"></div>
+          <div class="menu_left_drawer_close">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 0.25C8.07164 0.25 6.18657 0.821828 4.58319 1.89317C2.97982 2.96451 1.73013 4.48726 0.992179 6.26884C0.254225 8.05042 0.061142 10.0108 0.437348 11.9021C0.813554 13.7934 1.74215 15.5307 3.10571 16.8943C4.46928 18.2579 6.20656 19.1865 8.09787 19.5627C9.98919 19.9389 11.9496 19.7458 13.7312 19.0078C15.5127 18.2699 17.0355 17.0202 18.1068 15.4168C19.1782 13.8134 19.75 11.9284 19.75 10C19.7473 7.41498 18.7192 4.93661 16.8913 3.10872C15.0634 1.28084 12.585 0.25273 10 0.25ZM13.5306 12.4694C13.6003 12.5391 13.6556 12.6218 13.6933 12.7128C13.731 12.8039 13.7504 12.9015 13.7504 13C13.7504 13.0985 13.731 13.1961 13.6933 13.2872C13.6556 13.3782 13.6003 13.4609 13.5306 13.5306C13.4609 13.6003 13.3782 13.6556 13.2872 13.6933C13.1961 13.731 13.0986 13.7504 13 13.7504C12.9015 13.7504 12.8039 13.731 12.7128 13.6933C12.6218 13.6556 12.5391 13.6003 12.4694 13.5306L10 11.0603L7.53063 13.5306C7.46095 13.6003 7.37822 13.6556 7.28718 13.6933C7.19613 13.731 7.09855 13.7504 7 13.7504C6.90146 13.7504 6.80388 13.731 6.71283 13.6933C6.62179 13.6556 6.53906 13.6003 6.46938 13.5306C6.3997 13.4609 6.34442 13.3782 6.30671 13.2872C6.269 13.1961 6.24959 13.0985 6.24959 13C6.24959 12.9015 6.269 12.8039 6.30671 12.7128C6.34442 12.6218 6.3997 12.5391 6.46938 12.4694L8.93969 10L6.46938 7.53063C6.32865 7.38989 6.24959 7.19902 6.24959 7C6.24959 6.80098 6.32865 6.61011 6.46938 6.46937C6.61011 6.32864 6.80098 6.24958 7 6.24958C7.19903 6.24958 7.3899 6.32864 7.53063 6.46937L10 8.93969L12.4694 6.46937C12.5391 6.39969 12.6218 6.34442 12.7128 6.3067C12.8039 6.26899 12.9015 6.24958 13 6.24958C13.0986 6.24958 13.1961 6.26899 13.2872 6.3067C13.3782 6.34442 13.4609 6.39969 13.5306 6.46937C13.6003 6.53906 13.6556 6.62178 13.6933 6.71283C13.731 6.80387 13.7504 6.90145 13.7504 7C13.7504 7.09855 13.731 7.19613 13.6933 7.28717C13.6556 7.37822 13.6003 7.46094 13.5306 7.53063L11.0603 10L13.5306 12.4694Z" fill="#D9D9DB"/>
+            </svg>
+          </div>
+          <div class="menu_left_drawer_row">
+            <div class="update_left_search">
+              <div class="header__search">
+                  {% render 'update-search' %}
+                {% comment %}
+                  
+                   <a href="/search" class="header__icon header__icon--search header__icon--summary focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+                    <span>
+                      <svg class="modal__toggle-open icon icon-search" width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="6.8" cy="6.79976" r="6.3" stroke="black"/>
+                        <path d="M11.5999 11.2002L15.9999 16.0002" stroke="black"/>
+                      </svg>
+                    </span>
+                  <span class="header__icon-name" title="{{- 'general.search.search' | t -}}">{{- 'general.search.search' | t -}}</span>
+                </a>
+                {% endcomment %}
+              </div>
+            </div>
+            <ul class="menu_left_drawer_sun">
+              {%- for link in section.settings.menu.links -%}
+                {%- if link.url != blank -%}
+                  <li class="{{ link.title | handle }}">
+                    {% if link.url == blank or link.url == '#' %}
+                      <span>{{ link.title }}</span>
+                    {% else %}
+                      <a href="{{ link.url }}">{{ link.title }}</a>
+                    {% endif %}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            <div class="menu_left_drawer_scroll">
+              {%- for link in section.settings.menu.links -%}
+                <div class="Sub_{{ link.title | handle }}">
+                  <div class="mobile_menu_title">
+                    <p class="{{ link.title | handle }}">
+                      {% if link.url == blank or link.url == '#' %}
+                        <span>{{ link.title }}</span>
+                      {% else %}
+                        <a href="{{ link.url }}">{{ link.title }}</a>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <ul class="menu_left_drawer_Insub">
+                    {%- for childlink in link.links -%}
+                        <li class="{{ childlink.title | handle }} headerSubMenu">
+                            <p> <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                            <span class="menu_click_popup">
+                                <svg width="21" height="14" viewBox="0 0 21 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M12.6648 14L12.1508 14C12.7329 12.4167 13.5547 11.0062 14.566 9.8549C15.5772 8.7036 16.7565 7.8357 18.0318 7.30435L1.58807e-06 7.30435L1.61467e-06 6.69565L18.0318 6.69565C16.7557 6.16502 15.5754 5.29746 14.5634 4.14612C13.5513 2.99478 12.7288 1.58392 12.1462 -3.87012e-07L12.6648 -3.64342e-07C13.452 2.01505 14.6463 3.70601 16.1168 4.88719C17.5872 6.06838 19.2768 6.6941 21 6.69565L21 7.30435C19.2768 7.3059 17.5872 7.93162 16.1168 9.11281C14.6463 10.294 13.452 11.9849 12.6648 14Z" fill="black"/>
+                                </svg>
+                              </span>
+                            </p>
+                          {% assign ChildMenuTitle = childlink.title | handle %}
+                          {% for block in section.blocks %}
+                          {% assign menuTitle = block.settings.MenuTitle | handle %}
+                          {% if ChildMenuTitle == menuTitle %}
+                            <div class="sub_menu_block">
+                              {% for i in (1..10) %}
+                                {% assign imgTitle = "imageTitle" | append:i %}
+                                {% assign ButtonLink = "ButtonLink" | append:i %}
+                                {% assign menuTitle = "buttonLink" | append:i %}
+                                {% if block.settings[imgTitle] != blank or block.settings[ButtonLink] != blank %}
+                                  <a href="{{ block.settings[ButtonLink] }}">
+                                    {% if block.settings[imgTitle] != blank %}
+                                      <div class="sub_block_menu_img">
+                                        <img src="{{ block.settings[imgTitle] | img_url:'master' }}" alt="{{ block.settings[imgTitle].alt }}" loading="lazy">
+                                      </div>
+                                      {% endif %}
+                                      {% if block.settings[menuTitle] != blank %}
+                                        <p>{{ block.settings[menuTitle] }}</p>
+                                      {% endif %}
+                                    </a>
+                                  {% endif %}
+                                {% endfor %}
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                  {% assign menu_img = link.title | handle %}
+                  {% assign menu_TEXT = section.settings.buttonLink1 | handle %}
+                  {% if section.settings.buttonImg != blank and menu_img == menu_TEXT %}
+                    <div class="menuBottom_img">
+                      <a href="{{ section.settings.buttonUrl }}">
+                        <img src="{{ section.settings.buttonImg | img_url:'master' }}" alt="" loading="lazy">
+                      </a>
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>            
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="update_menu_center">
+        <div class="updat_menu_logo">
+          {% if section.settings.logo != blank %}
+            <div>
+              <a href="/">
+                <img src="{{ section.settings.logo | img_url:'master' }}" alt="{{ section.settings.logo.alt }}" >
+              </a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="update_menu_right">
+  
+        {% render 'update-lengua' %}
+        {% if section.settings.contect != blank %}
+          <div class="update_user_contact">
+            <a href="{{ section.settings.contect }}" class="update_user_contact_link">
+              <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.20557 7.85963C-0.394429 4.25963 1.20557 2.0263 2.20557 1.35963C3.56233 -0.443917 5.70563 2.35963 6.70563 3.85963C7.50563 5.05963 7.03896 6.0263 6.70563 6.35963C6.03896 6.85963 5.00563 8.25963 6.20563 9.85963C7.70563 11.8596 9.70563 14.3596 12.2056 12.8596C14.7056 11.3596 16.2056 13.8596 17.7056 15.3596C19.2056 16.8596 16.7056 20.3596 12.2056 18.8596C7.70563 17.3596 3.20557 12.3596 1.20557 7.85963Z" stroke="black"/></path>
+              </svg>
+            </a>
+          </div>
+        {% endif %}
+                  
+        {%- if shop.customer_accounts_enabled -%}
+          <details-disclosure class="header__account">
+            <details>
+                <summary class="header__icon header__icon--account link--text  header__icon--summary focus-inset modal__toggle" aria-haspopup="dialog" role="button">{% render 'icon-account' %}</summary>
+                <div class="header__account-modal modal__toggle color-background-2" role="dialog" aria-modal="true">
+                    {%- if customer -%}
+                      <div class="header__account__account">
+                          <div class="header__account__name">{{ customer.name }}</div>
+                          <ul class="header__account__body">
+                              <li class="header__account__link"><a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a></li>
+                              <li class="header__account__address"><a href="{{ routes.account_addresses_url }}">{{ 'customer.addresses.book' | t }}</a></li>
+                          </ul>
+                          <a class="header__account__logout button " href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a>
+                      </div>
+                    {%- else -%}
+                        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="button  header__account__login link  focus-inset">
+                            {% render 'icon-account' %}
+                            {%- liquid
+                                if customer
+                                    echo 'customer.account_fallback' | t
+                                else
+                                    echo 'customer.log_in' | t
+                                endif -%}
+                        </a>
+                        <a class="header__account__register link " href="{{ routes.account_register_url }}">{{ 'customer.login_page.create_account' | t }}</a>
+                    {%- endif -%}
+                </div>
+            </details>
+          </details-disclosure>
+        {%- endif -%}
+  
+        <a href="{{ routes.cart_url }}" class=" {% if request.page_type != 'cart' %}header__cart{% endif %} header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+            {%- liquid render 'icon-cart' -%}
+            <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+            {%- if cart != empty -%}
+                <div class="cart-count-bubble">
+                    {%- if cart.item_count < 100 -%}
+                        <span aria-hidden="true">{{ cart.item_count }}</span>
+                    {%- endif -%}
+                    <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+                </div>
+            {%- endif -%}
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggles = document.querySelectorAll(".desktop_menu_toggle");
+
+  toggles.forEach(toggle => {
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+
+      const parent = this.closest(".has-submenu");
+
+      document.querySelectorAll(".has-submenu").forEach(item => {
+        if (item !== parent) {
+          item.classList.remove("active");
+        }
+      });
+
+      parent.classList.toggle("active");
+    });
+  });
+
+  document.addEventListener("click", function () {
+    document.querySelectorAll(".has-submenu").forEach(item => {
+      item.classList.remove("active");
+    });
+  });
+});
+</script>
+
+
+                                    
+
+{% schema %}
+  {
+    "name": "Second Menu",
+    "settings": [
+      {
+          "type": "link_list",
+          "id": "desktop-menu",
+          "label": "Desktop Menu",
+          "info": "t:sections.header.settings.menu.info"
+      },
+      {
+          "type": "link_list",
+          "id": "menu",
+          "default": "main-menu",
+          "label": "t:sections.header.settings.menu.label",
+          "info": "t:sections.header.settings.menu.info"
+      },
+      {
+        "type":"image_picker",
+        "id":"logo",
+        "label":"Select Logo"
+      },
+      {
+        "type":"url",
+        "id":"contect",
+        "label":"Contact Information"
+      },
+      {
+          "type": "checkbox",
+          "id": "enable_country_selector",
+          "default": true,
+          "label": "t:sections.header.settings.enable_country_selector.label"
+      },
+      {
+          "type": "checkbox",
+          "id": "enable_language_selector",
+          "default": false,
+          "label": "t:sections.header.settings.enable_language_selector.label"
+      },
+      {
+        "type": "text",
+        "id":"buttonLink1",
+        "label":"Menu Title"
+      },
+      {
+        "type":"image_picker",
+        "id":"buttonImg",
+        "label":"Select Image"
+      },
+      {
+        "type":"url",
+        "id":"buttonUrl",
+        "label":"Add Menu Link"
+      },
+    ],
+
+    "blocks":[
+      {
+        "type":"block",
+        "name":"Blocks",
+        "settings": [
+          {
+            "type": "text",
+            "id":"MenuTitle",
+            "label":"Child Menu Name"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle1",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink1",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink1",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle2",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink2",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink2",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle3",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink3",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink3",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle4",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink4",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink4",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle5",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink5",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink5",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle6",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink6",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink6",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle7",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink7",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink7",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle8",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink8",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink8",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle9",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink9",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink9",
+            "label":"Add Menu Link"
+          },
+          {
+            "type":"image_picker",
+            "id":"imageTitle10",
+            "label":"Select Image"
+          },
+          {
+            "type": "html",
+            "id":"buttonLink10",
+            "label":"Menu Title"
+          },
+          {
+            "type":"url",
+            "id":"ButtonLink10",
+            "label":"Add Menu Link"
+          }
+        ]
+      }
+    ],
+
+    "presets": [
+      {
+        "name":"Second Menu"
+      }
+    ]
+  }
+{% endschema %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var headerParent = document.querySelectorAll('.sub_menu_block');
+  headerParent.forEach(function(element) {
+      element.parentNode.classList.add('active');
+  });
+  
+ document.querySelectorAll('.menu_left_drawer_row .menu_left_drawer_sun li, .update_left_menu .update_left_link li').forEach(item => {
+    item.addEventListener('click', function () {
+        document.querySelectorAll('.menu_left_drawer_scroll > div').forEach(sub => {
+            sub.style.display = 'none';
+        });
+        const targetClasses = Array.from(this.classList).filter(cls => cls !== 'active');
+        if (targetClasses.length > 0) {
+            const targetClass = targetClasses[0];
+            const targetSubmenu = document.querySelector(`.menu_left_drawer_scroll .Sub_${targetClass}`);
+            if (targetSubmenu) {
+                targetSubmenu.style.display = 'block';
+            }
+        }
+        document.querySelector('body').classList.add('menuOpen');
+
+        document.querySelectorAll('.menu_left_drawer_row .menu_left_drawer_sun li, .update_left_menu .update_left_link li').forEach(el => {
+            el.classList.remove('active');
+        });
+        targetClasses.forEach(targetClass => {
+            document.querySelectorAll(`.${targetClass}`).forEach(el => {
+                el.classList.add('active');
+            });
+        });
+    });
+});
+
+  document.querySelectorAll('.update_left_menu .update_left_link li').forEach(item => {
+    item.addEventListener('click', function () {
+      document.querySelector('.menu_left_drawer').classList.add('active');
+      const MenuItems = document.querySelectorAll(".headerSubMenu.active");
+      // if (MenuItems.length > 0) {
+      //   MenuItems[0].setAttribute("data-active", "true");
+      // }
+    })
+  });
+   document.querySelector('.update_menu_left .homeBurgerMenu').addEventListener('click', function () {
+      document.querySelector('body').classList.add('menuOpen');
+      document.querySelector('.menu_left_drawer').classList.add('active');
+   });
+
+  document.querySelectorAll('#countrySearch, #mobilecountrySearch').forEach(function(input) {
+      input.addEventListener('input', function() {
+          var searchTerm = this.value.toLowerCase();
+          document.querySelectorAll('#HeaderCountryList .disclosure__item').forEach(function(item) {
+              var dataCun = item.getAttribute('data-cun');
+              
+              if (dataCun) {
+                  var dataCunLower = dataCun.toLowerCase();
+                  
+                  if (dataCunLower.includes(searchTerm)) {
+                      item.style.display = '';
+                  } else {
+                      item.style.display = 'none';
+                  }
+              } else {
+                  item.style.display = 'none';
+              }
+          });
+      });
+  });
+  // const menuItems = document.querySelectorAll(".headerSubMenu.active .menu_click_popup");
+
+  // menuItems.forEach((item) => {
+  //   item.addEventListener("click", function () {
+  //     this.parentNode.parentNode.setAttribute("data-active", "true");
+  //     menuItems.forEach((otherItem) => {
+  //       if (otherItem !== this) {
+  //         otherItem.parentNode.parentNode.removeAttribute("data-active");
+  //       }
+  //     });
+  //   });
+  // });
+
+const menuItems = document.querySelectorAll(".headerSubMenu.active .menu_click_popup");
+
+menuItems.forEach((item) => {
+  item.addEventListener("click", function () {
+    const parent = this.closest('.headerSubMenu');
+    
+    // Toggle data-active on the clicked item’s parent element
+    if (parent.hasAttribute("data-active")) {
+      parent.removeAttribute("data-active");
+    } else {
+      parent.setAttribute("data-active", "true");
+    }
+
+    // Remove data-active from other menu items
+    menuItems.forEach((otherItem) => {
+      if (otherItem !== this) {
+        otherItem.closest('.headerSubMenu').removeAttribute("data-active");
+      }
+    });
+
+    // Log for debugging
+    console.log(parent);
+  });
+});
+
+
+
+  document.querySelector('.menu_left_drawer_close').addEventListener('click', function () {
+    this.parentNode.classList.remove('active');
+    document.querySelector('body').classList.remove('menuOpen');
+  });
+  document.querySelector('.update_menu_shadow').addEventListener('click', function () {
+    this.parentNode.classList.remove('active');
+    document.querySelector('body').classList.remove('menuOpen');
+  });
+
+  
+document.querySelector('body').addEventListener('click', function () {
+  document.querySelector('.menu_left_drawer').classList.remove('active');
+  document.querySelector('body').classList.remove('menuOpen');
+});
+document.querySelector('.update_menu').addEventListener('click', function (event) {
+  event.stopPropagation(); 
+});
+
+});
+  
+
+
+</script>

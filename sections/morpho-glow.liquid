@@ -1,0 +1,129 @@
+{% style %}
+  .morpho-section{background: #FAFAFA;}
+  .morpho-section .page-width{max-width: 1440px;margin: 0 auto;Padding:0 15px;}
+
+  .morpho-section .glow_sub_content{padding-top: 50px;border-bottom: 1px solid #828282;max-width: 1270px;margin: 0 auto;}
+
+  .morpho-section .glow_img_block{display: flex;flex-wrap: wrap;gap: 30px;align-items:center;text-align:center;}
+  
+  .morpho-section .glow_img_block figure{width: calc(60% - 15px);}
+  .morpho-section .glow_img_block figure img{width:100%;object-fit: cover;vertical-align: middle;}
+
+  .morpho-section .glow_text_block{width: calc(40% - 15px);}
+  
+  .morpho-section .glow_text_block h4{font-size: 20px;line-height: 27px;color: #000;font-weight: 700;margin-top: 0;margin-bottom: 16px;}
+  
+  .morpho-section .glow_content p{font-size: 20px;line-height:normal;color:#000;max-width:540px;margin:0 auto;}
+  .morpho-section .glow_text_block span{font-size: 10PX;text-transform: uppercase;padding-top: 15px;display: block;line-height: 14px;font-family: var(--argentum);}
+
+  .morpho-section .glow_sub_content{font-size: 14px;line-height: normal;display: flex;overflow: auto;gap: 24px;justify-content: space-evenly;}
+  .morpho-section .glow_sub_content span{width: auto;padding: 11px 0;white-space: nowrap;cursor: pointer;text-transform: uppercase;font-family: var(--argentum);color: #828282;font-weight: 300;letter-spacing: 1px;}
+  .morpho-section .glow_sub_content span.active{border-bottom: 2px solid #000;}
+  .morpho-section .glow_sub_content p{margin-top:24px;margin-bottom:0;}
+
+
+  @media (max-width: 991px){
+    .morpho-section .glow_title_content{Padding-bottom: 25px;}
+    .morpho-section .glow_content p,
+    .morpho-section .glow_sub_content{font-size: 18px;}
+  }
+
+  @media (max-width: 767px){
+    .morpho-section .glow_text_block h4{display: none;}
+    .morpho-section .glow_img_block{flex-direction: column-reverse;}
+    .morpho-section .glow_img_block figure{width: 100%;}
+    .morpho-section .glow_text_block{width: 100%;padding-top: 25px;}
+    .morpho-section .glow_title_content{Padding-bottom: 50px;}
+
+    .morpho-section .glow_sub_content{padding-top: 30px;}
+  }
+
+  @media (max-width: 389px){
+  }
+{% endstyle %}
+{% if product.metafields.morpho.image[0] != blank or product.metafields.title.morpho != blank or product.metafields.content.text != blank %}
+<section class="morpho-section pt_90">
+  <div class="page-width">
+
+    {% if product.metafields.Morphoglow.title != blank %}
+      <h2 class="main_title">{{ product.metafields.Morphoglow.title }}</h2>
+    {% endif %} 
+
+   <div class="glow_sub_content">
+      {% for block in product.metafields.morpho.text %}
+        {% assign i = forloop.index0 %}
+        <span data-index="{{ i }}">{{ product.metafields.morpho.text[i] }}</span>
+      {% endfor %}
+    </div>
+    <div class="morpho-glow-wrp">
+        <div class="swiper morpho-slider">
+          <div class="swiper-wrapper">
+            {% for block in product.metafields.morpho.image %}
+              {% assign i = forloop.index0 %}
+              <div class="swiper-slide" data-index="{{ i }}">
+                <div class="glow_img_block">
+                <figure>
+                  <img src="{{ product.metafields.morpho.image[i] }}" loading="lazy" alt="" width="600" height="600">
+                </figure>
+
+                  <div class="glow_text_block">
+                      {{ product.metafields.content.con[i] }} 
+                  </div>
+                 </div> 
+
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<script>
+var swiper;
+
+$(document).ready(function () {
+  swiper = new Swiper('.morpho-slider', {
+    slidesPerView: 1,
+    loop: true,
+    autoplay: { delay: 5000, disableOnInteraction: false, },
+    on: {
+      init: function () {
+        highlightActiveMode(this.realIndex);
+      },
+      slideChange: function () {
+        highlightActiveMode(this.realIndex);
+      }
+    }
+  });
+
+  $('.morpho-section .glow_sub_content span').on('click', function () {
+    var index = $(this).data('index');
+    console.log('Click index:', index);
+    swiper.slideToLoop(index); 
+  });
+});
+
+function highlightActiveMode(realIndex) {
+  $('.glow_sub_content span').removeClass('active');
+  $('.glow_sub_content span[data-index="' + realIndex + '"]').addClass('active');
+  $('.glow_sub_content span').css('color', '');
+  $('.glow_sub_content span[data-index="' + realIndex + '"]').css('color', '#000');
+}
+
+
+
+</script>
+
+{% schema %}
+{
+  "name": "Morpho Section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Morpho Section"
+    }
+  ]
+}
+{% endschema %}

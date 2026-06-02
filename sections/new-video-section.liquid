@@ -1,0 +1,183 @@
+<style>
+  #shopify-section-{{ section.id }} .video_text_content_section{background:{{ section.settings.background }}}
+
+  /* .video_text_content_section{padding: 50px 30px;} */
+  .video_text_content_section .video_text_content_inner{display: flex;flex-direction: column;gap: 40px;}
+
+  .video_text_content_section .video_text_content_inner .video_block_text_block{display: flex;flex-wrap: wrap;gap: 50px;}
+  .video_text_content_section .video_text_content_inner .video_block_text_block .video_text_content_wrraper{width: 100%;display: flex;flex-wrap: wrap;gap: 40px;}
+
+  .video_text_content_section .video_text_content_inner .video_block_text_block .video_block{position: relative;width: 100%;box-shadow: 0 0 8px #ffffff;}
+  .video_text_content_section .video_text_content_inner .video_block_text_block .video_block .video_custom{width: 100%;object-fit: contain;vertical-align: middle;max-height: 731.25px;}
+  .video_text_content_section .video_text_content_inner .video_block_text_block .video_block .play_icon_video{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);cursor: pointer;}
+
+  .video_text_content_section .mobile_video{display: none;}
+
+
+   @media screen and (max-width: 1350px) {
+     .video_text_content_section .video_text_content_inner .video_block_text_block{gap: 30px;}
+   }
+
+    @media screen and (max-width: 1150px) {
+      .video_text_content_section .video_text_content_inner .video_block_text_block .video_text_content_wrraper{flex-direction: column;}
+      .video_text_content_section .video_text_content_inner .video_block_text_block .video_block{width:100%;}
+    }
+
+     @media screen and (max-width: 768px) {
+       .video_text_content_section{padding:35px 0;}
+
+       .video_text_content_section .desktop_video{display: none;}
+       .video_text_content_section .mobile_video{display: block;}
+
+     }
+
+    @media screen and (max-width: 575px) {
+      .video_text_content_section .video_text_content_inner .video_block_text_block{flex-direction: column;}
+      .video_text_content_section .video_text_content_inner .video_block_text_block .video_text_content_wrraper{width: 100%;}
+       .play_icon_video svg {width: 35px; height: 35px;}
+    }
+</style>
+{% if product.metafields.custom.video != blank
+  or product.metafields.custom.video_image != blank
+  or section.settings.video_url != blank
+%}
+  <div class="video_text_content_section {% if section.settings.paddingtop == true %}pt_90{% endif %} {% if section.settings.padBottom == true %}pb_90{% endif %}">
+    <div class="page-width">
+      <div class="video_text_content_inner">
+        {% if section.settings.title != blank %}
+          <h2 class="h2" style="text-align:center;margin: 0;">{{ section.settings.title }}</h2>
+        {% endif %}
+
+        <div class="video_block_text_block">
+          <div class="video_text_content_wrraper">
+            {% if product.metafields.custom.video != blank %}
+              {% if product.metafields.custom.video != blank %}
+                <div class="video_block {% if product.metafields.custom.mobile_video != blank %}desktop_video{% endif %}">
+                  <video loop="loop" playsinline preload="" muted id="vid" class="video_custom" poster="{{ product.metafields.custom.video_image | img_url : "master" }}" >
+                    <source src="{{ product.metafields.custom.video }}" type="video/mp4">
+                  </video>
+                  <div class="play_icon_video">
+                    <svg width="50" height="50" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_73_185)">
+                      <path d="M24 48C10.7274 48 0 37.276 0 24C0 10.7273 10.7241 0 24 0C37.2727 0 48 10.724 48 24C48 37.2726 37.276 48 24 48Z" fill="#fff"/>
+                      <path d="M17 33.7772V14.2222C17 14.001 17.0561 13.7839 17.1624 13.5941C17.2687 13.4044 17.4212 13.249 17.6036 13.1446C17.7859 13.0402 17.9914 12.9907 18.198 13.0014C18.4046 13.0121 18.6046 13.0825 18.7768 13.2052L32.4911 22.9827C32.6476 23.0943 32.776 23.2456 32.8648 23.423C32.9535 23.6004 33 23.7985 33 23.9997C33 24.2009 32.9535 24.399 32.8648 24.5764C32.776 24.7538 32.6476 24.905 32.4911 25.0166L18.7768 34.7941C18.0259 35.3295 17 34.7609 17 33.7772Z" fill="#2E1D1C"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_73_185">
+                      <rect width="48" height="48" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if product.metafields.custom.mobile_video != blank %}
+                <div class="video_block mobile_video">
+                  <video loop="loop" preload="" muted playsinline id="vid" class="video_custom mobile_video" poster="{{ product.metafields.custom.mobile_video_image | img_url : "master" }}" >
+                    <source src="{{ product.metafields.custom.mobile_video }}" type="video/mp4">
+                  </video>
+                  <div class="play_icon_video mobile_video">
+                    <svg width="50" height="50" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_73_185)">
+                      <path d="M24 48C10.7274 48 0 37.276 0 24C0 10.7273 10.7241 0 24 0C37.2727 0 48 10.724 48 24C48 37.2726 37.276 48 24 48Z" fill="#fff"/>
+                      <path d="M17 33.7772V14.2222C17 14.001 17.0561 13.7839 17.1624 13.5941C17.2687 13.4044 17.4212 13.249 17.6036 13.1446C17.7859 13.0402 17.9914 12.9907 18.198 13.0014C18.4046 13.0121 18.6046 13.0825 18.7768 13.2052L32.4911 22.9827C32.6476 23.0943 32.776 23.2456 32.8648 23.423C32.9535 23.6004 33 23.7985 33 23.9997C33 24.2009 32.9535 24.399 32.8648 24.5764C32.776 24.7538 32.6476 24.905 32.4911 25.0166L18.7768 34.7941C18.0259 35.3295 17 34.7609 17 33.7772Z" fill="#2E1D1C"/>
+                      </g>
+                      <defs>
+                      <clipPath id="clip0_73_185">
+                      <rect width="48" height="48" fill="white"/>
+                      </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </div>
+              {% endif %}
+
+            {% else %}
+              <div class="video_block">
+                <video loop="loop" controls="controls" preload="" id="vid" class="video_custom" {% if section.settings.video_image != blank %}poster="{{ section.settings.video_image | img_url : "master" }}" {% endif %}>
+                  {% if section.settings.video_url != blank %}
+                    <source src="{{ section.settings.video_url }}" type="video/mp4">
+                  {% endif %}
+                </video>
+                <div class="play_icon_video">
+                  <svg width="50" height="50" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_73_185)">
+                    <path d="M24 48C10.7274 48 0 37.276 0 24C0 10.7273 10.7241 0 24 0C37.2727 0 48 10.724 48 24C48 37.2726 37.276 48 24 48Z" fill="#fff"/>
+                    <path d="M17 33.7772V14.2222C17 14.001 17.0561 13.7839 17.1624 13.5941C17.2687 13.4044 17.4212 13.249 17.6036 13.1446C17.7859 13.0402 17.9914 12.9907 18.198 13.0014C18.4046 13.0121 18.6046 13.0825 18.7768 13.2052L32.4911 22.9827C32.6476 23.0943 32.776 23.2456 32.8648 23.423C32.9535 23.6004 33 23.7985 33 23.9997C33 24.2009 32.9535 24.399 32.8648 24.5764C32.776 24.7538 32.6476 24.905 32.4911 25.0166L18.7768 34.7941C18.0259 35.3295 17 34.7609 17 33.7772Z" fill="#2E1D1C"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_73_185">
+                    <rect width="48" height="48" fill="white"/>
+                    </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<script>
+  $(document).ready(function () {
+    $('.play_icon_video').on('click', function () {
+      $(this).siblings('video')[0].play();
+      $(this).siblings('video')[0].muted = false;
+      $(this).hide();
+    });
+    $('.video_custom').on('click', function () {
+      $(this)[0].pause();
+      $(this)[0].muted = true;
+      $(this).siblings('.play_icon_video').show();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "New Video Section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "paddingtop",
+      "label": "Padding Top",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "padBottom",
+      "label": "Padding Bottom",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_image",
+      "label": "Video Image"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Video Section"
+    }
+  ]
+}
+{% endschema %}

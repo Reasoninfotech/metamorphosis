@@ -1,0 +1,49 @@
+.blog-slider-section .main_title{margin-bottom:48px;} 
+
+.blog-slider-section .blog-slider-block{overflow: hidden;}
+
+
+.blog-slider-section .blog-slider-block{padding-right:5px;}
+.blog-slider-section .article-wrp{border: 1px solid #BDBDBD;margin-right:-1px;}
+.blog-slider-section .article-wrp figure img{width:100%;width: 100%;vertical-align: middle;}
+
+.blog-slider-section .article-wrp .article-text-wrp{padding: 30px 30px;text-align: center;}
+.blog-slider-section .article-wrp .article-text-wrp span{font-family:var(--argentum);font-weight: 400;font-size: 14px;line-height: 1.5;color: #696969;}  
+
+.blog-slider-section .article-wrp .article-text-wrp figcaption{line-height: normal;height: 78px;}  
+.blog-slider-section .article-wrp .article-text-wrp figcaption a{line-height: normal;text-decoration: none;font-size:20px;}
+
+
+/* @media screen and (max-width:1599px){
+  .blog-slider-section .page-width{max-width:100%;}
+}  
+ */
+@media screen and (max-width:1399px){
+  .blog-slider-section .article-wrp .article-text-wrp{padding:30px;}
+}  
+
+@media screen and (max-width:991px){
+  .blog-slider-section .article-wrp .article-text-wrp{padding:30px;}
+
+  .blog_result_dot{position:relative;} 
+  .blog_result_dot .swiper-pagination-bullet{border: 1px solid #BDBDBD;opacity: 1;background:unset;}
+  .blog_result_dot .swiper-pagination-bullet-active{background:#BDBDBD;border:unset;}
+  
+  .blog-slider-block .swiper-wrapper{padding-bottom: 45px;}
+  
+}
+
+@media screen and (max-width:768px){
+  .blog-slider-section .main_title{margin-bottom: 38px;}
+  .blog-slider-section .article-wrp .article-text-wrp{padding: 10px;line-height: normal;}
+}   
+
+@media screen and (max-width:575px){
+  .blog-slider-section .main_title{margin-bottom: 30px;}
+  .blog-slider-section .article-wrp .article-text-wrp span{font-size:10px;}
+  .blog-slider-section .article-wrp .article-text-wrp figcaption a{font-size:18px;}
+}  
+
+@media screen and (max-width:389px){
+  .blog-slider-section .article-wrp .article-text-wrp figcaption{line-height: normal;height: auto;}  
+}

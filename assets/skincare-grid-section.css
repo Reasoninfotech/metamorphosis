@@ -1,0 +1,128 @@
+.skincare-grid-section .skincare-text-block{text-align:center;margin-bottom:48px;}
+
+.skincare-grid-section .skincare-text-block .main_title{margin-bottom: 16px;}
+.skincare-grid-section .skincare-text-block span p{margin:0;line-height:normal;font-size:20px;color:#000;}
+
+.skincare-grid-section .skincare_slide_block{overflow:hidden;}
+.skincare-grid-section .skincare_slide_block .swiper-slide{display:flex;height:auto;}
+
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp{background: #FAFAFA;display:flex;flex-direction:column;gap:16px;height:100%;position: relative;}
+
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp figure{height: 100%;}
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp figure img{width:100%;vertical-align:middle;object-fit:cover;transition: var(--duration-default);}
+
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp figure .img_hide{opacity:0;height:0;}
+
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp:hover figure .img_show{opacity:0;height:0;}
+.skincare-grid-section .skincare_slide_block .skin_pro_wrp:hover figure .img_hide{opacity:1;height:auto;}
+
+.skincare-grid-section .skin_pro_url{text-decoration:none;}
+.skincare-grid-section .skincare_slide_block .skin_pro_title{height:100%;display: flex;flex-direction: column;justify-content: space-between;align-items: center;text-align: center;padding: 0 10px 32px;max-width: 100%;margin: 0 auto;padding-bottom:32px;} 
+.skincare-grid-section .skincare_slide_block .skin_pro_title_wrp .pro_title{margin:0;font-size:20px;line-height:normal;font-weight:700;}
+
+
+.skincare-grid-section .skincare_slide_block .skin_pro_title_wrp .pro_dec{margin-top: 10px;}
+.skincare-grid-section .skincare_slide_block .skin_pro_title_wrp .pro_dec p{margin:0;font-size: 18px;line-height: normal;}
+
+.skincare-grid-section .skincare_slide_block .skin-price-money{color: #CA003D;font-size: 24px;font-weight: 700;line-height: normal;margin-top: 15px;margin-left: 15px;}
+
+
+.skincare-grid-section .skincare_list_button{display:none;}
+.skincare-grid-section .skincare_list_button{text-align:center;padding-top:32px;}
+.skincare-grid-section .skincare_list_button .common_btn{min-width:280px;}
+
+.skincare-grid-section.desktop_hide{display:none;}
+
+.skincare-grid-section.desktop_hide .skin_pro_url{
+  line-height:0;
+  vertical-align:middle;
+}
+
+.skincare-grid-section.desktop_hide .skin_pro_wrp figure{
+  padding:30px;
+}
+
+/* .skincare-grid-section .skin_buy_now{text-align: center;margin-bottom: -22px;} */
+
+.skincare-grid-section .product-form{padding: 0 24px 32px;}
+.skincare-grid-section .product-form .common_btn{min-width: unset;background: transparent;width: 100%;text-transform: uppercase;}
+.skincare-grid-section .product-form__buttons{margin: 0;display: flex;justify-content:center;}
+
+.skin_car_price_wrp .original-price.skin-price-money{color: #000;font-size: 18px;margin-left: 0px;}
+
+.skin_pro_title_wrp .bf_black_bar{margin-bottom: 8px;}
+
+@media screen and (max-width:991px){
+.skincare-grid-section .skincare_slide_block .swiper-wrapper{padding-bottom: 45px;}
+
+.skin_care_dot{position:relative;} 
+.skin_care_dot .swiper-pagination-bullet{border: 1px solid #BDBDBD;opacity: 1;background:unset;}
+.skin_care_dot .swiper-pagination-bullet-active{background:#BDBDBD;border:unset;}
+
+.skincare-grid-section .skincare_slide.mobile_block_hide{display:none;}
+.skincare-grid-section .skincare_list_button{display:block;}
+
+.skincare-grid-section.desktop_hide{display:block;}
+
+  
+}
+
+@media screen and (max-width:575px){
+  .skincare-grid-section .skincare-text-block{margin-bottom:16px;}
+  .skincare-grid-section .skincare-text-block span p{padding: 0 10px;font-size: 18px;max-width: 300px;width: 100%;margin: 0 auto;}
+  .skincare-grid-section .skincare_slide_block .skin_pro_title{padding:0 5px 20px}
+  .skincare-grid-section.desktop_hide .skin_pro_wrp figure{
+  padding:15px;
+}
+}
+
+/* Grid Skiincare Css */
+
+.skincare-grid-section .skincare_flex .skincare_flex_wrap{display: flex;flex-wrap: nowrap;overflow-x: auto; -ms-overflow-style: none;scrollbar-width: none;scroll-behavior: smooth;}
+.skincare-grid-section .skincare_flex .skincare_slide{width: 538px;min-width: 538px;border: 0.5px solid #BDBDBD;border-left: 0;}
+.skincare-grid-section .skincare_flex .skin_pro_wrp{height: 100%;}
+
+
+@media screen and (max-width:1599px){
+  .skincare-grid-section .skincare_flex .skincare_slide{width: 418px;min-width: 418px;}
+}
+
+@media screen and (max-width:1399px){
+  .skincare-grid-section .skincare_flex .skincare_slide{width: 368px;min-width: 368px;}
+}
+
+@media screen and (max-width:991px){
+  .skincare-grid-section .skincare_flex .skincare_flex_wrap{display: flex;flex-wrap: wrap;overflow: hidden;border-left: 0.5px solid #BDBDBD;border-top: 0.5px solid #BDBDBD;}
+  .skincare-grid-section .skincare_flex .skincare_slide{width:50%;min-width:50%;border-top: 0;}
+  .skincare-grid-section .product-form{padding: 0 24px 24px;}
+  .skincare-grid-section .product-form .common_btn{width:70%;}
+}
+
+
+@media screen and (max-width:575px){
+  .skincare-grid-section .skincare_slide_block .skin_pro_title{max-width: 100%;}
+
+  .skincare_slide .dicoount_badge{right: 12px;}
+  .skincare_slide .dicoount_badge img{width: 56px;height: 60px;}
+
+  .skincare-grid-section .skincare_flex .skincare_slide{width: 100%;}
+
+  .skincare-grid-section .skincare-text-block .main_title{margin-bottom: 4px;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

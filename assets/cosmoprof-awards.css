@@ -1,0 +1,51 @@
+.cosmoprof-awards-section .page-width{
+ max-width:1000px;  
+}
+
+.cosmoprof-awards-section .main_title{
+   text-align: center;
+  font-size:26px;
+  letter-spacing:0;
+   margin: 0;
+}
+
+.cosmoprof-awards-section .cosmoprof-awards-block{
+  margin-top:48px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+  align-items: center;
+  gap:15px;
+}
+
+.cosmoprof-awards-section .cosmoprof-awards-row{
+  width:calc(16.66% - 12.5px);
+}
+
+.cosmoprof-awards-section .cosmoprof-awards-row img{
+  width: 100%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+@media screen and (max-width: 768px){
+  .cosmoprof-awards-section .cosmoprof-awards-block{
+    margin-top:32px;
+    gap:15px;
+    justify-content:center;
+  }
+}
+
+@media screen and (max-width: 575px){
+  .cosmoprof-awards-section .main_title{
+    font-size:20px;
+  }
+  .cosmoprof-awards-section .cosmoprof-awards-row{
+    width: calc(33.33% - 10px);
+  }
+
+  .cosmoprof-awards-section .cosmoprof-awards-block{
+    margin-top: 16px;
+    padding: 0 30px;
+  }
+}

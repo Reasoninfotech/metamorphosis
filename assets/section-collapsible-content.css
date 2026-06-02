@@ -1,0 +1,175 @@
+.collapsible-content {
+    background: #FAFAFA;
+}
+.template-page-faq main#MainContent {
+    margin: 0;
+}
+.collapsible-content__separator {
+  padding-top: 0;
+}
+.collapsible-content__heading {
+  margin: 0;
+}
+.collapsible-content__text {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: rgba(var(--color-foreground), 0.6);
+  margin-top: 0.8rem;
+}
+ .template-product-silicone-patch-collection .collapsible-content__text {
+  color: rgb(var(--color-foreground-title));
+ }
+.collapsible-content__items {
+  margin-top: 2rem;
+}
+.collapsible-content__toggle-group .collapsible-content__question {
+    font-size: 24px;
+    line-height: 1.2;
+}
+.template-page-faq main#MainContent section:first-child .collapsible-content {
+    padding-top: 96px;
+}
+@media (min-width: 750px) {
+  .collapsible-content__items {
+    margin-top: 3.4rem;
+  }
+}
+.collapsible-content__item {
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+}
+/* .collapsible-content__item:first-child {
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+} */
+.collapsible-content__item:hover .collapsible-content__question {
+  opacity: 0.7;
+}
+.collapsible-content__item.active .collapsible-content__icon svg {
+  transform: rotate(270deg);
+}
+.collapsible-content__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0.5rem 1rem 0;
+  cursor: pointer;
+}
+@media (min-width: 750px) {
+  .collapsible-content__toggle {
+    padding: 16px 0;
+  }
+}
+.collapsible-content__toggle-group {
+  display: flex;
+  align-items: center;
+}
+.collapsible-content__question {
+  margin: 0;
+  transition: var(--duration-default);
+}
+.collapsible-content__digit, .collapsible-content__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.collapsible-content__digit {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-right: 0.8rem;
+  color: rgb(var(--color-button));
+  border-radius: 50%;
+  background-color: rgba(var(--color-base-background-2));
+}
+@media (min-width: 750px) {
+  .collapsible-content__digit {
+    width: 4.7rem;
+    height: 4.7rem;
+    font-size: 1.8rem;
+    margin-right: 1.6rem;
+  }
+}
+.collapsible-content__icon svg {
+  width: 2.2rem;
+  height: 1.6rem;
+  color: rgb(var(--color-button));
+  transform: rotate(90deg);
+  transition: var(--duration-default);
+}
+.collapsible-content__answer {
+  display: none;
+  /* border-top: 0.1rem solid rgba(0, 0, 0, 0.2); */
+  padding: 0;
+}
+/* @media (min-width: 990px) {
+  .collapsible-content__answer {
+    padding: 2.4rem 6.3rem;
+  }
+} */
+.collapsible-content__answer-inner {
+    max-width: 100%;
+    font-size: 20px;
+    line-height: 1.7;
+    color: rgb(var(--color-foreground-title));
+}
+.collapsible-content__answer-inner p {
+  margin: 0;
+}
+.collapsible-content__answer {
+    padding-bottom: 16px;
+}
+.template-page-faq main#MainContent section.collapsible-content-section {
+    padding: 0;
+}
+.FAQcoll .skin_pro_wrp {
+    background: transparent !important;
+}
+
+@media(max-width:1199px) {
+  .template-page-faq main#MainContent section:first-child .collapsible-content {
+    padding-top: 80px;
+}
+  .collapsible-content__toggle-group .collapsible-content__question {
+    font-size: 22px;
+}
+  .collapsible-content__answer-inner {
+    font-size: 18px;
+}
+}
+@media(max-width:991px) {
+  .template-page-faq main#MainContent section:first-child .collapsible-content {
+    padding-top: 70px;
+}
+.collapsible-content__toggle-group .collapsible-content__question {
+    font-size: 20px;
+}
+}
+@media(max-width:767px) {
+  .template-page-faq main#MainContent section:first-child .collapsible-content {
+    padding-top: 60px;
+}
+.collapsible-content__toggle-group .collapsible-content__question {
+    font-size: 18px;
+}
+.collapsible-content__answer-inner {
+    font-size: 17px;
+}
+}
+@media(max-width:575px) {
+  .template-page-faq main#MainContent section:first-child .collapsible-content {
+    padding-top: 50px;
+}
+}
+
+.collapsible-bottom-content{text-align: center;}
+.collapsible-bottom-content h3{margin: 0;font-size: 26px;line-height: normal;margin-bottom: 12px;}
+.collapsible-bottom-content .bt-content p{margin:0;}
+
+.collapsible_btn_wrp{text-align: center;padding-top: 36px;}
+.collapsible_btn_wrp .common_btn{min-width: 280px;}
+
+
+@media (max-width: 767px){
+  .collapsible_btn_wrp{padding-top: 32px;}
+}

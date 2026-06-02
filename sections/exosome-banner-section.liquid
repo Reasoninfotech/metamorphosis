@@ -1,0 +1,168 @@
+{% style %}
+  .exosome_banner_section{position: relative}
+  .exosome_banner_section .exosome_banner .desktop_video{
+    width: 100%;
+    height: auto;
+    /* max-height: 800px; */
+    object-fit: cover;
+    vertical-align: middle;
+  }
+  .exosome_banner_section .exosome_banner .mobile_video{
+    display: none;
+    width:100%;
+    object-fit: cover;
+    height: auto;
+    /* max-height: 750px; */
+  }
+
+  .exosome_banner_section .video_controls{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 50;
+  }
+
+  .exosome_banner_section .play_pause_btn{
+    width: 55px;
+    height: 55px;
+    background: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 12px rgba(0,0,0,0.25);
+  }
+
+  @media (max-width: 767px){
+    .exosome_banner_section .play_pause_btn{
+      width: 45px;
+      height: 45px;
+    }
+    .exosome_banner_section .exosome_banner .desktop_video{display: none;}
+    {% if section.settings.mob_video != blank %}
+    .exosome_banner_section .exosome_banner .desktop_video{display: none;}
+    {% endif %}
+    .exosome_banner_section .exosome_banner .mobile_video{display: block;}
+  }
+  @media (max-width: 575px){
+    .exosome_banner_section .exosome_banner .mobile_video{
+      max-height: 550px;
+    }
+  }
+{% endstyle %}
+
+<div class="exosome_banner_section">
+  <div class="exosome_banner">
+
+    {% if section.settings.desktop_poster  != blank %}
+      <video
+        {% if section.settings.desktop_poster != blank %}poster="{{ section.settings.desktop_poster | img_url: 'master' }}"{% endif %}
+        alt="{{ section.settings.desktop_poster.alt }}"
+        {% if section.settings.auto_loop %}autoplay loop muted playsinline{% endif %}
+        class="desktop_video"
+      >
+        <source src="{{ section.settings.desktop_video.sources[0].url }}" type="video/mp4">
+      </video>
+    {% endif %}
+
+    {% if section.settings.mobile_poster != blank %}
+      <video
+        {% if section.settings.mobile_poster != blank %}poster="{{ section.settings.mobile_poster | img_url: 'master' }}"{% endif %}
+        alt="{{ section.settings.mobile_poster.alt }}"
+        {% if section.settings.auto_loop %}autoplay loop muted playsinline{% endif %}
+        class="mobile_video"
+      >
+        <source src="{{ section.settings.mob_video.sources[0].url }}" type="video/mp4">
+      </video>
+    {% endif %}
+
+    {% unless section.settings.auto_loop %}
+      <div class="video_controls">
+        <button class="play_pause_btn"></button>
+      </div>
+    {% endunless %}
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  const playSVG = `
+    <svg width="26" height="26" viewBox="0 0 170 170" fill="#000">
+      <path d="M85.1484 0C132.093 0 170.148 38.0558 170.148 85C170.148 131.944 132.093 170 85.1484 170C38.2042 170 0.148438 131.944 0.148438 85C0.148437 38.0558 38.2042 0 85.1484 0ZM65.5986 43.1377C64.0667 43.1379 62.5612 43.5409 61.2344 44.3066C59.9077 45.0724 58.8056 46.1738 58.0391 47.5C57.2725 48.8263 56.8684 50.3314 56.8672 51.8633V118.137C56.8583 119.671 57.2578 121.179 58.0244 122.508C58.7911 123.836 59.8979 124.937 61.2305 125.697C62.5553 126.471 64.0623 126.879 65.5967 126.879C67.131 126.879 68.6381 126.471 69.9629 125.697L127.354 92.5605C128.681 91.7938 129.782 90.6913 130.548 89.3643C131.314 88.0372 131.717 86.5321 131.717 85C131.717 83.4679 131.314 81.9628 130.548 80.6357C129.782 79.3087 128.681 78.2062 127.354 77.4395L69.9629 44.3057C68.6359 43.5403 67.1306 43.1375 65.5986 43.1377Z"/>
+    </svg>
+  `;
+
+  const pauseSVG = `
+    <svg width="26" height="26" viewBox="0 0 32 32" fill="#000">
+      <path d="M16 0C7.16 0 0 7.16 0 16s7.16 16 16 16 16-7.16 16-16S24.84 0 16 0zM14 22c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12zm8 0c0 1-.8 2-2 2s-2-1-2-2V10c0-1 .8-2 2-2s2 1 2 2v12z"/>
+    </svg>
+  `;
+
+  let vid = window.innerWidth <= 767
+    ? document.querySelector('.exosome_banner_section .mobile_video')
+    : document.querySelector('.exosome_banner_section .desktop_video');
+
+  const btn = document.querySelector('.exosome_banner_section .play_pause_btn');
+
+  if (btn && vid) {
+    btn.innerHTML = playSVG;
+
+    btn.addEventListener('click', function () {
+      if (vid.paused) {
+        vid.play();
+        btn.innerHTML = pauseSVG;
+      } else {
+        vid.pause();
+        btn.innerHTML = playSVG;
+      }
+    });
+
+    vid.addEventListener('ended', function () {
+      btn.innerHTML = playSVG;
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Exosome Banner Video",
+  "class": "header-slider",
+  "settings": [
+    {
+      "type": "video",
+      "id": "desktop_video",
+      "label": "Desktop Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_poster",
+      "label": "Desktop Video Poster"
+    },
+    {
+      "type": "video",
+      "id": "mob_video",
+      "label": "Mobile Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_poster",
+      "label": "Mobile Video Poster"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_loop",
+      "label": "Autoplay + Loop",
+      "default": true
+    },
+  ],
+  "presets": [
+    {
+      "name": "Exosome Banner Video"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,202 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "title": {
+          "type": "article-header",
+          "settings": {
+            "blog_show_tags": false,
+            "blog_show_date": true,
+            "blog_show_author": true,
+            "image_height": "large",
+            "show_share_facebook": false,
+            "show_share_twitter": false,
+            "show_share_pinterest": false,
+            "show_share_copy": false
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {}
+        },
+        "article_footer": {
+          "type": "article-footer",
+          "disabled": true,
+          "settings": {
+            "blog_show_date": true,
+            "blog_show_author": true,
+            "show_share_facebook": true,
+            "show_share_twitter": true,
+            "show_share_pinterest": true,
+            "show_share_copy": true
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "content",
+        "article_footer"
+      ],
+      "settings": {
+        "header_variant": "column"
+      }
+    },
+    "featured_blog": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "<p>Latest Blogs</p>",
+        "blog": "blog-1",
+        "post_limit": 3,
+        "show_image": true,
+        "show_tags": false,
+        "show_date": true,
+        "show_author": true,
+        "show_excerpt": false,
+        "show_view_all": true,
+        "show_border": false
+      }
+    },
+    "new_home_collection_grid_WAb8Ft": {
+      "type": "new-home-collection-grid",
+      "settings": {
+        "desktop_show": true,
+        "padding_top": true,
+        "padding_bottom": true,
+        "home_collection": "custom-collection",
+        "products_per_page": 6,
+        "sort": "alphabetical",
+        "image_ratio": "square",
+        "image_fit": "contain",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_desc": false,
+        "subheading": "",
+        "heading": "THE METAMORPHOSIS COLLECTION",
+        "text": "Perfectly Paired: Advanced Light Therapy Meets Tailored Hydrogels for Radiant After-Care",
+        "button_show": false,
+        "btn_text": "VIEW ALL",
+        "button_link": "shopify://collections/all-collection"
+      }
+    },
+    "skincare_grid_section_Bw3LaY": {
+      "type": "skincare-grid-section",
+      "blocks": {
+        "block_dQq9Cp": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "metamorphosis-superstar-pimple-patches",
+            "image_second": "shopify://shop_images/5eac6c374e1be24ba3e52a69a28019ab.png",
+            "product_sub_text": "<p>Target skin imperfections <br/>with precision and efficacy</p>",
+            "product_title": "SuperStar<br>Pimple Patches",
+            "add_to_cart": false
+          }
+        },
+        "block_iW4BDC": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "metamorphosis-magic-moon-eye-evolution",
+            "image_second": "shopify://shop_images/3520cc3371cd6b6843c6ebe1a403087f.png",
+            "product_sub_text": "<p>Radiant rebirth - Smooth fine lines <br/>and revive tired eyes</p>",
+            "product_title": "MagicMoon<br>Eye Evolution",
+            "add_to_cart": false
+          }
+        },
+        "block_YDHxXp": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "metamorphosis-lushlips-transformation",
+            "image_second": "shopify://shop_images/5371a390cbba148491664671ca80e438.png",
+            "product_sub_text": "<p>Plump and define <br/>for a youthful pout</p>",
+            "product_title": "LushLips<br>Transformation",
+            "add_to_cart": false
+          }
+        },
+        "block_7eBYt3": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "hydrogel-face-star",
+            "image_second": "shopify://shop_images/fa9d22b7b4e8c56b785553a60790ce98.png",
+            "product_sub_text": "<p>Smooth lines, calm inflammation, <br/>and hydrate easily</p>",
+            "product_title": "SuperStar<br>Hydrogel Mask",
+            "add_to_cart": false
+          }
+        },
+        "block_ardHGG": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "hydrogel-eye-star",
+            "image_second": "shopify://shop_images/c17674a8a73fe1bfa86b7fb335dd620d.png",
+            "product_sub_text": "<p>Hydrate, brighten, <br/>and refresh under-eyes</p>",
+            "product_title": "MagicMoon<br>Hydrogel Mask",
+            "add_to_cart": false
+          }
+        },
+        "block_9wNxaG": {
+          "type": "block",
+          "settings": {
+            "mobile_hide": false,
+            "product": "hydrogel-pink-lip",
+            "image_second": "shopify://shop_images/6097691ee2f105e6c2875a9f57408683.png",
+            "product_sub_text": "<p>Hydrate, plump, <br/>and smooth for luscious, kissable lips</p>",
+            "product_title": "LushLips<br>Hydrogel Mask",
+            "add_to_cart": false
+          }
+        }
+      },
+      "block_order": [
+        "block_dQq9Cp",
+        "block_iW4BDC",
+        "block_YDHxXp",
+        "block_7eBYt3",
+        "block_ardHGG",
+        "block_9wNxaG"
+      ],
+      "settings": {
+        "mobile_show_section": true,
+        "padding_top": true,
+        "bgColor": "#ffffff",
+        "padding_bottom": true,
+        "title": "THE METAMORPHOSIS COLLECTION",
+        "content": "<p>Perfectly Paired: Advanced Light Therapy Meets Tailored Hydrogels for Radiant After-Care</p>",
+        "remove_slider": false,
+        "btn_text": "VIEW ALL",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "custom_css": [],
+      "settings": {
+        "back_color": "#fafafa",
+        "heading": "",
+        "heading_animation": true,
+        "sub_title": "LET YOUR NATURAL BEAUTY SHINE!",
+        "newsletter_text": "Have a question, suggestion, or inquiry? We're all ears!<br>Drop a message and start a conversation. <br> Your thoughts are important to us,  <br>and we promise to respond with the same enthusiasm.",
+        "button_style": "secondary",
+        "border_top": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_blog",
+    "new_home_collection_grid_WAb8Ft",
+    "skincare_grid_section_Bw3LaY",
+    "newsletter"
+  ]
+}

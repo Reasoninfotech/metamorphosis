@@ -1,0 +1,317 @@
+{% style %}
+  .targeted-section .page-width{max-width: 1440px;margin: 0 auto;Padding:0 15px;}
+
+  .targeted-section .targeted_sub_content{padding-top: 48px;border-bottom: 1px solid #828282;}
+
+  .targeted-section .glow_img_block{display: flex;flex-wrap: wrap;gap: 30px;align-items:center;text-align:center;padding: 30px 0;}
+  
+  .targeted-section .glow_img_block figure{width: calc(52% - 15px);}
+  .targeted-section .glow_img_block figure img{width:100%;object-fit: cover;vertical-align: middle;}
+
+  .targeted-section .glow_text_block{width: calc(48% - 15px);text-align: left;}
+  
+  .targeted-section .glow_text_block h4{font-size: 20px;line-height: 27px;color: #000;font-weight: 700;margin-top: 0;margin-bottom: 10px;}
+
+  .targeted-section .glow_content ul{color: #000000;padding-left: 30px;margin-top: 0;margin-bottom: 30px;}
+  .targeted-section .glow_content ul li{font-size: 18px;line-height: 22px;}
+
+  .targeted-section .glow_content p{font-size: 20px;line-height:normal;color:#000;max-width:540px;margin:0 auto;}
+  .targeted-section .glow_text_block span{font-size: 10PX;text-transform: uppercase;padding-top: 15px;display: block;line-height: 14px;font-family: var(--argentum);}
+
+  .targeted-section .targeted_sub_content{font-size: 14px;line-height: normal;display: flex;overflow: auto;gap: 24px;justify-content: space-evenly;}
+  .targeted-section .targeted_sub_content span{width: auto;padding: 11px 0;white-space: nowrap;cursor: pointer;text-transform: uppercase;font-family: var(--argentum);color: #828282;font-weight: 300;letter-spacing: 1px;}
+  .targeted-section .targeted_sub_content span.active{border-bottom: 2px solid #000;}
+  .targeted-section .targeted_sub_content p{margin-top:24px;margin-bottom:0;}
+
+  .targeted-section .product-form__buttons{align-items: flex-start;}
+  .targeted-section .product-form__submit{width: 100%;max-width: 146px;min-height: unset;min-width: unset;text-transform: uppercase;background: transparent;}
+
+  .targeted-section .targeted_mobile_show{display: none;}
+  .targeted-section .targeted_mobile_show span{text-transform: uppercase;font-family: var(--argentum);color: #828282;font-weight: 300;letter-spacing: 0.5px;font-size: 12px;}
+  .targeted-section .targeted_mobile_show h4{margin: 0;font-size: 20px;padding: 0 5px;height: 44px;}
+
+  .targeted-section .morpho-glow-wrp .swiper{display: none;}
+  .targeted-section .morpho-glow-wrp .swiper.targeted-slider.swiper-initialized{display: block;}
+
+
+
+  @media (max-width: 991px){
+    .targeted-section .glow_title_content{Padding-bottom: 25px;}
+    .targeted-section .glow_content p{font-size: 18px;}
+
+    .targeted-section .targeted_sub_content{display: none;}
+
+    .targeted-section .glow_img_block{padding: 16px;background: #FAFAFA;gap: 16px;}
+    .targeted-section .glow_img_block figure,
+    .targeted-section .glow_text_block{width: 100%;}
+
+    .targeted-section .main_title{margin-bottom: 32px;}
+
+    .targeted-section .targeted_mobile_show{display: block;width: 100%;text-align: center;}
+    .targeted-section .glow_text_block{ text-align: center;}
+    .targeted-section .glow_text_block h4{display: none;}
+    .targeted-section .glow_content ul{padding: 0;margin-bottom: 16px;list-style: unset;}
+    .targeted-section .glow_content ul li{font-size: 16px;line-height: 20px;position: relative;}
+    .targeted-section .glow_content ul li:before{content: " ";position: absolute;top: 0;bottom: 0;margin: auto;width: 4px;height: 4px;background: #000;border-radius: 50px;margin-left: -10px;}
+
+    .targeted-section .product-form__buttons{align-items: center;}
+    
+}
+
+@media (max-width: 429px){
+      /* .targeted-section .glow_text_block h4{display: none;}
+    .targeted-section .glow_img_block figure{width: 100%;}
+    .targeted-section .glow_text_block{width: 100%;padding-top: 25px;}
+    .targeted-section .glow_title_content{Padding-bottom: 50px;}
+    .targeted-section .targeted_sub_content{padding-top: 30px;} */
+    .targeted-section .targeted_mobile_show h4{font-size: 18px;height: 40px;}
+ 
+  }
+
+  @media (max-width: 389px){
+  }
+{% endstyle %}
+<section class="targeted-section pt_90">
+  <div class="page-width">
+
+    {% if section.settings.title != blank %}
+      <h2 class="main_title">{{ section.settings.title }}</h2>
+    {% endif %} 
+
+   <div class="targeted_sub_content">
+      {% for block in section.blocks %}
+        {% assign i = forloop.index0 %}
+        <span data-index="{{ i }}">{{ block.settings.tab_title }}</span>
+      {% endfor %}
+    </div>
+    <div class="morpho-glow-wrp">
+        <div class="swiper targeted-slider">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+              {% assign i = forloop.index0 %}  
+              <div class="swiper-slide" data-index="{{ i }}">
+                <div class="glow_img_block">
+                
+                 <div  class="targeted_mobile_show">   
+
+                   {% if block.settings.tab_title != blank %}
+                     <span class="">{{ block.settings.tab_title }}</span>
+                    {% endif %} 
+                     {% if block.settings.content_title != blank %}
+                      <h4>{{ block.settings.content_title }}</h4>
+                     {% endif %}
+                 </div>
+
+                {% if block.settings.image != blank %}   
+                  <figure>
+                      <img src="{{ block.settings.image | img_url : "master" }}" alt="{{ block.settings.image.alt | escape }}" loading="lazy">
+                  </figure>
+                {% endif %}
+
+
+                  <div class="glow_text_block">
+                     {% if block.settings.content_title != blank %}
+                     <h4>{{ block.settings.content_title }}</h4>
+                     {% endif %}
+                     {% if block.settings.content != blank %}
+                     <div class="glow_content">
+                        {{ block.settings.content }}
+                    </div>
+                    {% endif %}
+
+                    {% if block.settings.product != blank %}
+                    <div class="product_list_button">
+                       {% assign product_cus = block.settings.product %}
+                        {%- liquid assign gift_card_recipient_feature_active = false 
+									if product_cus.gift_card? 
+									assign gift_card_recipient_feature_active = true 
+									endif 
+									assign show_dynamic_checkout = false 
+									if gift_card_recipient_feature_active == false 
+									assign show_dynamic_checkout = true 
+									endif 
+								-%}
+								<product-form class="product-form" data-hide-errors="{{ gift_card_recipient_feature_active }}">
+									<div class="product-form__error-message-wrapper" role="alert" hidden>
+									<svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13" >
+										<circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/></circle>
+										<circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/></circle>
+										<path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/></path>
+										<path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7"></path>                                                                                                                                                                                                                                                                                                                                                                                                                                              
+									</svg>
+									<span class="product-form__error-message"></span>
+									</div>
+									{%- assign product_form_id = 'product-form-' | append: section.id -%}      
+									{%- form 'product',
+									product_cus,
+									id: product_form_id,
+									class: 'form',
+									novalidate: 'novalidate',
+									data-type: 'add-to-cart-form'
+									-%}
+									<input
+										type="hidden"
+										name="id"
+                    {% if block.settings.products_varint != blank %}
+                      value="{{ block.settings.products_varint }}"
+                    {% else %}
+										  value="{{ product_cus.selected_or_first_available_variant.id }}"
+                    {% endif %}
+										disabled
+									>
+				
+									<div class="product-form__buttons" style="margin:0;">
+										<button
+										id="ProductSubmitButton-{{ section.id }}"
+										type="submit"
+										name="add"
+										class="product-form__submit common_btn product-section__button button--primary-size button--arrow button--primary"
+										
+											{% if block.settings.show_dynamic_checkout and product_cus.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}
+										
+										{% if product_cus.selected_or_first_available_variant.available == false %}
+											disabled
+										{% endif %}
+										>
+										{%- if product_cus.selected_or_first_available_variant.available -%}
+											{{ 'products.product.add_to_cart' | t }}
+										{%- else -%}
+											{{ 'products.product.sold_out' | t }}
+										{%- endif -%}
+										</button>
+									</div>
+									{%- endform -%}
+								</product-form>
+                    </div>
+                    {% endif %}
+
+                  </div>
+
+
+                </div> 
+
+              </div>
+            {% endfor %}
+          </div>
+        </div> 
+    </div>
+  </div>
+</section>
+
+<script>
+var swiper;
+
+$(document).ready(function () {
+  swiper = new Swiper('.targeted-slider', {
+    slidesPerView: 1.1,
+    spaceBetween: 16,
+    loop: true,
+    {% comment %} autoplay: { delay: 5000, disableOnInteraction: false, }, {% endcomment %}
+
+    breakpoints: {
+        393:{
+         slidesPerView: 1.5,
+         spaceBetween: 16
+        },
+        480: {
+        slidesPerView: 2.2,
+        spaceBetween: 16
+        },
+        768: {
+        slidesPerView: 2.7,
+        spaceBetween: 20
+        },
+        899: {
+        slidesPerView: 3.2,
+        spaceBetween: 20
+        },
+        992: {
+        slidesPerView: 1,
+        }
+    },
+
+    on: {
+      init: function () {
+        highlightActiveMode(this.realIndex);
+      },
+      slideChange: function () {
+        highlightActiveMode(this.realIndex);
+      }
+    }
+  });
+
+  $('.targeted-section .targeted_sub_content span').on('click', function () {
+    var index = $(this).data('index');
+    console.log('Click index:', index);
+    swiper.slideToLoop(index); 
+  });
+});
+
+function highlightActiveMode(realIndex) {
+  $('.targeted_sub_content span').removeClass('active');
+  $('.targeted_sub_content span[data-index="' + realIndex + '"]').addClass('active');
+  $('.targeted_sub_content span').css('color', '');
+  $('.targeted_sub_content span[data-index="' + realIndex + '"]').css('color', '#000');
+}
+
+
+
+</script>
+
+{% schema %}
+{
+  "name": "Targeted Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "TARGETED argeted TREATMENTS"
+    }
+  ],
+  "blocks": [
+    {
+    "type": "targeted_block",
+    "name": "Targeted Block",
+    "settings": [
+      {
+        "type": "text",
+        "id": "tab_title",
+        "label": "Tab Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },   
+      {
+        "type": "text",
+        "id": "content_title",
+        "label": "Content Title"
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      },
+      {
+        "type": "number",
+        "id": "products_varint",
+        "label": "Products Varint Id",
+        "info": "Add Product Varint ID using Add-to-cart"
+      }
+    ]
+  }
+],
+  "presets": [
+    {
+      "name": "Targeted Section"
+    }
+  ]
+}
+{% endschema %}

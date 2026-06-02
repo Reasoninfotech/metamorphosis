@@ -1,0 +1,276 @@
+{% style %}
+.counter-section{background: var(--background)}
+
+/* .counter-section .main_title{padding-bottom:48px;} */
+.counter-section .sub_text p{
+  font-weight: 400;
+    font-size: 20px;
+    line-height: normal;
+    text-align: center;
+    margin:16px 0 48px;
+  }
+
+.counter-section .counter-sec-text{display: flex;flex-direction: column;gap: 80px;width:100%;}
+  
+.counter-section .counter-sec-row{display:flex;flex-wrap:wrap;border-left: 1px solid #BDBDBD;justify-content: center;}
+.counter-section .counter-sec-col{width:33.33%;display:flex;gap:37px;justify-content: center;align-items: center;border: 1px solid #BDBDBD;border-left: 0;padding: 24px 16px;}
+
+.counter-section .counter-sec-number{color:#000;font-size: 128px;line-height: 128px;letter-spacing: 0.56px;text-align:center;font-family: var(--font-heading-family);font-weight: 300;font-style: italic;}
+.counter-section .counter-sec-title{color:#000;font-size: 20px;line-height: normal;letter-spacing: 0.24px;text-align:center;font-family: var(--font-heading-family);}
+.counter-section .counter-sec-title p{margin:0;}
+.product_metamorphosis-magic-moon-eye-evolution .counter-sec-row,
+.product_metamorphosis-superstar-pimple-patches .counter-sec-row{border:0;}
+
+.product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-col:nth-child(1),
+.product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-col:nth-child(1){border-left: 1px solid #BDBDBD;}
+
+.counter-section .counter_bottom_text{margin-top: 15px;text-align: center;max-width: 730px;margin: 0 auto;}
+.counter-section .counter_bottom_text p{font-weight: 400;font-size: 20px;line-height: normal;margin-bottom: 0;}
+.metafield-rich_text_field p{
+  margin-top: 20px;
+}
+
+  
+@media screen and (max-width:1400px){
+  .counter-section .counter-sec-number{font-size:100px;line-height:100px;}
+  .counter-section .counter-sec-text{gap: 70px;}
+}
+  
+@media screen and (max-width:991px){
+  .counter-section .counter-sec-title{font-size:18px;}
+  .counter-section .counter-sec-text {gap: 50px;}
+}
+@media screen and (min-width: 768px){
+  .counter-section .counter-sec-title .brek-line br:first-child{display: none;}
+}
+@media screen and (max-width: 768px){
+  .counter-section .counter-sec-col{width:50%;}
+  .counter-section .counter-sec-col:nth-child(1){width:100%;border-bottom: 0;}
+  .counter-section .counter-sec-col:nth-child(1) .counter-sec-title br{display:none;}
+  .counter-section .counter-sec-text{gap:40px;}
+  .counter-section .sub_text p{font-size: 18px;margin:4px 0 30px;}
+
+  .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-col:nth-child(1),
+  .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-col:nth-child(1){width:50%;border-bottom: 1px solid #BDBDBD;}
+  
+  .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-col:nth-child(1) .counter-sec-title br,
+  .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-col:nth-child(1) .counter-sec-title br{display:block;}
+
+  .counter-section .counter_bottom_text p{font-size: 18px;}
+  .metafield-rich_text_field p{
+  margin-top: 18px;
+}
+  
+}
+
+@media screen and (max-width: 575px){
+   .counter-section .counter-sec-number{font-size:80px;line-height:80px;}
+  .counter-section .counter-sec-col{padding:16px;}
+    .counter-section .counter-sec-title{font-size:16px;}
+
+    .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-title,
+    .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-title{font-size:14px;}
+
+    /* .counter-section .main_title{padding-bottom: 16px;} */
+    .counter-section .sub_text p{margin:4px 0 16px;}
+    .counter-section .counter_bottom_text p{font-size: 16px;}
+    .metafield-rich_text_field p{
+  margin-top: 16px;
+}
+}  
+
+@media screen and (max-width: 423px){
+    .counter-section .counter-sec-title{font-size:14px;}
+  .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-title,
+  .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-title{font-size:12px;}
+} 
+
+@media screen and (max-width: 389px){
+    .counter-section .counter-sec-number{font-size:70px;line-height:70px;}
+    .counter-section .counter-sec-title{font-size:12px;}
+}   
+
+@media screen and (max-width: 374px){
+  .counter-section .counter-sec-row{border-bottom: 1px solid #BDBDBD;}
+  .counter-section .counter-sec-col:nth-child(1) .counter-sec-title br{display:block;}
+  .counter-section .counter-sec-col{width:100%;border-bottom:0;}
+
+  .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-row,
+  .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-row{border-left: 1px solid #BDBDBD;}
+
+  .product_metamorphosis-magic-moon-eye-evolution .counter-section .counter-sec-col:nth-child(1),
+  .product_metamorphosis-superstar-pimple-patches .counter-section .counter-sec-col:nth-child(1){width:100%;border-bottom: 0;border-left:0;}
+}  
+  
+{% endstyle %}
+
+{% if product.metafields.number.counter != blank %}
+<div class="counter-section {% if section.settings.padding_top == true %}pt_90{% endif %} {% if section.settings.padding_bottom == true %}pb_90 {% endif %}" >
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="main_title">{{ section.settings.title }}</h2>
+    {% endif %}
+    {% if section.settings.sub_text != blank %}
+      <div class="sub_text">{{ section.settings.sub_text }}</div>
+    {% endif %}
+    
+    <div class="counter-sec-row">
+      {% for block in product.metafields.number.counter %}
+        {% assign i = forloop.index0 %}
+        <div class="counter-sec-col{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"{% if settings.animations_reveal_on_scroll %} data-cascade style="--animation-order: {{ forloop.index }};"{% endif %}>
+            <div class="counter-sec-text">
+              {% if product.metafields.number.counter[i] != blank %}<div class="counter-sec-number"><span>{{ product.metafields.number.counter[i] }}</span>%</div>{% endif %}
+              {% if product.metafields.title.counter[i] != blank %}<div class="counter-sec-title">{{ product.metafields.title.counter[i] }}</div>{% endif %}
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.bottom_text != blank %}
+    <div class="counter_bottom_text">
+      {% if section.settings.use-meta != true %}
+      {{ section.settings.bottom_text }}
+      {% else %}
+        {% if product.metafields.custom.clinically_results.value != blank %}
+        {{ product.metafields.custom.clinically_results | metafield_tag }}
+        {% else %}
+          {{ section.settings.bottom_text }}
+        {% endif %}
+      {% endif %}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+  {% endif %}
+
+<script>
+//  $( document ).ready(function() {
+//    if($('.counter-sec-number span').length > 0){
+//     function inVisible(element) {
+//       var WindowTop = $(window).scrollTop();
+//       var WindowBottom = WindowTop + $(window).height();
+//       var ElementTop = element.offset().top;
+//       var ElementBottom = ElementTop + element.height();
+//       if ((ElementBottom <= WindowBottom) && ElementTop >= WindowTop)
+//         animate(element);
+//     }
+  
+//     function animate(element){
+//       if(!element.hasClass('animated')){
+//         element.addClass('animated')
+//         jQuery({ Counter: 0 }).animate({ Counter: element.text() }, {
+//           duration: 5000,
+//           easing: 'swing',
+//           step: function () {
+//             element.text(Math.ceil(this.Counter));
+//           }
+//         });
+//       }
+//     }
+    
+//     $(window).scroll(function() {
+//       $(".counter-sec-number span").each(function() {
+//         inVisible($(this));
+//       });
+//     });
+//     $(window).scroll();
+//   }
+// });
+
+$(document).ready(function() {
+  if ($('.counter-sec-number span').length > 0) {
+    function inVisible(element) {
+      var WindowTop = $(window).scrollTop();
+      var WindowBottom = WindowTop + $(window).height();
+      var ElementTop = element.offset().top;
+      var ElementBottom = ElementTop + element.height();
+      if ((ElementBottom <= WindowBottom) && ElementTop >= WindowTop) {
+        animate(element);
+      }
+    }
+
+    function animate(element) {
+      if (!element.hasClass('animated')) {
+        element.addClass('animated');
+        var targetValue = parseInt(element.text());
+        var startValue = 0;
+
+        $({ Counter: startValue }).animate({ Counter: targetValue }, {
+          duration: 2500,
+          easing: 'swing',
+          step: function () {
+            let currentValue = Math.round(this.Counter / 10) * 10; 
+            element.text(currentValue);
+          },
+          complete: function () {
+            element.text(targetValue);
+          }
+        });
+      }
+    }
+
+    $(window).scroll(function() {
+      $(".counter-sec-number span").each(function() {
+        inVisible($(this));
+      });
+    });
+    $(window).scroll();
+  }
+});
+  
+</script>  
+
+{% schema %}
+  {
+    "name": "Counter Section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "padding_top",
+        "label": "Padding Top",
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+      },
+      {
+        "type":"color",
+        "id":"background",
+        "label":"Background",
+        "default":"#202020"
+      },
+      {
+        "type":"text",
+        "id":"title",
+        "label":"Title",
+      },
+      {
+        "type": "richtext",
+        "id": "sub_text",
+        "label": "Sub text"
+      },
+      {
+        "type": "checkbox",
+        "id": "use-meta",
+        "label":"Use meta field value",
+        "default": false
+      },
+      {
+        "type": "richtext",
+        "id": "bottom_text",
+        "label": "Bottom Text",
+        "default": "<p>Based on an independent 84 day clinical study with once daily use. Individual results may vary. Not intended to diagnose, treat, cure or prevent any disease.</p>"
+      }
+    ],
+    "blocks":[
+    ],
+    
+    "presets":[
+      {
+        "name":"Counter Section"
+      }
+    ]
+  }
+{% endschema %}

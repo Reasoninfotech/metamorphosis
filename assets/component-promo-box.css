@@ -1,0 +1,178 @@
+/* #Promo_box{
+  position: fixed;
+  top: 20px;
+  left: 15px;
+  background: #fff;
+  z-index: 10;
+  box-shadow: 0 13px 42px 11px #0000000d; */
+
+  /* ✅ smoother animation */
+  /* transform: translateX(-110%);
+  opacity: 0;
+  visibility: hidden; */
+
+  /* ✅ only animate what you need */
+  /* transition-property: transform, opacity;
+  transition-duration: 0.8s, 0.8s;
+  transition-timing-function: cubic-bezier(.22,.61,.36,1); */
+
+  /* optional: remove if you don't want extra lag */
+  /* transition-delay: 0ms;
+
+  will-change: transform, opacity;
+
+  background-color: #ffffff;
+  border-radius: 120px;
+  width: 100%;
+  max-width: 366px;
+} */
+ #Promo_box{
+    position: fixed;
+    bottom: 20px;
+    left: 15px;
+    background: #fff;
+    z-index: 11;
+    box-shadow:0 13px 42px 11px #0000000d;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition-delay: 500ms;
+    transition-delay: 500ms;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    opacity:0;
+    visibility:hidden;
+    background-color: #ffffff;
+    border-radius: 120px;
+    width: 100%;
+    max-width:366px;
+}
+
+ #Promo_box.newevent{
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    -moz-transform: translateX(0%);
+}
+ #Promo_box a, #Promo_box a:hover, #Promo_box h6{
+    color:#000000;
+     text-decoration:none;
+}
+ #Promo_box .promo_close{
+position: absolute;
+    /* top: 50%;
+    right: 5px; */top: 10%;
+    right: -16px;
+    background: #ffffff;
+    font-size: 20px;
+    color: #c9003d;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    transform: translateY(-50%);
+
+}
+.promo_box_top{
+    display: none;
+}
+ #Promo_box .promo_box_top p{
+    margin:0px;
+    font-size:12px;
+}
+ #Promo_box .promo_box_top h6{
+    margin: 0;
+     line-height: normal;
+         font-size: 13px;
+    font-family: var(--argentum);
+        font-weight: 400;
+            letter-spacing: 0 !important;
+}
+ #Promo_box .promo_info{
+    /* margin-bottom:0px;
+    font-size: 11px;
+    font-family: var(--argentum);
+    font-weight: 300; */
+    margin: 0;
+    line-height: normal;
+    font-size: 13px;
+    font-family: var(--argentum);
+    font-weight: 300;
+    letter-spacing: 0 !important;
+}
+ #Promo_box figure{
+    margin:0px;
+        border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #C5003E;
+}
+ #Promo_box figure img{
+    vertical-align: bottom;
+    border-radius:5px
+}
+ #Promo_box .promo_description{
+  padding: 0 20px 0 0;
+}
+ #Promo_box .row {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+          padding: 5px 5px
+
+}
+ #Promo_box .col-3 {
+    border-radius: 4px 0 0 4px;
+    overflow: hidden;
+        max-width: 110px;
+         min-width: 90px;
+}
+ #Promo_box .col {
+    /* flex: 1 0 0%; */
+    /* padding: 5px 20px 5px 110px; */
+}
+ @media only screen and (max-width: 767px){
+     #Promo_box.promo-hide-mobile{
+        display:none !important;
+    }
+}
+ @media only screen and (max-width: 575px){
+     #Promo_box .promo_box_top h6{
+         font-size:12px;
+    }
+    #Promo_box .promo_info{
+        font-size:12px;
+    }
+     #Promo_box .promo_info{
+    font-size: 10px;
+}
+#Promo_box .col-3 {
+    min-width: 70px;
+}
+#Promo_box {
+    max-height: 100px;
+    min-height:unset;
+}
+}
+ @media only screen and (max-width: 410px){
+     #Promo_box{
+        max-width:90%;
+    }
+}
+ @media screen and (max-width:991px){
+     /* #Promo_box{
+        display:none !important
+    } */
+     body.temp_index #Promo_box,body.temp_collection #Promo_box{
+        display:block !important
+    }
+    
+}

@@ -1,0 +1,373 @@
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'section-products-grid.css' | asset_url | stylesheet_tag }}
+
+<link
+  rel="preload"
+  href="{{ 'component-card.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<link
+  rel="preload"
+  href="{{ 'component-price.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<link
+  rel="preload"
+  href="{{ 'component-badge.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+<link
+  rel="preload"
+  href="{{ 'component-rte.css' | asset_url }}"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+>
+
+<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-badge.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{% liquid
+  assign grid_products = collections[section.settings.home_collection].products
+  case section.settings.sort
+    when 'products_high', 'products_low'
+      assign grid_products = grid_products | sort: 'price_min'
+    when 'date', 'date_reversed'
+      assign grid_products = grid_products | sort: 'published_at'
+  endcase
+
+  if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+    assign grid_products = grid_products | reverse
+  endif
+%}
+
+<div class="products-grid home-collection-grid section-{{ section.id }}-padding {% if section.settings.padding_top == true %}pt_90 {% endif %}{% if section.settings.padding_bottom == true %}pb_90 {% endif %}{% if section.settings.desktop_show == true %}mobile_hide{% endif %}">
+  <div class="container">
+    {%- if section.settings.subheading != blank -%}
+      <div class="subtitle products-grid__subtitle">
+        {{- section.settings.subheading }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="main_title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="products-grid__text f-400">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_show -%}
+      <a
+        {% if section.settings.button_link.url != blank %}
+          href="{{ section.settings.button_link }}"
+        {% endif %}
+        class="button products-grid__button button--primary-size button--arrow button--{{ section.settings.button_style }}"
+        {% if section.settings.button_link.url == blank %}
+          aria-disabled="true"
+        {% endif %}
+      >
+        <span>{{ section.settings.button_label | escape }}</span>
+        {% render 'icon-button-arrow' %}
+      </a>
+    {%- endif -%}
+    <div class="products-grid__products">
+      {% if section.settings.slider_show == true %}
+        <div id="products-grid" class="swiper custom_grid_slider">
+          <div class="swiper-wrapper products-grid__products-items collection-product-list--1-mobile list-unstyled">
+            {%- for product in grid_products -%}
+              <div class="swiper-slide collection-product-card {% if settings.quickview_hover %}quickview--hover{% endif %} slider__slide">
+                {% render 'product-card',
+                  product_card_product: product,
+                  media_size: section.settings.image_ratio,
+                  media_fit: section.settings.image_fit,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_vendor: section.settings.show_vendor,
+                  show_desc: section.settings.show_desc,
+                  columns: 4,
+                  section_id: section.id,
+                  add_id: forloop.index
+                %}
+              </div>
+            {% endfor %}
+          </div>
+          <div class="custom_grid_swiper_arrow swiper-button-next">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+              <path d="M24.1235 27.2948L23.1444 27.2948C24.2532 24.279 25.8186 21.5924 27.7447 19.3994C29.6708 17.2065 31.9171 15.5533 34.3462 14.5412L0 14.5412V13.3818L34.3462 13.3818C31.9155 12.3711 29.6675 10.7186 27.7398 8.52554C25.8121 6.33252 24.2454 3.64517 23.1356 0.628174L24.1235 0.628174C25.6228 4.46637 27.8978 7.68725 30.6986 9.93712C33.4994 12.187 36.7176 13.3788 40 13.3818V14.5412C36.7176 14.5442 33.4994 15.736 30.6986 17.9859C27.8978 20.2358 25.6228 23.4566 24.1235 27.2948Z" fill="#000"></path>
+            </svg>
+          </div>
+          <div class="custom_grid_swiper_arrow swiper-button-prev">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+              <path d="M15.8765 0.628004L16.8556 0.628004C15.7468 3.64384 14.1814 6.33048 12.2553 8.52343C10.3292 10.7164 8.08286 12.3695 5.6538 13.3816L40 13.3816V14.5411L5.6538 14.5411C8.08447 15.5518 10.3325 17.2043 12.2602 19.3973C14.1879 21.5903 15.7546 24.2777 16.8644 27.2947L15.8765 27.2947C14.3772 23.4565 12.1022 20.2356 9.30141 17.9857C6.50063 15.7359 3.28236 14.544 0 14.5411L0 13.3816C3.28236 13.3787 6.50063 12.1868 9.30141 9.93695C12.1022 7.68708 14.3772 4.4662 15.8765 0.628004Z" fill="#000"></path>
+            </svg>
+          </div>
+        </div>
+        <div class="custom_grid_swiper_dot">
+          <div class="swiper-pagination"></div>
+        </div>
+
+      {% else %}
+        <ul
+          id="products-grid"
+          data-id="{{ section.id }}"
+          class="
+            				products-grid__products-items
+            collection-product-list--1-mobile list-unstyled
+          "
+        >
+          {% if grid_products.size > 0 %}
+            {%- for product in grid_products limit: section.settings.products_per_page -%}
+              <li class="collection-product-card {% if settings.quickview_hover %}quickview--hover{% endif %} slider__slide">
+                {% render 'product-card',
+                  product_card_product: product,
+                  media_size: section.settings.image_ratio,
+                  media_fit: section.settings.image_fit,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_vendor: section.settings.show_vendor,
+                  show_desc: section.settings.show_desc,
+                  columns: 4,
+                  section_id: section.id,
+                  add_id: forloop.index
+                %}
+              </li>
+            {%- endfor -%}
+          {% else %}
+            {%- for i in (1..4) -%}
+              <div class="popular-products__item_placeholder collection-popular-card collection-popular-card--placeholder">
+                {% render 'product-card-placeholder' %}
+              </div>
+            {%- endfor -%}
+          {% endif %}
+        </ul>
+      {% endif %}
+
+      {% if section.settings.button_link != blank %}
+        <div class="product_list_button">
+          <a href="{{ section.settings.button_link }}" class="common_btn">{{ section.settings.btn_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    var swiper = new Swiper('.custom_grid_slider', {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      breakpoints: {
+        393: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2.3,
+        },
+        980: {
+          slidesPerView: 2.5,
+        },
+        1280: {
+          slidesPerView: 3.2,
+        },
+      },
+
+      navigation: {
+        nextEl: '.custom_grid_swiper_arrow.swiper-button-next',
+        prevEl: '.custom_grid_swiper_arrow.swiper-button-prev',
+      },
+      pagination: {
+        el: '.custom_grid_swiper_dot .swiper-pagination',
+        clickable: true,
+      },
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Home Collection Grid",
+  "tag": "section",
+  "class": "products-grid-section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["*"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "slider_show",
+      "label": "Slider Show",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show",
+      "label": "Desktop Show"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_top",
+      "label": "Padding Top"
+    },
+    {
+      "type": "checkbox",
+      "id": "padding_bottom",
+      "label": "Padding Bottom"
+    },
+    {
+      "type": "collection",
+      "id": "home_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 3,
+      "max": 50,
+      "step": 1,
+      "default": 12,
+      "label": "t:sections.products-grid.settings.products_per_page.label"
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        {
+          "value": "alphabetical",
+          "label": "t:sections.products-grid.settings.sort.options__1.label"
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": "t:sections.products-grid.settings.sort.options__2.label"
+        },
+        {
+          "value": "date_reversed",
+          "label": "t:sections.products-grid.settings.sort.options__3.label"
+        },
+        {
+          "value": "date",
+          "label": "t:sections.products-grid.settings.sort.options__4.label"
+        },
+        {
+          "value": "products_high",
+          "label": "t:sections.products-grid.settings.sort.options__5.label"
+        },
+        {
+          "value": "products_low",
+          "label": "t:sections.products-grid.settings.sort.options__6.label"
+        }
+      ],
+      "default": "alphabetical",
+      "label": "t:sections.products-grid.settings.sort.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.products-grid.settings.header__3.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "t:sections.featured-products.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-products.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-products.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "square",
+      "label": "t:sections.featured-products.settings.image_ratio.label"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "t:sections.featured-products.settings.image_fit.label",
+      "options": [
+        {
+          "value": "contain",
+          "label": "t:sections.featured-products.settings.image_fit.options__1.label"
+        },
+        {
+          "value": "cover",
+          "label": "t:sections.featured-products.settings.image_fit.options__2.label"
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": true,
+      "label": "t:sections.products-grid.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": true,
+      "label": "t:sections.products-grid.settings.show_vendor.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_desc",
+      "default": false,
+      "label": "t:sections.products-grid.settings.show_desc.label",
+      "info": "t:sections.products-grid.settings.show_desc.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.products-grid.settings.header__4.content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.all.subheading.label"
+    },
+    {
+      "type": "html",
+      "id": "heading",
+      "label": "t:sections.all.heading.label",
+      "default": "Some heading"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "t:sections.all.text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.button.header_button.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show",
+      "default": true,
+      "label": "t:sections.all.button.button_show.label"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Collection Grid"
+    }
+  ]
+}
+{% endschema %}

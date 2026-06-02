@@ -1,0 +1,61 @@
+.tec-spe-section{background: #FAFAFA;}
+
+.tec-spe-section .technical-wrp{display:flex;flex-wrap:wrap;gap:60px;align-items:center;}
+
+.tec-spe-section .technical-tabel-block{width:calc(50% - 30px);}
+.tec-spe-section .technical-tabel-block .main_title{max-width: 100%;margin: auto;margin-bottom: 58px;}
+.tec-spe-section .technical-tabel-block .tec-tabel-wrp{display: flex;flex-direction: column;}
+
+.tec-spe-section .technical-tabel-block .tec-tabel-wrp p.spc_detail{line-height: normal;text-align: center;color: #000;max-width: 500px;margin: 0 auto;}
+
+.tec-spe-section .technical-tabel-block .specification-detail{display: flex;gap: 10px;justify-content: space-between;align-items:center;padding:16px 0;border-bottom:1px solid #BDBDBD}
+.tec-spe-section .technical-tabel-block .specification-detail span{font-size: 20px;line-height: normal;color: #CA003D;font-weight: 500;text-transform: uppercase;}
+.tec-spe-section .technical-tabel-block .specification-detail span br{display:none;}
+.tec-spe-section .technical-tabel-block .specification-detail p{margin:0;font-size:20px;line-height:normal;font-weight:500;text-align: end;color:#000;}
+.tec-spe-section .technical-tabel-block .specification-detail p br{display:none;}
+.tec-spe-section .technical-tabel-block .specification-detail:nth-child(2) p br{display:block;}
+.tec-spe-section .technical-tabel-block .specification-detail:nth-child(2).key_detail p br{display:none;}
+.tec-spe-section .technical-tabel-block .specification-detail:last-child{border:unset;} 
+
+
+.tec-spe-section .technical-img-block{width:calc(50% - 30px);}
+.tec-spe-section .technical-img-block figure img{width:100%;}
+.template-product-ruby-radiance .tec-spe-section .technical-img-block figure img{max-height: 476px;object-fit: contain;}
+.tec-spe-section .technical-img-wrp{display:flex;align-items:center;justify-content:center;gap:20px;}
+.tec-spe-section .technical-img-wrp figure{flex-shrink:0;}
+.tec-spe-section .technical-img-wrp figure img{width:51px;}
+.tec-spe-section .technical-img-wrp figcaption{font-size:20px;line-height:normal;font-weight:500;color:#000;}
+
+.tec-spe-section .technical-button_wrp{text-align:center;margin-top:30px;}
+.tec-spe-section .technical-button_wrp .common_btn{min-width:180px;background:transparent;}
+
+
+@media screen and (max-width:1399px){
+  .tec-spe-section .technical-wrp{gap:40px;}
+  .tec-spe-section .technical-tabel-block,
+  .tec-spe-section .technical-img-block{width:calc(50% - 20px);}
+}
+
+@media screen and (max-width:991px){
+  .tec-spe-section .technical-tabel-block,
+  .tec-spe-section .technical-img-block{width:100%;}
+
+  .tec-spe-section .technical-tabel-block .main_title{margin-bottom: 38px;}
+}
+
+@media screen and (max-width:575px){
+  .tec-spe-section .technical-tabel-block .main_title{margin-bottom: 32px;}
+  .tec-spe-section .technical-tabel-block .specification-detail span,
+  .tec-spe-section .technical-tabel-block .specification-detail p,
+  .tec-spe-section .technical-img-wrp figcaption{font-size: 18px;}
+  .tec-spe-section .technical-tabel-block .specification-detail span br,
+  .tec-spe-section .technical-tabel-block .specification-detail p br{display:block;}
+  .tec-spe-section .technical-tabel-block .specification-detail:nth-child(2).key_detail p br{display:block;}
+}
+
+
+@media screen and (max-width: 420px){
+  .tec-spe-section .technical-tabel-block .specification-detail span,
+  .tec-spe-section .technical-tabel-block .specification-detail p,
+  .tec-spe-section .technical-img-wrp figcaption{font-size: 16px;}
+}
