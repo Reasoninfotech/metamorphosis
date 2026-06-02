@@ -1,0 +1,134 @@
+ {{ 'service-icon.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+.section_{{ section.id }}.icon_text_section {
+    background: {{ section.settings.bgcolor }};
+}
+{% endstyle %}
+
+{% assign textColor = section.settings.textcolor %}
+{% assign paddTop = section.settings.paddTop %}
+{% assign padBottom = section.settings.padBottom %}
+<div class="section_{{ section.id }} icon_text_section cus_padding {% if paddTop == true %}pt_90{% endif %}{% if padBottom == true %} pb_90{% endif %} {{ section.settings.customClass }}">
+  <div class="page-width">
+    <div class="icon_text_section_title">
+      <h2 class="main_title">{{ section.settings.title }}</h2>
+    </div>
+    <div class="icon_text_section_slider swiper-container">
+      <div class="icon_text_wrp swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="icon_text_block swiper-slide">
+            {% if block.settings.custom_icon != blank %}
+              <div class="icon-block">
+                 <img src="{{ block.settings.custom_icon | img_url:'150x' }}" alt="{{ block.settings.custom_icon.alt }}"loading="lazy" >
+              </div>
+            {% endif %}
+            <div class="icons__text-wrapper">
+              {%- if block.settings.title != blank -%}
+                <h4 class="title_text" stye="color: {{ textColor }};">{{ block.settings.title }}</h4>
+              {%- endif -%}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var swiper = new Swiper(".section_{{ section.id }} .icon_text_section_slider", {
+    slidesPerView: 4,
+    spaceBetween: 10,
+    grabCursor: true,
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      400: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      575: {
+        slidesPerView: 4,
+        spaceBetween: 10,
+      },
+      700: {
+        slidesPerView: 5,
+        spaceBetween: 30
+      },
+      992: {
+        slidesPerView: 5,
+        spaceBetween: 56
+      },
+    }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Icon With Text",
+    "class": "icon_text_four",
+    "settings": [
+      {
+        "type":"color",
+        "id":"bgcolor",
+        "label":"Add Background Color",
+        "default":"#fff"
+      },
+      {
+        "type":"color",
+        "id":"textcolor",
+        "label":"Add Text Color",
+        "default":"#828282"
+      },
+      {
+        "type":"checkbox",
+        "id":"paddTop",
+        "label":"Padding Top",
+        "default":false
+      },
+      {
+        "type":"checkbox",
+        "id":"padBottom",
+        "label":"Padding Bottom",
+        "default":true
+      },
+      {
+        "type":"text",
+        "id":"customClass",
+        "label":"Add Custom Class"
+      },
+      {
+        "type":"html",
+        "id":"title",
+        "label":"Title"
+      }
+    ],
+     "blocks": [
+    {
+      "type": "item",
+      "name": "Text with icon",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "html",
+          "id": "title",
+          "label": "Heading",
+          "default": "DELIVERED FRESH TO YOU"
+        }
+      ]
+    }
+  ],
+    "presets": [
+      {
+        "name": "Icon With Text"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,263 @@
+{% schema %}
+{
+  "name": "BENEFITS Image Text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom class"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background color"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "html",
+      "id": "tite",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button url"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "text Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_text",
+          "label": "Title text"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text content"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "BENEFITS Image Text"
+    }
+  ]
+}
+{% endschema %}
+
+<section
+  class="benefits_img_text_section {{ section.settings.custom_class }}"
+  style="background-color:{{ section.settings.background }};"
+>
+  <div class="page-width">
+    <div class="exosome_werp">
+      <div class="exosome-text">
+        {% if section.settings.tite != blank %}
+          <h2 class="main_title">{{ section.settings.tite }}</h2>
+        {% endif %}
+
+        <div class="text-blocks">
+          {% for block in section.blocks %}
+            <div class="text">
+              {% if block.settings.title_text != blank %}
+                <h4>{{ block.settings.title_text }}</h4>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                {{ block.settings.text }}
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if section.settings.btn_url != blank %}
+          <div class="img-text-btn-wrp">
+            <a class="common_btn" href="{{ section.settings.btn_url }}">
+              {{ section.settings.btn_text }}
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="exosome-img">
+        <figure>
+          {% if section.settings.image != blank %}
+            <img src="{{ section.settings.image | img_url: "master" }}" alt="{{ section.settings.image.alt }}" loading="lazy">
+          {% endif %}
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits_img_text_section {
+  	 padding: 48px 0 0;
+  }
+   .benefits_img_text_section .page-width {
+  	 padding: 0;
+  }
+   .benefits_img_text_section .exosome_werp {
+  	 display: flex;
+  	 gap: 76px;
+  	 flex-wrap: wrap;
+  	 align-items: center;
+  }
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp {
+  		 gap: 20px;
+  	}
+  }
+   .benefits_img_text_section .exosome_werp .exosome-text {
+  	 width: calc(50% - 38px);
+  	 display: flex;
+  	 flex-direction: column;
+  	 align-items: center;
+  	 gap: 36px;
+  	 padding: 0 0 0 16px;
+  }
+   @media screen and (max-width: 991px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text {
+  		 width: calc(50% - 20px);
+  		 gap: 20px;
+  	}
+  }
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text {
+  		 width: 100%;
+  		 padding-top: 32px;
+  		 padding: 0 16px;
+  	}
+  }
+   @media screen and (max-width: 575px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text {
+  		 width: 100%;
+  	}
+  }
+
+   .benefits_img_text_section .exosome_werp .exosome-text h2 {
+  	 text-transform: uppercase;
+     font-size: 30px;
+  }
+
+   .benefits_img_text_section .exosome_werp .exosome-text .text-blocks {
+  	 display: flex;
+  	 flex-direction: column;
+  	 gap: 16px;
+  }
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text .text-blocks {
+  		 width: 100%;
+  		 gap: 0;
+  	}
+  }
+   .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text {
+  	 display: flex;
+  	 flex-direction: column;
+  	 gap: 10px;
+  }
+
+  .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text strong{
+    color: #000;
+  }
+
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text {
+  		 gap: 8px;
+  	}
+  }
+   @media screen and (max-width: 575px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text {
+  		 max-width: 100%;
+  	}
+  }
+   .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text h4 {
+  	 font-weight: 700;
+  	 font-size: 24px;
+  	 line-height: 100%;
+  	 margin: 0;
+  }
+   .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text p {
+  	 font-weight: 500;
+  	 font-size: 20px;
+  	 line-height: 100%;
+  	 margin: 0;
+  }
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text p {
+  		 font-size: 18px;
+  	}
+  }
+   @media screen and (max-width: 575px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-text .img-text-btn-wrp a {
+  		 min-width: 250px;
+  	}
+  }
+   .benefits_img_text_section .exosome_werp .exosome-img {
+  	 width: calc(50% - 38px);
+  }
+   @media screen and (max-width: 991px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-img {
+  		 width: calc(50% - 20px);
+  	}
+  }
+   @media screen and (max-width: 767px) {
+  	 .benefits_img_text_section .exosome_werp .exosome-img {
+  		 width: 100%;
+  	}
+  }
+   .benefits_img_text_section .exosome_werp .exosome-img figure img {
+  	 max-width: 100%;
+  	 width: 100%;
+  	 vertical-align: middle;
+  }
+
+    .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text p{
+      line-height: 24px;
+    }
+
+      @media screen and (max-width: 767px) {
+        .benefits_img_text_section .exosome_werp .exosome-text .text-blocks .text p{
+        line-height: 22px;
+      }
+      }
+
+
+
+      @media  (max-width: 991px){
+       
+        .benefits_img_text_section .exosome_werp{gap: 50px;}
+
+        .benefits_img_text_section .exosome_werp .exosome-text,
+        .benefits_img_text_section .exosome_werp .exosome-img{width: calc(50% - 25px);}
+
+      }
+
+
+      @media  (max-width: 767px){
+       
+        .benefits_img_text_section .exosome_werp{gap: 40px;}
+
+        .benefits_img_text_section .exosome_werp .exosome-text,
+        .benefits_img_text_section .exosome_werp .exosome-img{width: 100%;}
+
+        .benefits_img_text_section .exosome_werp .exosome-text h2{max-width: 550px;}
+
+      }
+
+</style>

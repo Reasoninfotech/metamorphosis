@@ -1,0 +1,89 @@
+{{ 'affiliate-slider.css' | asset_url | stylesheet_tag }}
+<section id="sec_{{ section.id }}" class="affiliate-slider-section">
+  <div class="affiliate-slider_container">
+    <div class="swiper affiliate-slider">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="affiliate-slider-block">
+            {% if block.settings.image != blank %}
+            <figure>
+              <img src="{{ block.settings.image | img_url : "master" }}" loading="lazy">
+            </figure>
+            {% endif %}  
+            <div class="plumper_text_block">
+              <div class="text_block_wrp">
+                <div class="plumper_text_wrp">
+                  {% if block.settings.title != blank %}
+                    <h2 class="main_title">{{ block.settings.title }}</h2>
+                  {% endif %} 
+                  {% if block.settings.sub_text != blank %}
+                    <span>{{ block.settings.sub_text }}</span> 
+                  {% endif %}  
+                </div>  
+                {% if block.settings.content != blank %}
+                 <div class="pulmber_other_text">{{ block.settings.content }}</div>
+                {% endif %}
+                <div class="pulmber_dots" style="display: block;"></div>
+              </div>
+            </div>
+          </div>
+          </div>
+        {% endfor %}  
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div> 
+</section>
+
+<script>
+    var swiper = new Swiper("#sec_{{ section.id }} .affiliate-slider", {
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '">' + (index + 1) + "</span>";
+        },
+      },
+    });
+  </script>
+
+{% schema %}
+  {
+    "name": "Affiliate Slider Section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "affiliate-slider",
+        "name": "Affiliate Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "html",
+            "id": "title",
+            "label": "Heading"
+          },
+          {
+            "type": "html",
+            "id": "sub_text",
+            "label": "Sub Text"
+          },
+          {
+            "type": "html",
+            "id": "content",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Affiliate Slider Section",
+      }
+    ]
+  }
+{% endschema %}

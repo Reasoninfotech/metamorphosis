@@ -1,0 +1,225 @@
+ {{ 'your-result.css' | asset_url | stylesheet_tag }}
+<div class="your_result section_{{ section.id }} {% if section.settings.padding_top == true %}pt_90{% endif %} {% if section.settings.padding_bottom == true %}pb_90 {% endif %}">
+  <div class="page-width">
+      <div class="your_result_title">
+          {% if section.settings.title != blank %}
+            <h2 class="main_title">{{ section.settings.title }}</h2>
+          {% endif %}
+          {% if section.settings.dis != blank %}
+            <p class="f-400">{{ section.settings.dis }}</p>
+          {% endif %}
+      </div>
+      <div class="your_result_block">
+          <div class="your_result_slide swiper-container">
+              <div class="your_result_waiper swiper-wrapper">
+                
+                {% for block in section.blocks %}
+                    <div class="swiper-slide">
+                     <div class="your_result_content">
+                        <div class="your_result_top">
+                          {% if block.settings.name != blank %}
+                            <div class="your_result_left">
+                                <h5>{{ block.settings.name }}</h5>
+                                {% if block.settings.verify != blank %}
+                                  <p>
+                                    <span><svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_2007_666)"><path d="M6.5 13.5C10.0899 13.5 13 10.5899 13 7C13 3.41015 10.0899 0.5 6.5 0.5C2.91015 0.5 0 3.41015 0 7C0 10.5899 2.91015 13.5 6.5 13.5Z" fill="#2ECC71"/><path d="M2.0946 7.14514L5.54123 10.5918L10.9026 5.23035L9.75377 4.08148L5.54123 8.29402L3.24348 5.99627L2.0946 7.14514Z" fill="#EBEDEE"/></g><defs><clipPath id="clip0_2007_666"><rect width="13" height="13" fill="white" transform="translate(0 0.5)"/></clipPath></defs></svg></span>
+                                    {{ block.settings.verify }}
+                                  </p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                            <div class="your_result_right">
+                              {% for i in (1..5) %}
+                                <span>
+                                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13.0789 15.2838C13.1081 15.4324 13.0594 15.581 12.9328 15.6701C12.8159 15.7593 12.6601 15.7692 12.5335 15.69L8.00487 12.9659L3.47625 15.6999C3.34965 15.7791 3.19382 15.7692 3.07696 15.68C2.96009 15.5909 2.90165 15.4423 2.93087 15.2937L4.08007 10.0734L0.126049 6.53705C0.0189206 6.43799 -0.0297748 6.2795 0.01892 6.14082C0.0676148 6.00214 0.184484 5.89318 0.330568 5.88327L5.57013 5.37808L7.66401 0.464831C7.72244 0.326151 7.85879 0.237 8.00487 0.237C8.15095 0.237 8.2873 0.326151 8.34573 0.464831L10.4299 5.37808L15.6694 5.87336C15.8155 5.88327 15.9421 5.99223 15.9811 6.13091C16.0298 6.26959 15.9811 6.42809 15.874 6.52714L11.9297 10.0635L13.0886 15.2838H13.0789Z" fill="#FFE600"/>
+                                  </svg>
+                                </span>
+                              {% endfor %}
+                            </div>
+                        </div>
+                        {% if block.settings.img != blank %}
+                          <div class="your_result_center">
+                              <img src="{{ block.settings.img | img_url:'425x' }}" alt="{{ block.settings.img.alt }}" loading="lazy">
+                          </div>
+                        {% endif %}
+                          {% if block.settings.title != blank %}
+                          <div class="your_result_bottom">
+                            <h4>{{ block.settings.title }}</h4>
+                            <p class="f-400">{{ block.settings.dis }}</p>
+                          </div>
+                        {% endif %}
+                          {% assign yourproduct = block.settings.product %}
+                            {% if yourproduct != blank %}
+                            <a href="{{ yourproduct.url }}">  
+                            <div class="your_product_block">
+                                <figure class="your_product_img">
+                                    <img src="{{ yourproduct.media[1] | img_url : "master" }}" loading="lazy" alt=""> 
+                                </figure>
+                                <figcaption>
+                                  <h4 class="your_product_title">
+                                    {% if block.settings.product_title != blank %}
+                                    {{ block.settings.product_title }}
+                                    {% else %}
+                                      {{ yourproduct.title }}
+                                    {% endif %}
+                                  </h4>
+                                  <span class="your_product_price">{{ yourproduct.price | money }}</span>
+                                </figcaption>
+                            </div>
+                            </a>
+                            {% endif %}
+                      </div>
+                    </div>
+                {% endfor %}
+
+              </div>
+
+              <div class="your_result_swiper_arrow swiper-button-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+                  <path d="M24.1235 27.2948L23.1444 27.2948C24.2532 24.279 25.8186 21.5924 27.7447 19.3994C29.6708 17.2065 31.9171 15.5533 34.3462 14.5412L0 14.5412V13.3818L34.3462 13.3818C31.9155 12.3711 29.6675 10.7186 27.7398 8.52554C25.8121 6.33252 24.2454 3.64517 23.1356 0.628174L24.1235 0.628174C25.6228 4.46637 27.8978 7.68725 30.6986 9.93712C33.4994 12.187 36.7176 13.3788 40 13.3818V14.5412C36.7176 14.5442 33.4994 15.736 30.6986 17.9859C27.8978 20.2358 25.6228 23.4566 24.1235 27.2948Z" fill="#000"></path>
+                </svg>
+              </div>
+              <div class="your_result_swiper_arrow swiper-button-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="28" viewBox="0 0 40 28" fill="none">
+                  <path d="M15.8765 0.628004L16.8556 0.628004C15.7468 3.64384 14.1814 6.33048 12.2553 8.52343C10.3292 10.7164 8.08286 12.3695 5.6538 13.3816L40 13.3816V14.5411L5.6538 14.5411C8.08447 15.5518 10.3325 17.2043 12.2602 19.3973C14.1879 21.5903 15.7546 24.2777 16.8644 27.2947L15.8765 27.2947C14.3772 23.4565 12.1022 20.2356 9.30141 17.9857C6.50063 15.7359 3.28236 14.544 0 14.5411L0 13.3816C3.28236 13.3787 6.50063 12.1868 9.30141 9.93695C12.1022 7.68708 14.3772 4.4662 15.8765 0.628004Z" fill="#000"></path>
+                </svg>
+              </div>
+
+              <div class="your_result_dot">
+                <div class="swiper-pagination"></div>
+              </div>
+          </div>
+      </div>
+
+      {% if section.settings.btn_url != blank %}
+      <div class="your_result_btn_wrp">
+        <a href="{{ section.settings.btn_url }}" class="common_btn">{{ section.settings.btn_text }}</a>
+      </div>
+      {% endif %}
+
+  </div>
+</div>
+
+<script>
+  var swiper = new Swiper(".section_{{ section.id }} .your_result_slide", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    grabCursor: true,
+    loop: false,
+    breakpoints: {
+      400: {
+        slidesPerView: 1
+      },
+      700: {
+        slidesPerView: 2.5,
+        spaceBetween: 18
+      },
+      992: {
+        slidesPerView: 3
+      },
+      {% comment %} 1200:{
+        slidesPerView: 4
+      } {% endcomment %}
+    },
+    navigation: {
+        nextEl: ".your_result .swiper-button-next",
+        prevEl: ".your_result .swiper-button-prev",
+      },
+     pagination: {
+      el: ".your_result_dot .swiper-pagination",
+      clickable: true
+    },
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Results",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "padding_top",
+        "label": "Padding Top",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "padding_bottom",
+        "label": "Padding Bottom",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id":"title",
+        "label":"Title"
+      },
+      {
+        "type": "textarea",
+        "id":"dis",
+        "label":"Description"
+      },
+      {
+        "type": "text",
+        "id":"btn_text",
+        "label":"Button Text",
+        "default": "SHOP LED DEVICES"
+      },
+      {
+        "type": "url",
+        "id":"btn_url",
+        "label":"Button Url"
+      }
+    ],
+
+    "blocks": [
+      {
+        "type":"block",
+        "name":"Block",
+        "settings": [
+          {
+            "type":"image_picker",
+            "id":"img",
+            "label":"Select Image"
+          },
+          {
+            "type":"text",
+            "id":"name",
+            "label":"Name"
+          },
+          {
+            "type":"text",
+            "id":"verify",
+            "label":"Verify Text"
+          },
+          {
+            "type": "text",
+            "id":"title",
+            "label":"Title"
+          },
+          {
+            "type": "textarea",
+            "id":"dis",
+            "label":"Description"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "product_title",
+            "label": "Product Title"
+          }
+        ]
+      }
+    ],
+
+    "presets": [
+      {
+        "name":"Results"
+      }
+    ]
+  }
+{% endschema %}
