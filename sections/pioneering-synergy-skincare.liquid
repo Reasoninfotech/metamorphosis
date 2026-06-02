@@ -46,14 +46,11 @@
       <div class="pioneering_img">
         {% if section.settings.img != blank %}
           <img
-            src="{{ section.settings.img | image_url: width: 1920 }}"
+            src="{{ section.settings.img | img_url : "master" }}"
             {% if section.settings.mobile_img != blank %}
               class="desktop_img"
             {% endif %}
-            fetchpriority="high"
-            width="{{ section.settings.img.width }}"
-            height="{{ section.settings.img.height }}"
-            alt="{{ section.settings.img.alt | escape }}"
+            loading="lazy"
           >
         {% endif %}
         {% if section.settings.mobile_img != blank %}
